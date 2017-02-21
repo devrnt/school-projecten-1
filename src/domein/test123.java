@@ -13,7 +13,7 @@ public class test123 {
     public static void main(String[] args) {
         System.out.println("Hallo wereld");
         System.out.println("Kheb het niet verkloot");
-        System.out.println("Juantje is geen banaantje");
+        System.out.println("Juantje is gen banaantje");
         
     }
     
