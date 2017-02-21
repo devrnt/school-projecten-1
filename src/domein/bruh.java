@@ -10,5 +10,8 @@ package domein;
  * @author Jonas
  */
 public class bruh {
+    public static void main(String[] args) {
+        
+    }
     
 }
