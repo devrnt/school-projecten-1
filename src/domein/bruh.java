@@ -13,6 +13,7 @@ public class bruh {
     public static void main(String[] args) {
         System.out.println("Hallo wereld");
         System.out.println("Jonas is groupleader");
+        System.out.println("Of toch niet");
         
     }
     
