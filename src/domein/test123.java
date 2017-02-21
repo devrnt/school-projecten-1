@@ -11,8 +11,8 @@ package domein;
  */
 public class test123 {
     public static void main(String[] args) {
-        System.out.print("Hallo wereld");
-        gebt verkloot
+        System.out.println("Hallo wereld");
+        System.out.println("Kheb het niet verkloot");
         
     }
     
