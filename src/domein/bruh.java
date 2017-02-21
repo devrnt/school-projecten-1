@@ -11,7 +11,8 @@ package domein;
  */
 public class bruh {
     public static void main(String[] args) {
-        System.out.print("Hallo wereld");
+        System.out.println("Hallo wereld");
+        System.out.println("Jonas is groupleader");
         
     }
     
