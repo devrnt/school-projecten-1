@@ -21,10 +21,12 @@ public class SpelerMapper {
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL)) {
             PreparedStatement query = conn.prepareStatement("INSERT INTO ID222177_g14.speler (voornaam, achternaam , krediet, geboortejaar)"
                     + "VALUES (?, ?, ?, ?)");
-            query.setString(1, speler.getVoorNaam());
-            query.setString(2, speler.getAchterNaam());
-            query.setString(3, speler.getKrediet());
-            query.setString(4, speler.getGeboortejaar());
+            query.setString(1, speler.getVoornaam());
+            query.setString(2, speler.getAchternaam());
+            query.setDouble(3, speler.getKrediet());
+            query.setInt(4, speler.getGeboortejaar());
+            query.executeUpdate();
+            
 
         } catch (SQLException ex) {
             throw new RuntimeException(ex);

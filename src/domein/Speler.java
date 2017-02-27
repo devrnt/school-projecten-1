@@ -14,6 +14,17 @@ public class Speler {
     private int geboortejaar;
     private final int huidigJaar = Calendar.getInstance().get(Calendar.YEAR);
 
+    public Speler(String voornaam, String achternaam, int geboortejaar) {
+        controleerVoornaam(voornaam);
+        controleerAchternaam(achternaam);
+        controleerLeeftijd(geboortejaar);
+
+        this.voornaam = voornaam;
+        this.achternaam = achternaam;
+        this.geboortejaar = geboortejaar;
+        krediet = 0;
+    }
+
     public void controleerVoornaam(String voornaam) {
         if (voornaam.length() < 3) {
             throw new IllegalArgumentException("Je voornaam moet minstens uit 3 karakters bestaan.");
