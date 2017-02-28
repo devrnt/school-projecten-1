@@ -6,10 +6,13 @@
 package persistentie;
 
 import domein.Speler;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 /**
  *
@@ -32,5 +35,32 @@ public class SpelerMapper {
         }
 
     }
+    
+    
+    public Speler geefSpeler(String gebruikersnaam) {
+        Speler speler = null;
+
+        try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL)) {
+            PreparedStatement query = conn.prepareStatement("SELECT * FROM ID222177_g14.speler WHERE gebruikersnaam = ?");
+            query.setString(1, gebruikersnaam);
+            try (ResultSet rs = query.executeQuery()) {
+                if (rs.next()) {
+                    String naam = rs.getString("naam");
+                    String voornaam = rs.getString("voornaam");
+                    LocalDate geboortedatum = rs.getDate("geboortedatum").toLocalDate();
+                    String wachtwoord = rs.getString("wachtwoord");
+                    boolean beheerder = rs.getBoolean("beheerder");
+                    BigDecimal krediet = rs.getBigDecimal("krediet");
+
+                    speler = new Speler(naam, voornaam, emailadres, geboortedatum, wachtwoord, beheerder, krediet);
+                }
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+
+        return speler;
+    }
+    
 
 }
