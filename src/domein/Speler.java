@@ -8,28 +8,25 @@ import java.util.Calendar;
  */
 public class Speler {
 
-    private String voornaam;
-    private String achternaam;
+    private String gebruikersnaam;
     private double krediet;
     private int geboortejaar;
-    private final int huidigJaar = Calendar.getInstance().get(Calendar.YEAR);
 
-    public Speler(String voornaam, String achternaam, int geboortejaar) {
-        controleerVoornaam(voornaam);
-        controleerAchternaam(achternaam);
+    public Speler(String gebruikersnaam, int geboortejaar) {
+        controleerGebruikersnaam(gebruikersnaam);
         controleerLeeftijd(geboortejaar);
 
-        this.voornaam = voornaam;
-        this.achternaam = achternaam;
+        this.gebruikersnaam = gebruikersnaam;
         this.geboortejaar = geboortejaar;
         krediet = 0;
     }
 
-    public void controleerVoornaam(String voornaam) {
-        if (voornaam.length() < 3) {
+    //later doen met reguliere expresies.
+    public void controleerGebruikersnaam(String gebruikersnaam) {
+        if (gebruikersnaam.length() < 3) {
             throw new IllegalArgumentException("Je voornaam moet minstens uit 3 karakters bestaan.");
         }
-        if (voornaam.contains(" ")) {
+        if (gebruikersnaam.contains(" ")) {
             throw new IllegalArgumentException("Uw voornaam mag geen spaties bevatten.");
         }
 
@@ -38,24 +35,23 @@ public class Speler {
         //    throw new IllegalArgumentException("Uw voornaam mag geen leestekens bevatten.");
         //}
         //alleen nodig bij voornaam
-        if (Character.isDigit(voornaam.charAt(0))) {
+        if (Character.isDigit(gebruikersnaam.charAt(0))) {
             throw new IllegalArgumentException("Uw voornaam mag niet beginnen met een cijfer");
         }
-
-    }
-
-    public void controleerAchternaam(String achternaam) {
-        if (achternaam.length() < 3) {
+        
+        if (gebruikersnaam.length() < 3) {
             throw new IllegalArgumentException("Je voornaam moet minstens uit 3 karakters bestaan.");
         }
 
-        if (achternaam.contains(" ")) {
+        if (gebruikersnaam.contains(" ")) {
             throw new IllegalArgumentException("Uw voornaam mag geen spaties bevatten.");
         }
+
     }
 
+
     public void controleerLeeftijd(int geboortejaar) {
-        int leeftijd = huidigJaar - geboortejaar;
+        int leeftijd = Calendar.getInstance().get(Calendar.YEAR) - geboortejaar;
         if (leeftijd < 6) {
             throw new IllegalArgumentException("U moet ouder zijn dan 6 jaar.");
         } else if (leeftijd > 99) {
@@ -63,22 +59,13 @@ public class Speler {
         }
     }
 
-    public String getVoornaam() {
-        return voornaam;
+    public String getGebruikersnaam() {
+        return gebruikersnaam;
     }
 
-    public void setVoornaam(String voornaam) {
-        controleerVoornaam(voornaam);
-        this.voornaam = voornaam;
-    }
-
-    public String getAchternaam() {
-        return achternaam;
-    }
-
-    public void setAchternaam(String achternaam) {
-        controleerAchternaam(achternaam);
-        this.achternaam = achternaam;
+    public void setGebruikersnaam(String gebruikersnaam) {
+        controleerGebruikersnaam(gebruikersnaam);
+        this.gebruikersnaam = gebruikersnaam;
     }
 
     public double getKrediet() {
