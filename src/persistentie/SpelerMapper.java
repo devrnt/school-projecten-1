@@ -19,12 +19,11 @@ public class SpelerMapper {
 
     public void voegToe(Speler speler) {
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL)) {
-            PreparedStatement query = conn.prepareStatement("INSERT INTO ID222177_g14.speler (voornaam, achternaam , krediet, geboortejaar)"
-                    + "VALUES (?, ?, ?, ?)");
-            query.setString(1, speler.getVoornaam());
-            query.setString(2, speler.getAchternaam());
-            query.setDouble(3, speler.getKrediet());
-            query.setInt(4, speler.getGeboortejaar());
+            PreparedStatement query = conn.prepareStatement("INSERT INTO ID222177_g14.speler (gebruikersnaam, krediet, geboortejaar)"
+                    + "VALUES (?, ?, ?)");
+            query.setString(1, speler.getGebruikersnaam());
+            query.setDouble(2, speler.getKrediet());
+            query.setInt(3, speler.getGeboortejaar());
             query.executeUpdate();
             
 
