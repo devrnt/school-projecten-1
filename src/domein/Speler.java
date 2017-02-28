@@ -12,12 +12,12 @@ public class Speler {
     private double krediet;
     private int geboortejaar;
 
-    public Speler(String gebruikersnaam, int geboortejaar) {
+    public Speler(String gebruikersnaam, int geboortejaar, double krediet) {
         controleerGebruikersnaam(gebruikersnaam);
         controleerLeeftijd(geboortejaar);
         this.gebruikersnaam = gebruikersnaam;
         this.geboortejaar = geboortejaar;
-        krediet = 0;
+        this.krediet = krediet;
     }
 
     //later doen met reguliere expresies.

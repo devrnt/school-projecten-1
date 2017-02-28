@@ -45,14 +45,11 @@ public class SpelerMapper {
             query.setString(1, gebruikersnaam);
             try (ResultSet rs = query.executeQuery()) {
                 if (rs.next()) {
-                    String naam = rs.getString("naam");
-                    String voornaam = rs.getString("voornaam");
-                    LocalDate geboortedatum = rs.getDate("geboortedatum").toLocalDate();
-                    String wachtwoord = rs.getString("wachtwoord");
-                    boolean beheerder = rs.getBoolean("beheerder");
-                    BigDecimal krediet = rs.getBigDecimal("krediet");
+                    String naam = rs.getString("gebruikersnaam");
+                    int geboortejaar = rs.getInt("geboortejaar");
+                    double krediet = rs.getDouble("krediet");
 
-                    speler = new Speler(naam, voornaam, emailadres, geboortedatum, wachtwoord, beheerder, krediet);
+                    speler = new Speler(naam, geboortejaar, krediet);
                 }
             }
         } catch (SQLException ex) {
