@@ -1,5 +1,6 @@
 package domein;
 
+import Exceptions.GebruikernaamInGebruikException;
 import persistentie.SpelerMapper;
 
 public class SpelerRepository {
@@ -13,7 +14,8 @@ public class SpelerRepository {
 
     public void voegSpelerToe(Speler speler) {
         if (bestaatSpeler(speler.getGebruikersnaam())) {
-            throw new IllegalArgumentException("gebruikersnaam al in gebruik");//exception nog maken GebruikersnaamInGebruikException
+            throw new GebruikernaamInGebruikException();
+            //throw new IllegalArgumentException("gebruikersnaam al in gebruik");//exception nog maken GebruikersnaamInGebruikException
         }
 
         mapper.voegToe(speler);
