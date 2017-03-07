@@ -31,7 +31,7 @@ public class test {
         domeinctrl.maakSpeler("Test", 1000);
         domeinctrl.maakSpeler("Test", 2020);
         
-        //domeinctrl.maakSpeler("Test", 1990);  //algemene speler, moet slagen
+        domeinctrl.maakSpeler("Test", 1990);  //algemene speler, moet slagen
         
     }
 }
