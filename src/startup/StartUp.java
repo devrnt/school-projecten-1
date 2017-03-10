@@ -5,10 +5,20 @@
  */
 package startup;
 
+import domein.DomeinController;
+import ui.ConsoleApplicatie;
+
 /**
  *
  * @author Jonas
  */
 public class StartUp {
-    
+    public static void main(String[] args){
+		DomeinController dc = new DomeinController();
+		
+                //testen Use Cases
+                
+                UC2.testResourceBundles(dc);
+	
+	}
 }

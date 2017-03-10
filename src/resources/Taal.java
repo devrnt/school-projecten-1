@@ -21,7 +21,7 @@ public class Taal {
     public Taal(String taal){
         if(toegelatenTalen.contains(taal)){
             loc = new Locale(taal);
-            bundle = ResourceBundle.getBundle("pazaak_resource", loc);
+            bundle = ResourceBundle.getBundle("resources.pazaak_resource", loc);
         }else{
             System.out.println("Verkeerde taal gekozen");
         }
