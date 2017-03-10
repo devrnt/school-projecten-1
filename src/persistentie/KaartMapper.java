@@ -12,6 +12,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -42,6 +44,27 @@ public class KaartMapper {
             throw new RuntimeException(ex);
         }
 
+    }
+        
+    public List<Kaart> getStartKaarten(){
+        List<Kaart> startKaarten = new ArrayList<>();
+
+        try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL)) {
+            PreparedStatement query = conn.prepareStatement("SELECT * FROM ID222177_g14.Kaarttype");
+            try (ResultSet rs = query.executeQuery()) {
+                while (rs.next()) {
+                    String omschrijving = rs.getString("omschrijving");
+                    int waarde = rs.getInt("waarde");
+                    String type = rs.getString("type");
+                    
+                    startKaarten.add(new Kaart(omschrijving, type, waarde));
+                }
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+
+        return startKaarten;
     }
     
 }

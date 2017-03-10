@@ -5,6 +5,7 @@
  */
 package domein;
 
+import java.util.List;
 import persistentie.KaartMapper;
 
 /**
@@ -25,6 +26,10 @@ public class KaartRepository {
         //
         
         mapper.voegToe(kaart, speler);
+    }
+    
+    public List<Kaart> getStartKaarten(){
+        return mapper.getStartKaarten();
     }
     
 }
