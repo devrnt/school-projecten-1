@@ -7,6 +7,7 @@ package domein;
 
 import Exceptions.GebruikernaamInGebruikException;
 import java.util.Calendar;
+import resources.Taal;
 
 /**
  *
@@ -16,6 +17,15 @@ public class DomeinController {
 
     private SpelerRepository spelerRepository;
     private KaartRepository kaartRepository;
+    private Taal taal;
+
+    public Taal getTaal() {
+        return taal;
+    }
+
+    public void setTaal(Taal taal) {
+        this.taal = taal;
+    }
 
     public DomeinController() {
         spelerRepository = new SpelerRepository();  //het aanmaken van de repositorys gebeurt hier zodat ze niet elke keer opnieuw aangemaakt moeten worden
