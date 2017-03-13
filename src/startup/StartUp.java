@@ -18,7 +18,7 @@ public class StartUp {
 		
                 //testen Use Cases
                 
-                UC2.testResourceBundles(dc);
+                UC2.testUC2(dc);
 	
 	}
 }

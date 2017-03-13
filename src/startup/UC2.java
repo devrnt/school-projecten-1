@@ -14,7 +14,7 @@ import resources.Taal;
  * @author Edward
  */
 public class UC2 {
-     public static void testResourceBundles(DomeinController dc) {
+     public static void testUC2(DomeinController dc) {
         Scanner input = new Scanner(System.in);
         String keuze = "";
         while (!keuze.equals("nl") && !keuze.equals("fr") && !keuze.equals("en")) {
