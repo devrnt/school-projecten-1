@@ -45,6 +45,7 @@ public class DomeinController {
         }
         //stapel kaarten moet nog toegevoegd worden
         spelerRepository.voegSpelerToe(nieuweSpeler); //nog surrounden met try-catch
+        kaartRepository.voegStartkaartenToeAanSpeler(nieuweSpeler);
         
     }
 }
