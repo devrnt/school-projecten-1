@@ -1,6 +1,7 @@
 package domein;
 
 import Exceptions.GebruikernaamInGebruikException;
+import java.util.List;
 import persistentie.SpelerMapper;
 
 public class SpelerRepository {
@@ -26,5 +27,9 @@ public class SpelerRepository {
         return mapper.geefSpeler(gebruikersnaam) != null;
     }
     
+    public List<Speler> geefLijstBeschikbareSpelers(){
+        //mapper.
+                return null;
+    }
 
 }
