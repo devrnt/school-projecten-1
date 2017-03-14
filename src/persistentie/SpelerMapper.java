@@ -19,6 +19,8 @@ import java.time.LocalDate;
  * @author Jonas
  */
 public class SpelerMapper {
+    
+    
 
     public void voegToe(Speler speler) {
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL)) {
@@ -36,6 +38,17 @@ public class SpelerMapper {
 
     }
     
+    public boolean bestaatSpeler(String gebruikersnaam){
+        try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL)) {
+            PreparedStatement query = conn.prepareStatement("SELECT * FROM ID222177_g14.Speler WHERE gebruikersnaam = ?");
+            query.setString(1, gebruikersnaam);
+            try (ResultSet rs = query.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
     
     public Speler geefSpeler(String gebruikersnaam) {
         Speler speler = null;
