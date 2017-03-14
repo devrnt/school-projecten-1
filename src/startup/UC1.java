@@ -25,12 +25,7 @@ public class UC1 {
         //dc.maakSpeler("Test", 1000);
         //dc.maakSpeler("Test", 2020);
         //correct aanmaken van de speler
-        int teller = 2;
-        
-        
-        
-
-        for (int i = 0; i < teller;) {
+  
             Scanner input = new Scanner(System.in);
             String naam = "";
             int geboortejaar;
@@ -40,19 +35,16 @@ public class UC1 {
             naam = input.nextLine();
             System.out.println(dc.getTaal().getVertaling("geboortejaar_input"));
             geboortejaar = input.nextInt();
-
             
             try {
                 dc.maakSpeler(naam, geboortejaar);
-                teller--;
-
     
             } catch (IllegalArgumentException e) {
                 System.out.println(dc.getTaal().getVertaling(e.getMessage()));
             }
-          
+           
 
-        }
+        
 
         //Methodes om de spelers op te vragen uit de database maken geen deel uit van UC1
     }
