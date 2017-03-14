@@ -60,13 +60,14 @@ public class KaartMapper {
     //kan in feite samengevoegd worden met de methode die startkaarten opvraagt
     public void voegStartkaartenToe(Speler speler, List<Kaart> startKaarten) {
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL)) {
-            PreparedStatement spelerlijst = conn.prepareStatement("SELECT * FROM ID222177_dobbel.Speler WHERE gebruikersnaam = ?");
+            PreparedStatement spelerlijst = conn.prepareStatement("SELECT * FROM ID222177_g14.Speler WHERE gebruikersnaam = ?");
             spelerlijst.setString(1, speler.getGebruikersnaam());
             ResultSet rs = spelerlijst.executeQuery();
             int spelerId = rs.getInt("spelerID");
 
+            System.out.println(spelerId);
             for (Kaart kaart : startKaarten) {
-                PreparedStatement query = conn.prepareStatement("INSERT INTO ID222177_g14.Kaart (spelerid, omschrijving)"
+                PreparedStatement query = conn.prepareStatement("INSERT INTO ID222177_g14.Kaart (spelerID, omschrijving)"
                         + "VALUES (?, ?)");
                 query.setInt(1, spelerId);
                 query.setString(2, kaart.getOmschrijving());
