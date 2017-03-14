@@ -47,6 +47,8 @@ public class DomeinController {
         //eerst startstapel ophalen uit de kaartRepository
         // startstapel toekennen aan de speler
         
+        nieuweSpeler.setStartStapel(kaartRepository.getStartKaarten());
+        
         spelerRepository.voegSpelerToe(nieuweSpeler); //nog surrounden met try-catch
         kaartRepository.voegStartkaartenToeAanSpeler(nieuweSpeler);
     }

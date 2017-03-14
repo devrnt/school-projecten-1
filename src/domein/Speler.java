@@ -1,6 +1,7 @@
 package domein;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,6 +14,7 @@ public class Speler {
     private String gebruikersnaam;
     private double krediet;
     private int geboortejaar;
+    private List<Kaart> kaartLijst;
 
     public Speler(String gebruikersnaam, int geboortejaar, double krediet) {
         
@@ -68,5 +70,13 @@ public class Speler {
         } else if (leeftijd > 99) {
             throw new IllegalArgumentException("te_oud");
         }
+    }
+    
+    public void setStartStapel(List<Kaart> lijst){
+        kaartLijst = lijst;
+    }
+    
+    public List<Kaart> getKaartLijst(){
+        return kaartLijst;
     }
 }
