@@ -1,6 +1,8 @@
 package domein;
 
 import java.util.Calendar;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -48,7 +50,9 @@ public class Speler {
         }
 
         //Controle maken voor leestekes in naam
-        if(gebruikersnaam.matches("\\p{Punct}")){
+        Pattern p = Pattern.compile("[^A-Za-z0-9]");
+        Matcher m = p.matcher(gebruikersnaam);
+        if(m.find()){
             throw new IllegalArgumentException("verkeerd_character");
         }
         

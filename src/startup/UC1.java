@@ -17,14 +17,14 @@ public class UC1 {
         dc.maakSpeler("Te", 1990);
         dc.maakSpeler("Te st", 1990);
         dc.maakSpeler("5Test", 1990);
-        dc.maakSpeler("Test@", 1990);
+        dc.maakSpeler("Test&", 1990);
         
         //verkeerde geboortedatum
         dc.maakSpeler("Test", 1000);
         dc.maakSpeler("Test", 2020);
         
         //correct aanmaken van de speler
-        dc.maakSpeler("CorrecteTest", 1990);
+        //dc.maakSpeler("CorrecteTest", 1990);
         
         //Methodes om de spelers op te vragen uit de database maken geen deel uit van UC1
     }
