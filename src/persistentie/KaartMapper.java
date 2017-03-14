@@ -23,7 +23,7 @@ public class KaartMapper {
 
     public void voegToe(Kaart kaart, Speler speler) {
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL)) {
-            PreparedStatement query = conn.prepareStatement("INSERT INTO ID222177_g14.kaarttype (omschrijving, waarde, type)"
+            PreparedStatement query = conn.prepareStatement("INSERT INTO ID222177_g14.Kaarttype (omschrijving, waarde, type)"
                     + "VALUES (?, ?, ?)");
             query.setString(1, kaart.getOmschrijving());
             query.setDouble(2, kaart.getWaarde());
