@@ -50,6 +50,4 @@ public class DomeinController {
         spelerRepository.voegSpelerToe(nieuweSpeler); //nog surrounden met try-catch
         kaartRepository.voegStartkaartenToeAanSpeler(nieuweSpeler);
     }
-    
-    public void maakWedstrijd()
 }
