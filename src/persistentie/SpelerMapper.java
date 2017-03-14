@@ -22,7 +22,7 @@ public class SpelerMapper {
 
     public void voegToe(Speler speler) {
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL)) {
-            PreparedStatement query = conn.prepareStatement("INSERT INTO ID222177_g14.speler (gebruikersnaam, krediet, geboortejaar)"
+            PreparedStatement query = conn.prepareStatement("INSERT INTO ID222177_g14.Speler (gebruikersnaam, krediet, geboortejaar)"
                     + "VALUES (?, ?, ?)");
             query.setString(1, speler.getGebruikersnaam());
             query.setDouble(2, speler.getKrediet());
@@ -41,7 +41,7 @@ public class SpelerMapper {
         Speler speler = null;
 
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL)) {
-            PreparedStatement query = conn.prepareStatement("SELECT * FROM ID222177_g14.speler WHERE gebruikersnaam = ?");
+            PreparedStatement query = conn.prepareStatement("SELECT * FROM ID222177_g14.Speler WHERE gebruikersnaam = ?");
             query.setString(1, gebruikersnaam);
             try (ResultSet rs = query.executeQuery()) {
                 if (rs.next()) {

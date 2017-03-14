@@ -26,7 +26,7 @@ public class KaartRepository {
         //
         
         mapper.voegToe(kaart, speler);
-    }
+    } 
     
     public void voegStartkaartenToeAanSpeler(Speler speler){
         mapper.voegStartkaartenToe(speler, mapper.getStartKaarten());

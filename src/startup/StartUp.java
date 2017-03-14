@@ -6,6 +6,8 @@
 package startup;
 
 import domein.DomeinController;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import ui.ConsoleApplicatie;
 
 /**
@@ -15,10 +17,16 @@ import ui.ConsoleApplicatie;
 public class StartUp {
     public static void main(String[] args){
 		DomeinController dc = new DomeinController();
-		
-                //testen Use Cases
                 
-                UC2.testUC2(dc);
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            
+            //testen Use Cases
+            UC1.testUC1(dc);
+            //UC2.testUC2(dc);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(StartUp.class.getName()).log(Level.SEVERE, null, ex);
+        }
 	
 	}
 }
