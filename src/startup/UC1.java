@@ -24,7 +24,7 @@ public class UC1 {
         dc.maakSpeler("Test", 2020);
         
         //correct aanmaken van de speler
-        dc.maakSpeler("CorrecteTest", 1990);
+        dc.maakSpeler("CorrecteTestToday", 1990);
         
         //Methodes om de spelers op te vragen uit de database maken geen deel uit van UC1
     }
