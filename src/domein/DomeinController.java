@@ -44,7 +44,12 @@ public class DomeinController {
             return;
         }
         //stapel kaarten moet nog toegevoegd worden
+        //eerst startstapel ophalen uit de kaartRepository
+        // startstapel toekennen aan de speler
+        
         spelerRepository.voegSpelerToe(nieuweSpeler); //nog surrounden met try-catch
         kaartRepository.voegStartkaartenToeAanSpeler(nieuweSpeler);
     }
+    
+    public void maakWedstrijd()
 }
