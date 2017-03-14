@@ -63,9 +63,9 @@ public class KaartMapper {
             PreparedStatement spelerlijst = conn.prepareStatement("SELECT * FROM ID222177_g14.Speler WHERE gebruikersnaam = ?");
             spelerlijst.setString(1, speler.getGebruikersnaam());
             ResultSet rs = spelerlijst.executeQuery();
+            rs.next();
             int spelerId = rs.getInt("spelerID");
-
-            System.out.println(spelerId);
+            
             for (Kaart kaart : startKaarten) {
                 PreparedStatement query = conn.prepareStatement("INSERT INTO ID222177_g14.Kaart (spelerID, omschrijving)"
                         + "VALUES (?, ?)");
