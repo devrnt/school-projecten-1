@@ -25,7 +25,10 @@ public class UC1 {
         //dc.maakSpeler("Test", 1000);
         //dc.maakSpeler("Test", 2020);
         //correct aanmaken van de speler
-  
+        int aantalSpelers = 0;
+        
+        
+        do{
             Scanner input = new Scanner(System.in);
             String naam = "";
             int geboortejaar;
@@ -38,10 +41,12 @@ public class UC1 {
             
             try {
                 dc.maakSpeler(naam, geboortejaar);
+                aantalSpelers++;
     
             } catch (IllegalArgumentException e) {
                 System.out.println(dc.getTaal().getVertaling(e.getMessage()));
             }
+        }while(aantalSpelers<2);
            
 
         

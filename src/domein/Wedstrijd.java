@@ -10,6 +10,10 @@ package domein;
  * @author Jonas
  */
 public class Wedstrijd {
+    
+    private Speler speler1;
+    private Speler speler2;
+    
     public Wedstrijd(Speler speler){
         
     }
