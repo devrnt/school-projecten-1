@@ -1,16 +1,19 @@
 package domein;
 
 import Exceptions.GebruikernaamInGebruikException;
+import java.util.ArrayList;
 import java.util.List;
 import persistentie.SpelerMapper;
 
 public class SpelerRepository {
 
     private final SpelerMapper mapper;
+    private List<Speler> spelers;
 
     public SpelerRepository() {
         mapper = new SpelerMapper();
         //spelers = new ArrayList<>();
+        spelers = mapper.geefLijstSpelers();
     }
 
     public void voegSpelerToe(Speler speler) {
@@ -20,11 +23,15 @@ public class SpelerRepository {
         }
 
         mapper.voegToe(speler);
-
+        spelers.add(speler);
     }
 
     public List<String> geefLijstBeschikbareSpelers() {
-        return mapper.geefLijstBeschikbareSpelers();
+        List<String> beschikbaar = new ArrayList<>();
+        for(Speler speler: spelers){
+            if(speler.isBeschikbaar()){ beschikbaar.add(speler.getGebruikersnaam()); }
+        }
+        return beschikbaar;
     }
 
 }

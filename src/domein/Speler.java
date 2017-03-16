@@ -30,6 +30,7 @@ public class Speler {
         this.gebruikersnaam = gebruikersnaam;
         this.geboortejaar = geboortejaar;
         this.krediet = krediet;
+        beschikbaar = true;
     }
 
     public String getGebruikersnaam() {
