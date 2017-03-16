@@ -22,10 +22,9 @@ public class SpelerRepository {
         mapper.voegToe(speler);
 
     }
-    
-    public List<Speler> geefLijstBeschikbareSpelers(){
-        //mapper.
-                return null;
+
+    public List<String> geefLijstBeschikbareSpelers() {
+        return mapper.geefLijstBeschikbareSpelers();
     }
 
 }
