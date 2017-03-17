@@ -7,6 +7,7 @@ package startup;
 
 import domein.DomeinController;
 import java.util.Scanner;
+import resources.Taal;
 
 /**
  *
@@ -25,33 +26,38 @@ public class UC1 {
         //dc.maakSpeler("Test", 1000);
         //dc.maakSpeler("Test", 2020);
         //correct aanmaken van de speler
-        int aantalSpelers = 0;
+        int aantalSpelers=0;
+        int aantalGewensteSpelers;
         
+        //de taal tijdelijk op nl zetten
         
-        do{
+        dc.setTaal(new Taal("en"));
+
+        
+        Scanner inputUser = new Scanner(System.in);
+
+        System.out.println(dc.getTaal().getVertaling("aantal_spelers"));
+        aantalGewensteSpelers = inputUser.nextInt();
+
+        do {
             Scanner input = new Scanner(System.in);
             String naam = "";
             int geboortejaar;
-            
 
             System.out.println(dc.getTaal().getVertaling("naam_input"));
             naam = input.nextLine();
             System.out.println(dc.getTaal().getVertaling("geboortejaar_input"));
             geboortejaar = input.nextInt();
-            
+
             try {
                 dc.maakSpeler(naam, geboortejaar);
                 aantalSpelers++;
-    
+
             } catch (IllegalArgumentException e) {
                 System.out.println(dc.getTaal().getVertaling(e.getMessage()));
             }
-        }while(aantalSpelers<2);
-           
-
-        
+        } while (aantalSpelers < aantalGewensteSpelers);
 
         //Methodes om de spelers op te vragen uit de database maken geen deel uit van UC1
     }
 }
-
