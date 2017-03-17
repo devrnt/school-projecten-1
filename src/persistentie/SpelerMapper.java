@@ -74,14 +74,15 @@ public class SpelerMapper {
         return speler;
     }
     
-    public List<String> geefLijstBeschikbareSpelers() {
-        List<String> spelerLijst = new ArrayList<>();
+    public List<Speler> geefLijstSpelers() {
+        List<Speler> spelerLijst = new ArrayList<>();
 
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL)) {
             PreparedStatement query = conn.prepareStatement("SELECT * FROM ID222177_g14.Speler");
             try (ResultSet rs = query.executeQuery()) {
                 while (rs.next()) {
-                    spelerLijst.add(rs.getString("gebruikersnaam"));
+                    
+                    spelerLijst.add(new Speler(rs.getString("gebruikersnaam"), rs.getInt("geboortejaar"), rs.getDouble("krediet")));
                 }
             }
         } catch (SQLException ex) {
