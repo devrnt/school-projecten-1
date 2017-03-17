@@ -19,10 +19,13 @@ public class StartUp {
     public static void main(String[] args) {
         DomeinController dc = new DomeinController();
 
+        
+        
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
             //testen Use Cases
+            UC2.testUC2(dc);
             UC1.testUC1(dc);
             //UC2.testUC2(dc);
         } catch (ClassNotFoundException ex) {

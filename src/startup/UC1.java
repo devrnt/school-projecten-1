@@ -31,7 +31,7 @@ public class UC1 {
         
         //de taal tijdelijk op nl zetten
         
-        dc.setTaal(new Taal("en"));
+        //dc.setTaal(new Taal("en"));
 
         
         Scanner inputUser = new Scanner(System.in);
