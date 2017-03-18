@@ -7,6 +7,7 @@ package domein;
 
 import Exceptions.GebruikernaamInGebruikException;
 import java.util.Calendar;
+import java.util.List;
 import resources.Taal;
 
 /**
@@ -51,5 +52,9 @@ public class DomeinController {
         
         spelerRepository.voegSpelerToe(nieuweSpeler); //nog surrounden met try-catch
         kaartRepository.voegStartkaartenToeAanSpeler(nieuweSpeler);
+    }
+    
+    public List<String> geefLijstBeschikbareSpelers(){
+        return spelerRepository.geefLijstBeschikbareSpelers();
     }
 }
