@@ -10,5 +10,22 @@ package Exceptions;
  * @author Edward
  */
 public class GebruikernaamInGebruikException extends IllegalArgumentException{
+
+    public GebruikernaamInGebruikException() {
+        super("Geef een getal in.");
+    }
+
+    public GebruikernaamInGebruikException(String s) {
+        super(s);
+    }
+
+    public GebruikernaamInGebruikException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public GebruikernaamInGebruikException(Throwable cause) {
+        super(cause);
+    }
+    
     
 }
