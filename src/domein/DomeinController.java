@@ -6,6 +6,8 @@
 package domein;
 
 import Exceptions.GebruikernaamInGebruikException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import resources.Taal;
@@ -19,6 +21,7 @@ public class DomeinController {
     private SpelerRepository spelerRepository;
     private KaartRepository kaartRepository;
     private Taal taal;
+    private List<Speler> geregistreerdeSpelers; //mogelijks de registratie doen in een WedstrijdRepository?
 
     public Taal getTaal() {
         return taal;
@@ -56,5 +59,22 @@ public class DomeinController {
     
     public List<String> geefLijstBeschikbareSpelers(){
         return spelerRepository.geefLijstBeschikbareSpelers();
+    }
+    
+    public void maakWedstrijd(){
+        geregistreerdeSpelers.clear();
+    }
+    
+    public List<String> registreerSpeler(String gebruikersnaam){
+        Speler speler = spelerRepository.geefSpeler(gebruikersnaam);
+        if(speler != null && geregistreerdeSpelers.size() < 2){
+            geregistreerdeSpelers.add(speler);
+        }
+        return new ArrayList<>(Arrays.asList(geregistreerdeSpelers.get(0).getGebruikersnaam(), geregistreerdeSpelers.get(1).getGebruikersnaam()));
+    }
+    
+    public Wedstrijd creerWedstrijd(){
+        if(geregistreerdeSpelers.size() < 2){ return null; }
+        return new Wedstrijd(geregistreerdeSpelers);
     }
 }

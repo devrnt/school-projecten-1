@@ -34,4 +34,10 @@ public class SpelerRepository {
         return beschikbaar;
     }
 
+    public Speler geefSpeler(String gebruikersnaam){
+        for(Speler speler: spelers){
+            if(speler.getGebruikersnaam().equals(gebruikersnaam)){ return speler; }
+        }
+        return null;
+    }
 }
