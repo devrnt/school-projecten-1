@@ -16,13 +16,20 @@ public class SpelerRepository {
     }
 
     public void voegSpelerToe(Speler speler) {
-        if (mapper.bestaatSpeler(speler.getGebruikersnaam())) {
+        if (bestaatSpeler(speler.getGebruikersnaam())) {
             throw new IllegalArgumentException("naam_bestaat");
             
         }
 
         mapper.voegToe(speler);
         spelers.add(speler);
+    }
+    
+    private boolean bestaatSpeler(String naam){
+        for(Speler speler: spelers){
+            if(speler.getGebruikersnaam().equals(naam)){ return true; }
+        }
+        return false;
     }
 
     public List<String> geefLijstBeschikbareSpelers() {
