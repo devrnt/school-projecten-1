@@ -40,8 +40,6 @@ public class UC1 {
 
         while (aantalSpelers < aantalGewensteSpelers) {
 
-            do {
-
                 try {
                     Scanner input = new Scanner(System.in);
                     String naam = "";
@@ -59,8 +57,6 @@ public class UC1 {
                     System.out.println(dc.getTaal().getVertaling(e.getMessage()));
                 }
 
-            } while (flag); //while (aantalSpelers < aantalGewensteSpelers);
-            //Methodes om de spelers op te vragen uit de database maken geen deel uit van UC1
         }
     }
 }

@@ -44,8 +44,7 @@ public class DomeinController {
             nieuweSpeler.controleerGebruikersnaam(naam);
             nieuweSpeler.controleerLeeftijd(geboortejaar);
         }catch(IllegalArgumentException ex){
-            ex.printStackTrace();
-            return;
+            throw new IllegalArgumentException(ex.getMessage());
         }
         //stapel kaarten moet nog toegevoegd worden
         //eerst startstapel ophalen uit de kaartRepository
