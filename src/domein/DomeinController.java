@@ -5,10 +5,6 @@
  */
 package domein;
 
-import Exceptions.GebruikernaamInGebruikException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 import resources.Taal;
 
@@ -46,9 +42,6 @@ public class DomeinController {
         }catch(IllegalArgumentException ex){
             throw new IllegalArgumentException(ex.getMessage());
         }
-        //stapel kaarten moet nog toegevoegd worden
-        //eerst startstapel ophalen uit de kaartRepository
-        // startstapel toekennen aan de speler
         
         nieuweSpeler.setStartStapel(kaartRepository.getStartKaarten());
         
@@ -79,8 +72,4 @@ public class DomeinController {
         return new ArrayList<>(Arrays.asList(geregistreerdeSpelers.get(0).getGebruikersnaam(), geregistreerdeSpelers.get(1).getGebruikersnaam()));
     }*/
     
-    /*public Wedstrijd creerWedstrijd(){
-        if(geregistreerdeSpelers.size() < 2){ return null; }
-        return new Wedstrijd(geregistreerdeSpelers);
-    }*/
 }
