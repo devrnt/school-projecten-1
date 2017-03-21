@@ -49,7 +49,9 @@ public class Wedstrijd {
     }
     
     public List<String> geefSpelersZonderWedstrijdStapel(){
-        //toDo
-        return new ArrayList<>();
+        List<String> lijst = new ArrayList<>();
+        if(speler1.getWedstrijdStapel().size() == 0){ lijst.add(speler1.getGebruikersnaam()); }
+        if(speler2.getWedstrijdStapel().size() == 0){ lijst.add(speler2.getGebruikersnaam()); }
+        return lijst;
     }
 }
