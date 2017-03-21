@@ -32,36 +32,40 @@ public class DomeinController {
         kaartRepository = new KaartRepository();
     }
 
-    public void maakSpeler(String naam, int geboortejaar) {        
+    public void maakSpeler(String naam, int geboortejaar) {
         Speler nieuweSpeler = new Speler(naam, geboortejaar, 0);
-        
+
         //validatie gebruikersnaam
-        try{
+        try {
             nieuweSpeler.controleerGebruikersnaam(naam);
             nieuweSpeler.controleerLeeftijd(geboortejaar);
-        }catch(IllegalArgumentException ex){
+        } catch (IllegalArgumentException ex) {
             throw ex;
         }
-        
+
         nieuweSpeler.setStartStapel(kaartRepository.getStartKaarten());
-        
+
         spelerRepository.voegSpelerToe(nieuweSpeler); //nog surrounden met try-catch
         kaartRepository.voegStartkaartenToeAanSpeler(nieuweSpeler);
     }
-    
-    public List<String> geefLijstBeschikbareSpelers(){
+
+    public List<String> geefLijstBeschikbareSpelers() {
         return spelerRepository.geefLijstBeschikbareSpelers();
     }
-    
-    public void maakWedstrijd(){
+
+    public void maakWedstrijd() {
         wedstrijd = new Wedstrijd();
     }
-    
-    public List<String> registreerSpeler(String gebruikersnaam){
-        return wedstrijd.registreerSpeler(spelerRepository.geefSpeler(gebruikersnaam));
+
+    public void registreerSpeler(String gebruikersnaam) {
+        wedstrijd.registreerSpeler(spelerRepository.geefSpeler(gebruikersnaam));
     }
-    
-    public List<String> geefSpelerZonderWedstrijdStapel(){
+
+    public List<String> geefGeregistreerdeSpelers() {
+        return wedstrijd.geefGeregistreerdeSpelers();
+    }
+
+    public List<String> geefSpelerZonderWedstrijdStapel() {
         return wedstrijd.geefSpelersZonderWedstrijdStapel();
     }
     /*public List<String> registreerSpeler(String gebruikersnaam){
@@ -71,5 +75,5 @@ public class DomeinController {
         }
         return new ArrayList<>(Arrays.asList(geregistreerdeSpelers.get(0).getGebruikersnaam(), geregistreerdeSpelers.get(1).getGebruikersnaam()));
     }*/
-    
+
 }

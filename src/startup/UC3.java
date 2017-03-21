@@ -17,6 +17,7 @@ import resources.Taal;
  */
 public class UC3 {
     public static void testUC3(DomeinController dc) {
+        //spelerlijst lokaal bijhouden en spelers die al geregistreerd zijn verwijderen eruit
         Scanner input = new Scanner(System.in);
         dc.maakWedstrijd();
         String keuze = "";
@@ -27,10 +28,13 @@ public class UC3 {
             System.out.println(dc.getTaal().getVertaling("selecteer_speler"));
             keuze = input.nextLine();
             
-            spelers = dc.registreerSpeler(keuze);
-            System.out.println(dc.getTaal().getVertaling("geregistreerde_spelers"));
-            spelers.forEach((naam)->{ System.out.println(naam); });
+            dc.registreerSpeler(keuze);
+            //System.out.println(dc.getTaal().getVertaling("geregistreerde_spelers"));
+            //spelers.forEach((naam)->{ System.out.println(naam); });
         }
+        System.out.println(dc.getTaal().getVertaling("geregistreerde_spelers"));
+        dc.geefGeregistreerdeSpelers().forEach((naam)->{ System.out.println(naam); });
+        
         System.out.println(dc.getTaal().getVertaling("geen_wedstrijdstapel"));
         if(!dc.geefSpelerZonderWedstrijdStapel().isEmpty()){
             dc.geefSpelerZonderWedstrijdStapel().forEach((naam)->{ System.out.println(naam); });
