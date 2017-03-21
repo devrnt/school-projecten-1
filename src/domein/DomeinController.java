@@ -40,7 +40,7 @@ public class DomeinController {
             nieuweSpeler.controleerGebruikersnaam(naam);
             nieuweSpeler.controleerLeeftijd(geboortejaar);
         }catch(IllegalArgumentException ex){
-            throw new IllegalArgumentException(ex.getMessage());
+            throw ex;
         }
         
         nieuweSpeler.setStartStapel(kaartRepository.getStartKaarten());

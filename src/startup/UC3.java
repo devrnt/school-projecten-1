@@ -22,16 +22,16 @@ public class UC3 {
         String keuze = "";
         List<String> spelers = new ArrayList<>();
         while (spelers.size() < 2) {
-            System.out.println("Dit zijn de beschikbare spelers: ");
+            System.out.println(dc.getTaal().getVertaling("beschikbare_spelers"));
             dc.geefLijstBeschikbareSpelers().forEach((naam)->{ System.out.println(naam); });
-            System.out.println("Gelieve een van deze personen te selecteren");
+            System.out.println(dc.getTaal().getVertaling("selecteer_speler"));
             keuze = input.nextLine();
             
             spelers = dc.registreerSpeler(keuze);
-            System.out.println("De volgende spelers zijn nu geregistreerd: ");
+            System.out.println(dc.getTaal().getVertaling("geregistreerde_spelers"));
             spelers.forEach((naam)->{ System.out.println(naam); });
         }
-        System.out.println("Deze spelers hebben nog geen wedstrijdStapel!");
+        System.out.println(dc.getTaal().getVertaling("geen_wedstrijdstapel"));
         if(!dc.geefSpelerZonderWedstrijdStapel().isEmpty()){
             dc.geefSpelerZonderWedstrijdStapel().forEach((naam)->{ System.out.println(naam); });
         }

@@ -53,7 +53,7 @@ public class UC1 {
                     aantalSpelers++;
 
                 } catch (IllegalArgumentException e) {
-                    System.out.println(dc.getTaal().getVertaling(e.getMessage()));
+                    System.err.println(dc.getTaal().getVertaling(e.getMessage()));
                 }
 
         }
