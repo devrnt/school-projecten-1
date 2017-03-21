@@ -16,7 +16,7 @@ import resources.Taal;
  * @author Edward
  */
 public class UC3 {
-    public static void testUC2(DomeinController dc) {
+    public static void testUC3(DomeinController dc) {
         Scanner input = new Scanner(System.in);
         dc.maakWedstrijd();
         String keuze = "";
@@ -32,7 +32,9 @@ public class UC3 {
             spelers.forEach((naam)->{ System.out.println(naam); });
         }
         System.out.println("Deze spelers hebben nog geen wedstrijdStapel!");
-        dc.geefSpelerZonderWedstrijdStapel().forEach((naam)->{ System.out.println(naam); });
+        if(!dc.geefSpelerZonderWedstrijdStapel().isEmpty()){
+            dc.geefSpelerZonderWedstrijdStapel().forEach((naam)->{ System.out.println(naam); });
+        }
         //toDo geefActieveSpeler(deze wordt nog nergens geset)
     }
 }

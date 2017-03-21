@@ -43,6 +43,6 @@ public class Wedstrijd {
     
     public List<String> geefSpelersZonderWedstrijdStapel(){
         //toDo
-        return null;
+        return new ArrayList<>();
     }
 }

@@ -7,7 +7,6 @@ package startup;
 
 import domein.DomeinController;
 import java.util.Scanner;
-import resources.Taal;
 
 /**
  *
