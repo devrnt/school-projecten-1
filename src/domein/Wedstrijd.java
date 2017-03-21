@@ -23,18 +23,25 @@ public class Wedstrijd {
         
     }
     
-    public List<String> registreerSpeler(Speler speler){
+    public void registreerSpeler(Speler speler){
         if(speler != null){
             if(speler1 == null){
                 speler1 = speler;
                 speler.setBeschikbaar(false);
-                return new ArrayList<>(Arrays.asList(speler1.getGebruikersnaam()));
             }else if(speler2 == null){
                 speler.setBeschikbaar(false);
                 speler2 = speler;
             }
         }
-        return new ArrayList<>(Arrays.asList(speler1.getGebruikersnaam(), speler2.getGebruikersnaam()));
+    }
+    
+    public List<String> geefGeregistreerdeSpelers(){
+        List<String> lijst = new ArrayList<>();
+        if(speler1 != null){
+            if(speler2 != null){ lijst.add(speler2.getGebruikersnaam()); }
+            lijst.add(speler1.getGebruikersnaam());
+        }
+        return lijst;
     }
     
     public String geefActieveSpeler(){
