@@ -76,4 +76,7 @@ public class DomeinController {
         return new ArrayList<>(Arrays.asList(geregistreerdeSpelers.get(0).getGebruikersnaam(), geregistreerdeSpelers.get(1).getGebruikersnaam()));
     }*/
 
+    public void maakWedstrijdStapel(){
+
+    }
 }
