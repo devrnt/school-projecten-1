@@ -28,6 +28,7 @@ public class StartUp {
             UC2.testUC2(dc);
             UC1.testUC1(dc);
             UC3.testUC3(dc);
+            //UC4.testUC4(dc);
             //UC2.testUC2(dc);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(StartUp.class.getName()).log(Level.SEVERE, null, ex);
