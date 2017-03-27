@@ -5,7 +5,9 @@
  */
 package domein;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import resources.Taal;
 
 /**
@@ -18,6 +20,7 @@ public class DomeinController {
     private KaartRepository kaartRepository;
     private Taal taal;
     private Wedstrijd wedstrijd;
+    private Speler speler;
 
     public Taal getTaal() {
         return taal;
@@ -68,6 +71,7 @@ public class DomeinController {
     public List<String> geefSpelerZonderWedstrijdStapel() {
         return wedstrijd.geefSpelersZonderWedstrijdStapel();
     }
+
     /*public List<String> registreerSpeler(String gebruikersnaam){
         Speler speler = spelerRepository.geefSpeler(gebruikersnaam);
         if(speler != null && geregistreerdeSpelers.size() < 2){
@@ -75,8 +79,45 @@ public class DomeinController {
         }
         return new ArrayList<>(Arrays.asList(geregistreerdeSpelers.get(0).getGebruikersnaam(), geregistreerdeSpelers.get(1).getGebruikersnaam()));
     }*/
+    public void selecteerKaartVoorWedstrijdStapel(int keuze) {
 
-    public void maakWedstrijdStapel(){
+        switch (keuze) {
+        }
+
+    }
+
+    public String toonNGKaartenStartStapel() {
+        String output = "";
+        int teller = 0;
+
+        for (Kaart kaart : speler.toonNietGeselecteerdeKaarten()) {
+            teller++;
+            output += String.format("%d. %s", teller, kaart.getOmschrijving());
+        }
+
+        return output;
+    }
+
+    public int geefAantalKaartenWedstrijdStapel() {
+        int aantal = 0;
+
+        for (Kaart kaart : speler.getWedstrijdStapel()) {
+            aantal++;
+        }
+
+        return aantal;
+    }
+
+    public void maakWedstrijdStapel() {
+        int min = 0;
+        int max = 5;
+        Random rand = null;
+        
+        do {
+
+            int randomNummer = rand.nextInt((max - min) + 1) + min;
+
+        } while (speler.getAantalKaartenInWedstrijdStapel() > 4);
 
     }
 }
