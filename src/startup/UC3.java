@@ -34,7 +34,7 @@ public class UC3 {
         }
         System.out.println(dc.getTaal().getVertaling("geregistreerde_spelers"));
         dc.geefGeregistreerdeSpelers().forEach((naam)->{ System.out.println(naam); });
-        
+            
         System.out.println(dc.getTaal().getVertaling("geen_wedstrijdstapel"));
         if(!dc.geefSpelerZonderWedstrijdStapel().isEmpty()){
             dc.geefSpelerZonderWedstrijdStapel().forEach((naam)->{ System.out.println(naam); });
