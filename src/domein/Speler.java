@@ -51,8 +51,8 @@ public class Speler {
     public int getGeboortejaar() {
         return geboortejaar;
     }
-    
-    public List<Kaart> getWedstrijdStapel(){
+
+    public List<Kaart> getWedstrijdStapel() {
         return wedstrijdStapel;
     }
 
@@ -107,8 +107,18 @@ public class Speler {
 
         return NGkaarten;
     }
-    
-    public void selecteerKaart(Kaart wedstrijdKaart){
+
+    public void selecteerKaart(Kaart wedstrijdKaart) {
         wedstrijdStapel.add(wedstrijdKaart);
+    }
+
+    public int getAantalKaartenInWedstrijdStapel() {
+        int teller = 0;
+
+        for (Kaart kaart : wedstrijdStapel) {
+            teller++;
+        }
+        return teller;
+
     }
 }
