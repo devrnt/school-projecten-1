@@ -35,8 +35,6 @@ public class UC1 {
         //boolean flag = true;
         boolean extraSpeler = true;
 
-        System.out.println(dc.getTaal().getVertaling("aantal_spelers"));
-
         while (extraSpeler) {
            
             try {
