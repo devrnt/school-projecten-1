@@ -15,8 +15,8 @@ public class UC4 {
         // Dit moet gebeuren voor de beide speler
         
         List<String> selectie = new ArrayList<String>();
-        List<String> startstapel = dc.toonStartStapel();
-
+        List<String> startstapel = dc.toonStartStapel(speler);
+        startstapel.forEach((omschrijving)->{ System.out.println(omschrijving); });
         while (selectie.size() < 6) {
             System.out.println("Geef een nummer van een kaart");
             int keuze = -1;

@@ -20,7 +20,6 @@ public class DomeinController {
     private KaartRepository kaartRepository;
     private Taal taal;
     private Wedstrijd wedstrijd;
-    private Speler speler;
 
     public Taal getTaal() {
         return taal;
@@ -82,7 +81,8 @@ public class DomeinController {
 
     
     // lijst van Strings 
-    public List<String> toonStartStapel() {
+    public List<String> toonStartStapel(String naam) {
+        Speler speler = spelerRepository.geefSpeler(naam);
         List<String> output = new ArrayList<>();
         for (Kaart kaart : speler.getKaartLijst()) {
            
@@ -91,11 +91,7 @@ public class DomeinController {
 
         return output;
     }
-
-    public int geefAantalKaartenWedstrijdStapel() {
-        return speler.getWedstrijdStapel().size();
-    }
-
+    
     public void maakWedstrijdStapel(String naam, List<String> selectie) {
         
         wedstrijd.maakWedstrijdStapel(naam, selectie);
@@ -113,6 +109,5 @@ public class DomeinController {
     public void verhoogKrediet(){
         Speler winnaar = wedstrijd.getWinnaar();
         winnaar.setKrediet(winnaar.getKrediet() + 5);
-        spelerRepository.updateKrediet(speler);
     }
 }
