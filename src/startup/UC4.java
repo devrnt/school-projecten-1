@@ -13,6 +13,7 @@ public class UC4 {
              System.out.println(dc.toonNGKaartenStartStapel());
              System.out.printf("U moet nog %d kaarten kiezen.%n", (6-dc.geefAantalKaartenWedstrijdStapel()));
              System.out.printf("> ");
+             //toDo try catch + controle keuze
              keuze = input.nextInt();
              dc.selecteerKaartVoorWedstrijdStapel(keuze);
              
