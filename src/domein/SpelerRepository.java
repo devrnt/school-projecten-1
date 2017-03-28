@@ -46,4 +46,8 @@ public class SpelerRepository {
         }
         return null;
     }
+    
+    public void updateKrediet(Speler speler){
+        mapper.updateKrediet(speler);
+    }
 }
