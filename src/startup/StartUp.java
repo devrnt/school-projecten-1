@@ -21,14 +21,14 @@ public class StartUp {
         DomeinController dc = new DomeinController();
         Scanner input = new Scanner(System.in);
         int keuze = -1;
-
+        boolean flag=true;
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
             //testen Use Cases
             UC2.testUC2(dc);
 
-            while (true) {
+            while (flag) {
                 do {
                     int i = 1;
                     System.out.printf("%d. %s%n", i, dc.getTaal().getVertaling("wedstrijd_start"));
@@ -49,9 +49,9 @@ public class StartUp {
                     case 2:
                         UC1.testUC1(dc);
                         break;
-                    case 3: System.exit(0);
+                    case 3: flag=false;
                         break;
-                    case 4: System.exit(0);
+                    case 4: flag=false;
                 }
 
                 
