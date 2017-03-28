@@ -86,12 +86,11 @@ public class DomeinController {
 
     }
 
-   
     // lijst van Strings 
     public List<String> toonNGKaartenStartStapel() {
         List<String> output = new ArrayList<String>();
         for (Kaart kaart : speler.toonNietGeselecteerdeKaarten()) {
-           
+
             output.add(kaart.getOmschrijving());
         }
 
@@ -103,21 +102,19 @@ public class DomeinController {
     }
 
     public void maakWedstrijdStapel(String naam, List<String> stapel) {
-        
+
         wedstrijd.maakWedstrijdStapel(naam, stapel);
     }
-    
-    public double geefKredietWinnaar(){
+
+    public double geefKredietWinnaar() {
         return wedstrijd.getWinnaar().getKrediet();
     }
-    
-    public String geefNaamWinnaar(){
+
+    public String geefNaamWinnaar() {
         return wedstrijd.getWinnaar().getGebruikersnaam();
     }
-    
-    public void verhoogKrediet(){
-        Speler winnaar = wedstrijd.getWinnaar();
-        winnaar.setKrediet(winnaar.getKrediet() + 5);
-        spelerRepository.updateKrediet(speler);
+
+    public void verhoogKrediet() {
+        wedstrijd.verhoogKrediet();
     }
 }

@@ -68,4 +68,7 @@ public class Wedstrijd {
         }
     }
     
+    public void verhoogKrediet(){
+        winnaar.setKrediet(winnaar.getKrediet() + 5);
+    }
 }

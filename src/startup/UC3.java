@@ -17,14 +17,15 @@ import resources.Taal;
  * @author Edward
  */
 public class UC3 {
+
     public static void testUC3(DomeinController dc) {
         //spelerlijst lokaal bijhouden en spelers die al geregistreerd zijn verwijderen eruit
         Scanner input = new Scanner(System.in);
         dc.maakWedstrijd();
         // String keuze = "";
         List<String> gekozenSpelers = new ArrayList<>();
-        List <String> beschikbareSpelers = dc.geefLijstBeschikbareSpelers();
-        
+        List<String> beschikbareSpelers = dc.geefLijstBeschikbareSpelers();
+
         while (gekozenSpelers.size() < 2) {
             System.out.println(dc.getTaal().getVertaling("beschikbare_spelers"));
             int keuze = -1;
@@ -36,24 +37,20 @@ public class UC3 {
             }
             gekozenSpelers.add(beschikbareSpelers.get(keuze));
             beschikbareSpelers.remove(keuze);
-            
-            //System.out.println(dc.getTaal().getVertaling("geregistreerde_spelers"));
-            //spelers.forEach((naam)->{ System.out.println(naam); });
         }
-        
+
         for (int i = 0; i < gekozenSpelers.size(); i++) {
-                        
+
             dc.registreerSpeler(gekozenSpelers.get(i));
         }
-        
-        
+
         System.out.println(dc.getTaal().getVertaling("geregistreerde_spelers"));
-        dc.geefGeregistreerdeSpelers().forEach((naam)->{ System.out.println(naam); });
-            
-        
+        dc.geefGeregistreerdeSpelers().forEach((naam) -> {
+            System.out.println(naam);
+        });
+
         List<String> spelersZonderStapel = dc.geefSpelerZonderWedstrijdStapel();
-        
-        
+
         while (spelersZonderStapel.size() > 0) {
             System.out.println(dc.getTaal().getVertaling("geen_wedstrijdstapel"));
             int keuze = -1;
@@ -64,17 +61,12 @@ public class UC3 {
                 keuze = input.nextInt();
             }
             UC4.testUC4(dc, spelersZonderStapel.get(keuze));
-            
+
             spelersZonderStapel.remove(spelersZonderStapel.get(keuze));
-            
+
             //System.out.println(dc.getTaal().getVertaling("geregistreerde_spelers"));
             //spelers.forEach((naam)->{ System.out.println(naam); });
         }
-        // Analoog als hierboven
-        System.out.println(dc.getTaal().getVertaling("geen_wedstrijdstapel"));
-        if(!dc.geefSpelerZonderWedstrijdStapel().isEmpty()){
-            dc.geefSpelerZonderWedstrijdStapel().forEach((naam)->{ System.out.println(naam); });
-        }
-        
+
     }
 }
