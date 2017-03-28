@@ -94,20 +94,6 @@ public class Speler {
         return kaartLijst;
     }
 
-    public List<Kaart> toonNietGeselecteerdeKaarten() {
-
-        List<Kaart> NGkaarten = new ArrayList<>();
-
-        kaartLijst.forEach((i) -> {
-            if (wedstrijdStapel.contains(i)) {
-            } else {
-                NGkaarten.add(i);
-            }
-        });
-
-        return NGkaarten;
-    }
-
     public void selecteerKaart(Kaart wedstrijdKaart) {
         wedstrijdStapel.add(wedstrijdKaart);
     }
@@ -124,5 +110,9 @@ public class Speler {
     
     public void maakWedstrijdStapel(List<String> stapel) {
         // met for - lus de stapel overlopen + vergelijken met de startstapel en zo de wedstrijdstapel opbouwen
+        
+        
     }
+    
+    
 }
