@@ -28,8 +28,20 @@ public class UC2 {
             keuze = "en";
         } //standaard setting (kan ook gedaan worden door resource_en te hernoemen naar resource)
         dc.setTaal(new Taal(keuze));
+<<<<<<< Upstream, based on origin/master
         System.out.println(dc.getTaal().getVertaling("wedstrijd_start"));
         System.out.println(dc.getTaal().getVertaling("maak_speler"));
         System.out.println(dc.getTaal().getVertaling("laad_wedstrijd"));
+=======
+        
+        int i = 1;
+        System.out.printf("%d. %s%n",i, dc.getTaal().getVertaling("wedstrijd_start"));
+        i++;
+        System.out.printf("%d. %s%n",i, dc.getTaal().getVertaling("maak_speler")); 
+        i++;
+        System.out.printf("%d. %s%n",i, dc.getTaal().getVertaling("laad_wedstrijd"));
+        i=0;
+        
+>>>>>>> 7033385 UC1 afgewerkt + taal prop
     }
 }

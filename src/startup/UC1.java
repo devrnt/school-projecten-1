@@ -6,6 +6,7 @@
 package startup;
 
 import domein.DomeinController;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -25,36 +26,47 @@ public class UC1 {
         //dc.maakSpeler("Test", 1000);
         //dc.maakSpeler("Test", 2020);
         //correct aanmaken van de speler
-        int aantalSpelers = 0;
-        int aantalGewensteSpelers;
-
+        
         //de taal tijdelijk op nl zetten
         //dc.setTaal(new Taal("en"));
-        Scanner inputUser = new Scanner(System.in);
+        // Scanner inputUser = new Scanner(System.in);
+        // System.out.println(dc.getTaal().getVertaling("aantal_spelers"));
+        // aantalGewensteSpelers = inputUser.nextInt();
+        //boolean flag = true;
+        boolean extraSpeler = true;
 
+<<<<<<< Upstream, based on origin/master
         System.out.println(dc.getTaal().getVertaling("aantal_spelers"));
         aantalGewensteSpelers = inputUser.nextInt(); // for lus, niet op voorhand zeggen hoeveel spelers er moeten zijn
+=======
+        while (extraSpeler) {
+>>>>>>> 7033385 UC1 afgewerkt + taal prop
 
-        boolean flag = true;
+            try {
+                Scanner input = new Scanner(System.in);
+                String naam = "";
+                int geboortejaar;
 
-        while (aantalSpelers < aantalGewensteSpelers) {
+                System.out.println(dc.getTaal().getVertaling("naam_input"));
+                naam = input.nextLine();
+                System.out.println(dc.getTaal().getVertaling("geboortejaar_input"));
+                geboortejaar = input.nextInt();
 
-                try {
-                    Scanner input = new Scanner(System.in);
-                    String naam = "";
-                    int geboortejaar;
+                dc.maakSpeler(naam, geboortejaar);
 
-                    System.out.println(dc.getTaal().getVertaling("naam_input"));
-                    naam = input.nextLine();
-                    System.out.println(dc.getTaal().getVertaling("geboortejaar_input"));
-                    geboortejaar = input.nextInt();
-
-                    dc.maakSpeler(naam, geboortejaar);
-                    aantalSpelers++;
-
-                } catch (IllegalArgumentException e) {
-                    System.err.println(dc.getTaal().getVertaling(e.getMessage()));
+                try{
+                
+                System.out.println(dc.getTaal().getVertaling("extra_speler"));
+                extraSpeler = input.nextBoolean();
+                
+                } catch(InputMismatchException e){
+                    System.err.println(dc.getTaal().getVertaling("antwoord_extra_speler"));
                 }
+                
+
+            } catch (IllegalArgumentException e) {
+                System.err.println(dc.getTaal().getVertaling(e.getMessage()));
+            }
 
         }
     }

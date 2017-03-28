@@ -62,6 +62,12 @@ public class Speler {
         if (gebruikersnaam.length() < 3) {
             throw new IllegalArgumentException("naam_te_kort");
         }
+        
+        if(gebruikersnaam.length()>25){
+            throw new IllegalArgumentException("naam_te_lang");
+        }
+        
+        
         if (gebruikersnaam.contains(" ")) {
             throw new IllegalArgumentException("verkeerd_character");
         }
