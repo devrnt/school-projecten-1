@@ -1,5 +1,6 @@
 package domein;
 
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -61,6 +62,12 @@ public class Speler {
         if (gebruikersnaam.length() < 3) {
             throw new IllegalArgumentException("naam_te_kort");
         }
+        
+        if(gebruikersnaam.length()>25){
+            throw new IllegalArgumentException("naam_te_lang");
+        }
+        
+        
         if (gebruikersnaam.contains(" ")) {
             throw new IllegalArgumentException("verkeerd_character");
         }
@@ -94,35 +101,26 @@ public class Speler {
         return kaartLijst;
     }
 
-    public List<Kaart> toonNietGeselecteerdeKaarten() {
+    public void maakWedstrijdStapel(List<String> selectie) {
+        // met for - lus de stapel overlopen + vergelijken met de startstapel en zo de wedstrijdstapel opbouwen
+        int min = 0;
+        int max = wedstrijdStapel.size();
 
-        List<Kaart> NGkaarten = new ArrayList<>();
-
-        kaartLijst.forEach((i) -> {
-            if (wedstrijdStapel.contains(i)) {
-            } else {
-                NGkaarten.add(i);
+        kaartLijst.forEach((kaart) -> {
+            for (int i = 0; i < selectie.size(); i++) {
+                if (kaart.getOmschrijving() == selectie.get(i)) {
+                    wedstrijdStapel.add(kaart);
+                }
             }
         });
 
-        return NGkaarten;
-    }
+        while (wedstrijdStapel.size() > 4) {
 
-    public void selecteerKaart(Kaart wedstrijdKaart) {
-        wedstrijdStapel.add(wedstrijdKaart);
-    }
+            int randomNum = ThreadLocalRandom.current().nextInt(min, max);
 
-    public int getAantalKaartenInWedstrijdStapel() {
-        int teller = 0;
+            wedstrijdStapel.remove(randomNum);
 
-        for (Kaart kaart : wedstrijdStapel) {
-            teller++;
         }
-        return teller;
+    }
 
-    }
-    
-    public void maakWedstrijdStapel(List<String> stapel) {
-        // met for - lus de stapel overlopen + vergelijken met de startstapel en zo de wedstrijdstapel opbouwen
-    }
 }
