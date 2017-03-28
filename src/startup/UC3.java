@@ -20,21 +20,39 @@ public class UC3 {
         //spelerlijst lokaal bijhouden en spelers die al geregistreerd zijn verwijderen eruit
         Scanner input = new Scanner(System.in);
         dc.maakWedstrijd();
-        String keuze = "";
-        List<String> spelers = new ArrayList<>();
-        while (spelers.size() < 2) {
+        // String keuze = "";
+        List<String> gekozenSpelers = new ArrayList<>();
+        List <String> beschikbareSpelers = dc.geefLijstBeschikbareSpelers();
+        
+        while (gekozenSpelers.size() < 2) {
             System.out.println(dc.getTaal().getVertaling("beschikbare_spelers"));
-            dc.geefLijstBeschikbareSpelers().forEach((naam)->{ System.out.println(naam); });
-            System.out.println(dc.getTaal().getVertaling("selecteer_speler"));
-            keuze = input.nextLine();
+            int keuze = -1;
+            while (keuze < 0 || keuze >= beschikbareSpelers.size()) {
+                for (int i = 0; i < beschikbareSpelers.size(); i++) {
+                    System.out.println(i + " " + beschikbareSpelers.get(i));
+                }
+                keuze = input.nextInt();
+            }
+            gekozenSpelers.add(beschikbareSpelers.get(keuze));
+            beschikbareSpelers.remove(keuze);
             
-            dc.registreerSpeler(keuze);
             //System.out.println(dc.getTaal().getVertaling("geregistreerde_spelers"));
             //spelers.forEach((naam)->{ System.out.println(naam); });
         }
+        
+        for (int i = 0; i < gekozenSpelers.size(); i++) {
+                        
+            dc.registreerSpeler(gekozenSpelers.get(i));
+        }
+        
+        
         System.out.println(dc.getTaal().getVertaling("geregistreerde_spelers"));
         dc.geefGeregistreerdeSpelers().forEach((naam)->{ System.out.println(naam); });
             
+        
+        
+        
+        // Analoog als hierboven
         System.out.println(dc.getTaal().getVertaling("geen_wedstrijdstapel"));
         if(!dc.geefSpelerZonderWedstrijdStapel().isEmpty()){
             dc.geefSpelerZonderWedstrijdStapel().forEach((naam)->{ System.out.println(naam); });
