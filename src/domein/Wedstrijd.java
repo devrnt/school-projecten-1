@@ -55,8 +55,17 @@ public class Wedstrijd {
     
     public List<String> geefSpelersZonderWedstrijdStapel(){
         List<String> lijst = new ArrayList<>();
-        if(speler1.getWedstrijdStapel().size() == 0){ lijst.add(speler1.getGebruikersnaam()); }
-        if(speler2.getWedstrijdStapel().size() == 0){ lijst.add(speler2.getGebruikersnaam()); }
+        if(speler1.getWedstrijdStapel().isEmpty()){ lijst.add(speler1.getGebruikersnaam()); }
+        if(speler2.getWedstrijdStapel().isEmpty()){ lijst.add(speler2.getGebruikersnaam()); }
         return lijst;
     }
+    public void maakWedstrijdStapel(String naam, List<String> stapel) {
+        if (naam.equals(speler1.getGebruikersnaam())){
+            speler1.maakWedstrijdStapel(stapel);
+        }
+        else if (naam.equals(speler2.getGebruikersnaam())){
+            speler2.maakWedstrijdStapel(stapel);
+        }
+    }
+    
 }
