@@ -120,4 +120,12 @@ public class DomeinController {
         } while (speler.getAantalKaartenInWedstrijdStapel() > 4);
 
     }
+    
+    public double geefKredietWinnaar(){
+        return wedstrijd.getWinnaar().getKrediet();
+    }
+    
+    public String geefNaamWinnaar(){
+        return wedstrijd.getWinnaar().getGebruikersnaam();
+    }
 }

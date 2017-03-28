@@ -18,6 +18,11 @@ public class Wedstrijd {
     private Speler speler1; //werken met gewoon de userName ipv de volledige speler?
     private Speler speler2;
     private Speler actief;
+    private Speler winnaar;
+
+    public Speler getWinnaar() {
+        return winnaar;
+    }
     
     public Wedstrijd(){
         
