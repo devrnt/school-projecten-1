@@ -27,23 +27,37 @@ public class StartUp {
 
             //testen Use Cases
             UC2.testUC2(dc);
-            
-            
-            do {
+
+            while (true) {
+                do {
+                    int i = 1;
+                    System.out.printf("%d. %s%n", i, dc.getTaal().getVertaling("wedstrijd_start"));
+                    i++;
+                    System.out.printf("%d. %s%n", i, dc.getTaal().getVertaling("maak_speler"));
+                    i++;
+                    System.out.printf("%d. %s%n", i, dc.getTaal().getVertaling("laad_wedstrijd"));
+                    i = 0;
+                    System.out.println("Selecteer een optie");
+                    System.out.print(" >");
+                    keuze = input.nextInt();
+
+                } while (keuze < 0 || keuze > 4);
+
+                switch (keuze) {
+                    case 1: UC3.testUC3(dc);
+                        break;
+                    case 2:
+                        UC1.testUC1(dc);
+                        break;
+                    case 3: System.exit(0);
+                        break;
+                    case 4: System.exit(0);
+                }
+
                 
-                System.out.println("Selecteer een optie");
-                System.out.print(">");
-                keuze = input.nextInt();
-                
-            } while (keuze < 0 || keuze > 4);
-            
-            switch(keuze){
-                case 1: UC1.testUC1(dc);
+                //UC4.testUC4(dc);
+                //UC2.testUC2(dc);
             }
-            
-            UC3.testUC3(dc);
-            //UC4.testUC4(dc);
-            //UC2.testUC2(dc);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(StartUp.class.getName()).log(Level.SEVERE, null, ex);
         }
