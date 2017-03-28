@@ -38,7 +38,7 @@ public class StartUp {
                     System.out.printf("%d. %s%n", i, dc.getTaal().getVertaling("laad_wedstrijd"));
                     i = 0;
                     System.out.println("Selecteer een optie");
-                    System.out.print(" >");
+                    System.out.print(" > ");
                     keuze = input.nextInt();
 
                 } while (keuze < 0 || keuze > 4);

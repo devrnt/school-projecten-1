@@ -24,16 +24,22 @@ public class UC3 {
         dc.maakWedstrijd();
         // String keuze = "";
         List<String> gekozenSpelers = new ArrayList<>();
-        List<String> beschikbareSpelers = dc.geefLijstBeschikbareSpelers();
-
+        List <String> beschikbareSpelers = dc.geefLijstBeschikbareSpelers();
+        
+        
+        if(beschikbareSpelers.isEmpty()){
+            System.out.printf(dc.getTaal().getVertaling("geen_beschikbare_spelers") + "%n%n");
+            return;
+        }
+        
         while (gekozenSpelers.size() < 2) {
             System.out.println(dc.getTaal().getVertaling("beschikbare_spelers"));
             int keuze = -1;
             while (keuze < 0 || keuze >= beschikbareSpelers.size()) {
                 for (int i = 0; i < beschikbareSpelers.size(); i++) {
-                    System.out.println(i + " " + beschikbareSpelers.get(i));
+                    System.out.println(i + 1 + " " + beschikbareSpelers.get(i));
                 }
-                keuze = input.nextInt();
+                keuze = input.nextInt()-1;
             }
             gekozenSpelers.add(beschikbareSpelers.get(keuze));
             beschikbareSpelers.remove(keuze);

@@ -22,7 +22,7 @@ public class UC2 {
             System.out.println("Voor Nederlands: typ nl");
             System.out.println("Pour Français: choisissez fr");
             System.out.println("For English: choose en");
-            System.out.printf(" >");
+            System.out.printf(" > ");
             
             keuze = input.nextLine();
             System.out.println("--------------------");
