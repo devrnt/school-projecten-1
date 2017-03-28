@@ -5,6 +5,7 @@
  */
 package persistentie;
 
+import domein.Kaart;
 import domein.Speler;
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -51,7 +52,7 @@ public class SpelerMapper {
         }
     }
 
-    public Speler geefSpeler(String gebruikersnaam) {
+    /*public Speler geefSpeler(String gebruikersnaam) {
         Speler speler = null;
 
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL)) {
@@ -71,7 +72,7 @@ public class SpelerMapper {
         }
 
         return speler;
-    }
+    }*/
 
     public List<Speler> geefLijstSpelers() {
         List<Speler> spelerLijst = new ArrayList<>();
@@ -80,8 +81,9 @@ public class SpelerMapper {
             PreparedStatement query = conn.prepareStatement("SELECT * FROM ID222177_g14.Speler");
             try (ResultSet rs = query.executeQuery()) {
                 while (rs.next()) {
-
-                    spelerLijst.add(new Speler(rs.getString("gebruikersnaam"), rs.getInt("geboortejaar"), rs.getDouble("krediet")));
+                    Speler tempSpeler = new Speler(rs.getString("gebruikersnaam"), rs.getInt("geboortejaar"), rs.getDouble("krediet"));
+                    geefKaartenSpeler(tempSpeler, rs.getInt("spelerID"));
+                    spelerLijst.add(tempSpeler);
                 }
             }
         } catch (SQLException ex) {
@@ -91,7 +93,21 @@ public class SpelerMapper {
         return spelerLijst;
     }
 
-    public void updateKrediet(Speler speler) {
+    private void geefKaartenSpeler(Speler speler, int spelerID){
+        try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL)) {
+            PreparedStatement query = conn.prepareStatement("SELECT * FROM ID222177_g14.Kaart INNER JOIN ID222177_g14.Kaarttype USING (omschrijving) WHERE spelerID = ?");
+            query.setInt(1, spelerID);
+            try (ResultSet rs = query.executeQuery()) {
+                while (rs.next()) {
+                    speler.voegKaartToe(new Kaart(rs.getString("omschrijving"), rs.getString("type"), rs.getInt("waarde")));
+                }
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+    
+    /*public void updateKrediet(Speler speler) {
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL)) {
             PreparedStatement query = conn.prepareStatement("UPDATE ID222177_g14.Speler SET krediet = ?  WHERE gebruikersnaam = ?");
             query.setDouble(2, speler.getKrediet());
@@ -100,5 +116,5 @@ public class SpelerMapper {
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
-    }
+    }*/
 }

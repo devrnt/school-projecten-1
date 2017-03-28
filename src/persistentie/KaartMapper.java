@@ -65,7 +65,7 @@ public class KaartMapper {
             ResultSet rs = spelerlijst.executeQuery();
             rs.next();
             int spelerId = rs.getInt("spelerID");
-            
+
             for (Kaart kaart : speler.getKaartLijst()) {
                 PreparedStatement query = conn.prepareStatement("INSERT INTO ID222177_g14.Kaart (spelerID, omschrijving)"
                         + "VALUES (?, ?)");
