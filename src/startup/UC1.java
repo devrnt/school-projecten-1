@@ -35,13 +35,10 @@ public class UC1 {
         //boolean flag = true;
         boolean extraSpeler = true;
 
-<<<<<<< Upstream, based on origin/master
         System.out.println(dc.getTaal().getVertaling("aantal_spelers"));
-        aantalGewensteSpelers = inputUser.nextInt(); // for lus, niet op voorhand zeggen hoeveel spelers er moeten zijn
-=======
-        while (extraSpeler) {
->>>>>>> 7033385 UC1 afgewerkt + taal prop
 
+        while (extraSpeler) {
+           
             try {
                 Scanner input = new Scanner(System.in);
                 String naam = "";
