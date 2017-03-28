@@ -86,13 +86,13 @@ public class DomeinController {
 
     }
 
-    public String toonNGKaartenStartStapel() {
-        String output = "";
-        int teller = 0;
-
+   
+    // lijst van Strings 
+    public List<String> toonNGKaartenStartStapel() {
+        List<String> output = new ArrayList<String>();
         for (Kaart kaart : speler.toonNietGeselecteerdeKaarten()) {
-            teller++;
-            output += String.format("%d. %s", teller, kaart.getOmschrijving());
+           
+            output.add(kaart.getOmschrijving());
         }
 
         return output;
@@ -108,7 +108,10 @@ public class DomeinController {
         return aantal;
     }
 
-    public void maakWedstrijdStapel() {
+    public void maakWedstrijdStapel(String, naam, List<String> stapel) {
+        
+        wedstrijd.maakWedstrijdStapel(naam, stapel);
+        
         int min = 0;
         int max = 5;
         Random rand = null;
