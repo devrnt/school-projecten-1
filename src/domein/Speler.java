@@ -121,4 +121,8 @@ public class Speler {
         return teller;
 
     }
+    
+    public void maakWedstrijdStapel(List<String> stapel) {
+        // met for - lus de stapel overlopen + vergelijken met de startstapel en zo de wedstrijdstapel opbouwen
+    }
 }
