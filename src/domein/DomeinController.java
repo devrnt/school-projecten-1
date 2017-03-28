@@ -131,4 +131,10 @@ public class DomeinController {
     public String geefNaamWinnaar(){
         return wedstrijd.getWinnaar().getGebruikersnaam();
     }
+    
+    public void verhoogKrediet(){
+        Speler winnaar = wedstrijd.getWinnaar();
+        winnaar.setKrediet(winnaar.getKrediet() + 5);
+        spelerRepository.updateKrediet(speler);
+    }
 }
