@@ -1,13 +1,14 @@
 package startup;
 
 import domein.DomeinController;
+import domein.Speler;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class UC4 {
 
-    public static void testUC4(DomeinController dc) {
+    public static void testUC4(DomeinController dc, String speler) {
 
         Scanner input = new Scanner(System.in);
 
