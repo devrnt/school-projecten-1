@@ -32,7 +32,7 @@ public class DomeinController {
 
     public DomeinController() {
         spelerRepository = new SpelerRepository();  //het aanmaken van de repositorys gebeurt hier zodat ze niet elke keer opnieuw aangemaakt moeten worden
-        kaartRepository = new KaartRepository();
+        kaartRepository = new KaartRepository(); //test
     }
 
     public void maakSpeler(String naam, int geboortejaar) {
