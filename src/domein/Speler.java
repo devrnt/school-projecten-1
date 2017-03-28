@@ -31,6 +31,7 @@ public class Speler {
     public Speler(String gebruikersnaam, int geboortejaar, double krediet) {
 
         wedstrijdStapel = new ArrayList<>();
+        kaartLijst = new ArrayList<>();
         this.gebruikersnaam = gebruikersnaam;
         this.geboortejaar = geboortejaar;
         this.krediet = krediet;
@@ -99,6 +100,10 @@ public class Speler {
 
     public List<Kaart> getKaartLijst() {
         return kaartLijst;
+    }
+    
+    public void voegKaartToe(Kaart kaart){
+        kaartLijst.add(kaart);
     }
 
     public void maakWedstrijdStapel(List<String> selectie) {
