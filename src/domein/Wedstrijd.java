@@ -59,12 +59,12 @@ public class Wedstrijd {
         if(speler2.getWedstrijdStapel().isEmpty()){ lijst.add(speler2.getGebruikersnaam()); }
         return lijst;
     }
-    public void maakWedstrijdStapel(String naam, List<String> stapel) {
+    public void maakWedstrijdStapel(String naam, List<String> selectie) {
         if (naam.equals(speler1.getGebruikersnaam())){
-            speler1.maakWedstrijdStapel(stapel);
+            speler1.maakWedstrijdStapel(selectie);
         }
         else if (naam.equals(speler2.getGebruikersnaam())){
-            speler2.maakWedstrijdStapel(stapel);
+            speler2.maakWedstrijdStapel(selectie);
         }
     }
     

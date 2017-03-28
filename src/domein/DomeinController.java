@@ -79,14 +79,8 @@ public class DomeinController {
         }
         return new ArrayList<>(Arrays.asList(geregistreerdeSpelers.get(0).getGebruikersnaam(), geregistreerdeSpelers.get(1).getGebruikersnaam()));
     }*/
-    public void selecteerKaartVoorWedstrijdStapel(int keuze) {
-        //toDo kaart uit de startstapel toevoegen aan wedstrijdstapel
-        switch (keuze) {
-        }
 
-    }
-
-   
+    
     // lijst van Strings 
     public List<String> toonStartStapel() {
         List<String> output = new ArrayList<>();
@@ -98,10 +92,14 @@ public class DomeinController {
         return output;
     }
 
-    public void maakWedstrijdStapel(String naam, List<String> stapel) {
+    public int geefAantalKaartenWedstrijdStapel() {
+        return speler.getWedstrijdStapel().size();
+    }
+
+    public void maakWedstrijdStapel(String naam, List<String> selectie) {
         
-        wedstrijd.maakWedstrijdStapel(naam, stapel);
-        
+        wedstrijd.maakWedstrijdStapel(naam, selectie);
+
     }
     
     public double geefKredietWinnaar(){

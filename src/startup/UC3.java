@@ -6,6 +6,7 @@
 package startup;
 
 import domein.DomeinController;
+import domein.Speler;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -50,13 +51,30 @@ public class UC3 {
         dc.geefGeregistreerdeSpelers().forEach((naam)->{ System.out.println(naam); });
             
         
+        List<String> spelersZonderStapel = dc.geefSpelerZonderWedstrijdStapel();
         
         
+        while (spelersZonderStapel.size() > 0) {
+            System.out.println(dc.getTaal().getVertaling("geen_wedstrijdstapel"));
+            int keuze = -1;
+            while (keuze < 0 || keuze >= spelersZonderStapel.size()) {
+                for (int i = 0; i < spelersZonderStapel.size(); i++) {
+                    System.out.println(i + " " + spelersZonderStapel.get(i));
+                }
+                keuze = input.nextInt();
+            }
+            UC4.testUC4(dc, spelersZonderStapel.get(keuze));
+            
+            spelersZonderStapel.remove(spelersZonderStapel.get(keuze));
+            
+            //System.out.println(dc.getTaal().getVertaling("geregistreerde_spelers"));
+            //spelers.forEach((naam)->{ System.out.println(naam); });
+        }
         // Analoog als hierboven
         System.out.println(dc.getTaal().getVertaling("geen_wedstrijdstapel"));
         if(!dc.geefSpelerZonderWedstrijdStapel().isEmpty()){
             dc.geefSpelerZonderWedstrijdStapel().forEach((naam)->{ System.out.println(naam); });
         }
-        //toDo geefActieveSpeler(deze wordt nog nergens geset)
+        
     }
 }

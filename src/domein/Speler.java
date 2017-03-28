@@ -1,5 +1,6 @@
 package domein;
 
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -94,25 +95,26 @@ public class Speler {
         return kaartLijst;
     }
 
-    public void selecteerKaart(Kaart wedstrijdKaart) {
-        wedstrijdStapel.add(wedstrijdKaart);
-    }
-
-    public int getAantalKaartenInWedstrijdStapel() {
-        int teller = 0;
-
-        for (Kaart kaart : wedstrijdStapel) {
-            teller++;
-        }
-        return teller;
-
-    }
-    
-    public void maakWedstrijdStapel(List<String> stapel) {
+    public void maakWedstrijdStapel(List<String> selectie) {
         // met for - lus de stapel overlopen + vergelijken met de startstapel en zo de wedstrijdstapel opbouwen
-        
-        
+        int min = 0;
+        int max = wedstrijdStapel.size();
+
+        kaartLijst.forEach((kaart) -> {
+            for (int i = 0; i < selectie.size(); i++) {
+                if (kaart.getOmschrijving() == selectie.get(i)) {
+                    wedstrijdStapel.add(kaart);
+                }
+            }
+        });
+
+        while (wedstrijdStapel.size() > 4) {
+
+            int randomNum = ThreadLocalRandom.current().nextInt(min, max);
+
+            wedstrijdStapel.remove(randomNum);
+
+        }
     }
-    
-    
+
 }
