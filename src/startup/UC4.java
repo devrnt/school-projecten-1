@@ -25,7 +25,7 @@ public class UC4 {
                     System.out.println(i + " " + startstapel.get(i));
                 }
                 System.out.printf("Maak uw keuze%n");
-                System.out.print(">");
+                System.out.print(" >");
                 keuze = input.nextInt();
             }
             selectie.add(startstapel.get(keuze));
