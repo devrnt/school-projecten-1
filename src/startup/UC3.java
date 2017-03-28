@@ -27,10 +27,10 @@ public class UC3 {
         List<String> beschikbareSpelers = dc.geefLijstBeschikbareSpelers();
 
         if (beschikbareSpelers.size() < 2) {
-                        System.out.println("-------------------------");
+            System.out.println("-------------------------");
 
             System.out.printf(dc.getTaal().getVertaling("geen_beschikbare_spelers") + "%n");
-                        System.out.println("-------------------------");
+            System.out.println("-------------------------");
 
             return;
         }
