@@ -40,6 +40,7 @@ public class UC2 {
         i++;
         System.out.printf("%d. %s%n",i, dc.getTaal().getVertaling("laad_wedstrijd"));
         i=0;
+        int juanbanaan;
         
     }
 }
