@@ -87,9 +87,10 @@ public class DomeinController {
     }
 
     // lijst van Strings 
-    public List<String> toonNGKaartenStartStapel() {
+    public List<String> toonStartStapel(String naam) {
+        Speler speler = spelerRepository.geefSpeler(naam);
         List<String> output = new ArrayList<String>();
-        for (Kaart kaart : speler.toonNietGeselecteerdeKaarten()) {
+        for (Kaart kaart : speler.getKaartLijst()) {
 
             output.add(kaart.getOmschrijving());
         }
