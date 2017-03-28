@@ -27,9 +27,12 @@ public class StartUp {
 
             //testen Use Cases
             UC2.testUC2(dc);
+            
+            
             do {
+                
                 System.out.println("Selecteer een optie");
-                System.out.println(">");
+                System.out.print(">");
                 keuze = input.nextInt();
                 
             } while (keuze < 0 || keuze > 4);
