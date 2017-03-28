@@ -33,7 +33,7 @@ public class UC1 {
         Scanner inputUser = new Scanner(System.in);
 
         System.out.println(dc.getTaal().getVertaling("aantal_spelers"));
-        aantalGewensteSpelers = inputUser.nextInt();
+        aantalGewensteSpelers = inputUser.nextInt(); // for lus, niet op voorhand zeggen hoeveel spelers er moeten zijn
 
         boolean flag = true;
 
