@@ -14,10 +14,10 @@ public class UC4 {
         
         // Dit moet gebeuren voor de beide speler
         
-        List<String> resultaat = new ArrayList<String>();
-        List<String> startstapel = dc.toonNGKaartenStartStapel();
+        List<String> selectie = new ArrayList<String>();
+        List<String> startstapel = dc.toonStartStapel();
 
-        while (resultaat.size() < 6) {
+        while (selectie.size() < 6) {
             System.out.println("Geef een nummer van een kaart");
             int keuze = -1;
             while (keuze < 0 || keuze >= startstapel.size()) {
@@ -26,10 +26,10 @@ public class UC4 {
                 }
                 keuze = input.nextInt();
             }
-            resultaat.add(startstapel.get(keuze));
+            selectie.add(startstapel.get(keuze));
             startstapel.remove(keuze);
         }
 
-        dc.maakWedstrijdStapel(naam_van_de_speler, resultaat);
+        dc.maakWedstrijdStapel(naam_van_de_speler, selectie);
     }
 }
