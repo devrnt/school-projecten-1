@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,10 +45,6 @@ public class MainController implements Initializable {
         this.dc = dc;
     }
     
-    public void enableMenu(){       //kan beter opgelost worden met een eventlistener
-        menu.setDisable(false);
-    }
-    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         maakButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -61,6 +58,15 @@ public class MainController implements Initializable {
                     AnchorPane content = loader.load();
                     main.getChildren().clear();
                     main.getChildren().add(content);
+                    
+                    ((Button)content.getChildren().get(6)).setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            main.setDisable(true);
+                            menu.setDisable(false);
+                        }
+                    });
+                    
                     menu.setDisable(true);
                 } catch (IOException ex) {
                     Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);

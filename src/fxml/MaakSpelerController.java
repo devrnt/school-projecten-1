@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
 /**
@@ -29,6 +30,8 @@ public class MaakSpelerController implements Initializable {
     public TextField naamInput;
     public TextField jaarInput;
     public Text error;
+    public ImageView correct;
+    public ImageView wrong;
 
     private DomeinController dc;
 
@@ -45,19 +48,16 @@ public class MaakSpelerController implements Initializable {
                 if(!(naamInput.getText().equals("") || jaarInput.getText().equals(""))){
                     try{
                         dc.maakSpeler(naamInput.getText(), Integer.parseInt(jaarInput.getText()));
+                        correct.setOpacity(1);
+                        wrong.setOpacity(0);
                         naamInput.setText("");
                         jaarInput.setText("");
                     }catch(IllegalArgumentException e){
                         error.setText(dc.getTaal().getVertaling(e.getMessage()));
+                        correct.setOpacity(0);
+                        wrong.setOpacity(1);
                     }
                 }
-            }
-        });
-        
-        exitButton.setOnAction(new EventHandler() {
-            @Override
-            public void handle(Event event) {
-                
             }
         });
     }
