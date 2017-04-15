@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane fx:id="main" layoutX="200.0" prefHeight="400.0" prefWidth="600.0" />
+      <AnchorPane fx:id="menu" prefHeight="400.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="maakButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" text="%maak_speler" />
+            <Button fx:id="startButton" layoutY="100.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" text="%wedstrijd_start" textAlignment="CENTER" />
+            <Button fx:id="laadButton" layoutY="200.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" text="%laad_wedstrijd" textAlignment="CENTER" />
+            <Button fx:id="sluitButton" layoutY="300.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="200.0" text="%exit" textAlignment="CENTER" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

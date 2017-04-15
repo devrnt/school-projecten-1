@@ -18,27 +18,31 @@ import javafx.stage.Stage;
  *
  * @author Edward
  */
-public class uitest extends Application{
+public class StartUpUI extends Application{
     private Stage stage;
     
     @Override
     public void start(Stage stage) throws Exception {
+        DomeinController dc = new DomeinController();
+        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/taalpicker.fxml"));
-        loader.setController(new TaalPickerController(new DomeinController()));
+        TaalPickerController ctrl = new TaalPickerController(dc);
+        loader.setController(ctrl);
         Pane root = loader.load();
         Scene scene = new Scene(root);
         
-        stage.setTitle("Taalpicker test");
+        stage.setTitle("PAZAAK");
         stage.setScene(scene);
         stage.show();
         
         stage.show();
         System.out.println("done");
         this.stage = stage;
+        ctrl.setStage(stage);
     }
     
     public static void next(){
-        System.out.println("it gets done");
+        
     }
 
     public static void main(String[] args) {
