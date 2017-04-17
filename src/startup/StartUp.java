@@ -40,6 +40,7 @@ public class StartUp {
                     System.out.println(dc.getTaal().getVertaling("selecteer_optie"));
                     System.out.print(" > ");
                     keuze = input.nextInt();
+                    System.out.println("--------------------");
 
                 } while (keuze < 0 || keuze > 4);
 

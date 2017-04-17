@@ -16,13 +16,14 @@ public class UC4 {
         
         List<String> selectie = new ArrayList<String>();
         List<String> startstapel = dc.toonStartStapel(speler);
-        startstapel.forEach((omschrijving)->{ System.out.println(omschrijving); });
+        //startstapel.forEach((omschrijving)->{ System.out.println(omschrijving); });
+        System.out.println("Geef telkens de index van de kaart die u wenst toe te voegen aan uw deck. (Een deck bestaat uit 6 kaarten)");
         while (selectie.size() < 6) {
-            System.out.println("Geef een nummer van een kaart");
+            System.out.println("Geef een index van een kaart");
             int keuze = -1;
             while (keuze < 0 || keuze >= startstapel.size()) {
                 for (int i = 0; i < startstapel.size(); i++) {
-                    System.out.println(i + " " + startstapel.get(i));
+                    System.out.println(i + ") " + startstapel.get(i));
                 }
                 System.out.printf("Maak uw keuze%n");
                 System.out.print(" >");
