@@ -17,7 +17,7 @@ public class UC4 {
         List<String> selectie = new ArrayList<String>();
         List<String> startstapel = dc.toonStartStapel(speler);
         //startstapel.forEach((omschrijving)->{ System.out.println(omschrijving); });
-        System.out.println("Geef telkens de index van de kaart die u wenst toe te voegen aan uw deck. (Een deck bestaat uit 6 kaarten)");
+        System.out.println("Geef telkens de index van de kaart die u wenst toe te voegen aan uw deck. (Uw selectie moet bestaan uit 6 kaarten)");
         while (selectie.size() < 6) {
             System.out.println("Geef een index van een kaart");
             int keuze = -1;

@@ -56,6 +56,7 @@ public class UC3 {
             dc.registreerSpeler(gekozenSpelers.get(i));
         }
 
+        System.out.println("--------------------");
         System.out.println(dc.getTaal().getVertaling("geregistreerde_spelers"));
         dc.geefGeregistreerdeSpelers().forEach((naam) -> {
             System.out.printf(" > %s%n",naam);

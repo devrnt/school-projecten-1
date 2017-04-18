@@ -1,6 +1,6 @@
 package domein;
 
-import java.util.concurrent.ThreadLocalRandom;
+import static java.lang.Math.floor;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -121,7 +121,7 @@ public class Speler {
 
         while (wedstrijdStapel.size() > 4) {
 
-            int randomNum = ThreadLocalRandom.current().nextInt(min, max);
+            int randomNum = (int) floor(Math.random()*7);
 
             wedstrijdStapel.remove(randomNum);
 
