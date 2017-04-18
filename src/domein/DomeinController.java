@@ -61,7 +61,6 @@ public class DomeinController {
     }
 
     public void registreerSpeler(String gebruikersnaam) {
-        System.out.println(spelerRepository.geefSpeler(gebruikersnaam));
         wedstrijd.registreerSpeler(spelerRepository.geefSpeler(gebruikersnaam));
     }
 

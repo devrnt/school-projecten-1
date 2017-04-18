@@ -35,7 +35,6 @@ public class StartUpUI extends Application{
         stage.show();
         
         stage.show();
-        System.out.println("done");
         ctrl.setStage(stage);
     }
     

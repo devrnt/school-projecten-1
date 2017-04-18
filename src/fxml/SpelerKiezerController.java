@@ -42,6 +42,7 @@ public class SpelerKiezerController implements Initializable {
         List<String> picked = new ArrayList<>();
         for(String text: lijst){
             Label label = new Label(text);
+           
             label.setOnMouseClicked(new EventHandler<MouseEvent>(){
                 @Override
                 public void handle(MouseEvent event) {

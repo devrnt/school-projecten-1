@@ -27,7 +27,7 @@
                 <Font size="20.0" />
             </font>
         </Text>
-      <ImageView fitHeight="94.0" fitWidth="408.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="94.0" fitWidth="408.0" layoutX="131.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../resources/swtor_logo.png" />
          </image>
