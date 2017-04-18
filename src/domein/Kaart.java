@@ -13,10 +13,10 @@ public class Kaart {
 
     private String omschrijving;
     private String type;
-    private int waarde;
+    private String waarde;
     private int prijs;
 
-    public Kaart(String omschrijving, String type, int waarde, int prijs) {
+    public Kaart(String omschrijving, String type, String waarde, int prijs) {
         this.omschrijving = omschrijving;
         this.type = type;
         this.waarde = waarde;
@@ -35,7 +35,7 @@ public class Kaart {
         return type;
     }
 
-    public int getWaarde() {
+    public String getWaarde() {
         return waarde;
     }
 

@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class KaartMapper {
 
-    public void voegToe(Kaart kaart, Speler speler) {
+  /*public void voegToe(Kaart kaart, Speler speler) {
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL)) {
             PreparedStatement query = conn.prepareStatement("INSERT INTO ID222177_g14.Kaarttype (omschrijving, waarde, type)"
                     + "VALUES (?, ?, ?)");
@@ -34,7 +34,7 @@ public class KaartMapper {
             throw new RuntimeException(ex);
         }
 
-    }
+    } */
 
     public List<Kaart> getKaarten() {
         List<Kaart> Kaarten = new ArrayList<>();
@@ -45,7 +45,7 @@ public class KaartMapper {
                 while (rs.next()) {
                     String omschrijving = rs.getString("omschrijving");
                     String type = rs.getString("type");
-                    int waarde = rs.getInt("waarde");
+                    String waarde = rs.getString("waarde");
                     int prijs = rs.getInt("prijs");
 
                     Kaarten.add(new Kaart(omschrijving, type, waarde, prijs));
