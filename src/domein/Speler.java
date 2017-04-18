@@ -4,6 +4,7 @@ import static java.lang.Math.floor;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -108,17 +109,17 @@ public class Speler {
     public void maakWedstrijdStapel(List<String> selectie) {
         kaartLijst.forEach((kaart) -> {
             for (int i = 0; i < selectie.size(); i++) {
-                if (kaart.getOmschrijving() == selectie.get(i)) {
+                if (kaart.getOmschrijving().equals(selectie.get(i))) {
                     wedstrijdStapel.add(kaart);
                 }
             }
         });
+        Random random = new Random();
+        
 
         while (wedstrijdStapel.size() > 4) {
 
-            int randomNum = (int) floor(Math.random() * 7);
-
-            wedstrijdStapel.remove(randomNum);
+            wedstrijdStapel.remove(random.nextInt(wedstrijdStapel.size()));
 
         }
     }

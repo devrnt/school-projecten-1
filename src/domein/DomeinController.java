@@ -79,10 +79,10 @@ public class DomeinController {
         }
         return new ArrayList<>(Arrays.asList(geregistreerdeSpelers.get(0).getGebruikersnaam(), geregistreerdeSpelers.get(1).getGebruikersnaam()));
     }*/
-
     // lijst van Strings 
     public List<String> toonStartStapel(String naam) {
-        Speler speler = spelerRepository.geefSpeler(naam);
+        // Speler ophalen uit wedstrijd
+        Speler speler = wedstrijd.geefSpeler(naam);
         List<String> output = new ArrayList<String>();
         for (Kaart kaart : speler.getKaartLijst()) {
 
@@ -112,9 +112,17 @@ public class DomeinController {
     public void verhoogKrediet() {
         wedstrijd.verhoogKrediet();
     }
-    
-    public double geefKredietSpeler(String naam){
-        Speler speler = spelerRepository.geefSpeler(naam);
-        return speler.getKrediet();
+
+    public double geefKredietSpeler(String naam) {
+
+        return wedstrijd.geefSpeler(naam).getKrediet();
+    }
+
+    public List<String> toonAlleKaarten() {
+        List<String> output1 = new ArrayList<>();
+        for (Kaart kaart : kaartRepository.getKaarten()) {
+            output1.add(String.format("%s %d",kaart.getOmschrijving(), kaart.getPrijs()));
+        }
+        return output1;
     }
 }

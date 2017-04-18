@@ -22,14 +22,13 @@ public class KaartRepository {
         //spelers = new ArrayList<>();
     }
 
-  /*public void voegToe(Kaart kaart, Speler speler) {
+    /*public void voegToe(Kaart kaart, Speler speler) {
         //kijken of er al default kaarten zijn toegevoegd
         //s
         //
 
         mapper.voegToe(kaart, speler);
     } */
-
     public List<Kaart> getStartKaarten() {
         List<Kaart> startkaarten = new ArrayList<>();
 
@@ -43,7 +42,13 @@ public class KaartRepository {
     }
 
     public List<Kaart> getKaarten() {
-        return mapper.getKaarten();
+        List<Kaart> kaarten = new ArrayList<>();
+
+        for (Kaart kaart : mapper.getKaarten()) {
+            kaarten.add(kaart);
+        }
+
+        return kaarten;
     }
 
     public void voegStartkaartenToeAanSpeler(Speler speler) {

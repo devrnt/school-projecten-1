@@ -71,4 +71,15 @@ public class Wedstrijd {
     public void verhoogKrediet(){
         winnaar.setKrediet(winnaar.getKrediet() + 5);
     }
+    
+    
+    // mehtode schrijven die speler retourneert op basis van de naam
+    public Speler geefSpeler(String naam) {
+        if (naam.equals(speler1.getGebruikersnaam())) {
+           return speler1;
+        } else if (naam.equals(speler2.getGebruikersnaam())) {
+            return speler2;
+        }
+        return null;   
+    }
 }
