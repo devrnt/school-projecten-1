@@ -60,6 +60,7 @@ public class SpelerKiezerController implements Initializable {
         kiesButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                dc.maakWedstrijd();
                 if(picked.size() == 2){
                     for(String naam: picked){
                         dc.registreerSpeler(naam);

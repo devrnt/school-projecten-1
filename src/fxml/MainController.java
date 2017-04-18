@@ -77,7 +77,7 @@ public class MainController implements Initializable {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/spelerKiezer.fxml"));
                     loader.setResources(dc.getTaal().getBundle());
-                    MaakSpelerController ctrl = new MaakSpelerController(dc);
+                    SpelerKiezerController ctrl = new SpelerKiezerController(dc);
                     loader.setController(ctrl);
                     AnchorPane content = loader.load();
                     main.getChildren().clear();

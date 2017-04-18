@@ -19,7 +19,6 @@ import javafx.stage.Stage;
  * @author Edward
  */
 public class StartUpUI extends Application{
-    private Stage stage;
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -37,7 +36,6 @@ public class StartUpUI extends Application{
         
         stage.show();
         System.out.println("done");
-        this.stage = stage;
         ctrl.setStage(stage);
     }
     
