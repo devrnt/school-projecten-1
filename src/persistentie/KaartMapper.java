@@ -37,24 +37,25 @@ public class KaartMapper {
     }
 
     public List<Kaart> getKaarten() {
-        List<Kaart> startKaarten = new ArrayList<>();
+        List<Kaart> Kaarten = new ArrayList<>();
 
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL)) {
             PreparedStatement query = conn.prepareStatement("SELECT * FROM ID222177_g14.Kaarttype");
             try (ResultSet rs = query.executeQuery()) {
                 while (rs.next()) {
                     String omschrijving = rs.getString("omschrijving");
-                    int waarde = rs.getInt("waarde");
                     String type = rs.getString("type");
+                    int waarde = rs.getInt("waarde");
+                    int prijs = rs.getInt("prijs");
 
-                    startKaarten.add(new Kaart(omschrijving, type, waarde));
+                    Kaarten.add(new Kaart(omschrijving, type, waarde, prijs));
                 }
             }
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
 
-        return startKaarten;
+        return Kaarten;
     }
 
     //kan in feite samengevoegd worden met de methode die startkaarten opvraagt

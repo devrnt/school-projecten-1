@@ -46,7 +46,7 @@ public class DomeinController {
             throw ex;
         }
 
-        nieuweSpeler.setStartStapel(kaartRepository.getKaarten());
+        nieuweSpeler.setStartStapel(kaartRepository.getStartKaarten());
 
         spelerRepository.voegSpelerToe(nieuweSpeler); //nog surrounden met try-catch
         kaartRepository.voegStartkaartenToeAanSpeler(nieuweSpeler);
