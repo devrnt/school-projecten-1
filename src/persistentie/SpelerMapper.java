@@ -99,7 +99,7 @@ public class SpelerMapper {
             query.setInt(1, spelerID);
             try (ResultSet rs = query.executeQuery()) {
                 while (rs.next()) {
-                    speler.voegKaartToe(new Kaart(rs.getString("omschrijving"), rs.getString("type"), rs.getInt("waarde")));
+                    speler.voegKaartToe(new Kaart(rs.getString("omschrijving"), rs.getString("type"), rs.getInt("waarde"), rs.getInt("prijs")));
                 }
             }
         } catch (SQLException ex) {
