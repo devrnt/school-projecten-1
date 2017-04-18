@@ -74,7 +74,28 @@ public class MainController implements Initializable {
         startButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("toDo");
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/spelerKiezer.fxml"));
+                    loader.setResources(dc.getTaal().getBundle());
+                    MaakSpelerController ctrl = new MaakSpelerController(dc);
+                    loader.setController(ctrl);
+                    AnchorPane content = loader.load();
+                    main.getChildren().clear();
+                    main.getChildren().add(content);
+                    
+                    ((Button)content.getChildren().get(2)).setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            main.setDisable(true);
+                            menu.setDisable(false);
+                        }
+                    });
+                    
+                    menu.setDisable(true);
+                    main.setDisable(false);
+                } catch (IOException ex) {
+                    Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         
