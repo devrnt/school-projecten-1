@@ -36,6 +36,8 @@ public class StartUp {
                     System.out.printf("%d. %s%n", i, dc.getTaal().getVertaling("maak_speler"));
                     i++;
                     System.out.printf("%d. %s%n", i, dc.getTaal().getVertaling("laad_wedstrijd"));
+                    i++;
+                    System.out.printf("%d. %s%n", i, dc.getTaal().getVertaling("exit"));
                     i = 0;
                     System.out.println(dc.getTaal().getVertaling("selecteer_optie"));
                     System.out.print(" > ");

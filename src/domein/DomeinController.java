@@ -46,7 +46,7 @@ public class DomeinController {
             throw ex;
         }
 
-        nieuweSpeler.setStartStapel(kaartRepository.getStartKaarten());
+        nieuweSpeler.setStartStapel(kaartRepository.getKaarten());
 
         spelerRepository.voegSpelerToe(nieuweSpeler); //nog surrounden met try-catch
         kaartRepository.voegStartkaartenToeAanSpeler(nieuweSpeler);
@@ -79,12 +79,6 @@ public class DomeinController {
         }
         return new ArrayList<>(Arrays.asList(geregistreerdeSpelers.get(0).getGebruikersnaam(), geregistreerdeSpelers.get(1).getGebruikersnaam()));
     }*/
-    public void selecteerKaartVoorWedstrijdStapel(int keuze) {
-        //toDo kaart uit de startstapel toevoegen aan wedstrijdstapel
-        switch (keuze) {
-        }
-
-    }
 
     // lijst van Strings 
     public List<String> toonStartStapel(String naam) {
@@ -117,5 +111,10 @@ public class DomeinController {
 
     public void verhoogKrediet() {
         wedstrijd.verhoogKrediet();
+    }
+    
+    public double geefKredietSpeler(String naam){
+        Speler speler = spelerRepository.geefSpeler(naam);
+        return speler.getKrediet();
     }
 }

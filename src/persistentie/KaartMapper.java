@@ -36,7 +36,7 @@ public class KaartMapper {
 
     }
 
-    public List<Kaart> getStartKaarten() {
+    public List<Kaart> getKaarten() {
         List<Kaart> startKaarten = new ArrayList<>();
 
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL)) {

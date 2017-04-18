@@ -28,8 +28,8 @@ public class KaartRepository {
         mapper.voegToe(kaart, speler);
     } 
     
-    public List<Kaart> getStartKaarten(){
-        return mapper.getStartKaarten();
+    public List<Kaart> getKaarten(){
+        return mapper.getKaarten();
     }
     
     public void voegStartkaartenToeAanSpeler(Speler speler){

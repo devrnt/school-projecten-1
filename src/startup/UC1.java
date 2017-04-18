@@ -53,6 +53,7 @@ public class UC1 {
                 
                 System.out.println(dc.getTaal().getVertaling("extra_speler"));
                 extraSpeler = input.nextBoolean();
+                System.out.println("--------------------");
                 
                 } catch(InputMismatchException e){
                     System.err.println(dc.getTaal().getVertaling("antwoord_extra_speler"));
