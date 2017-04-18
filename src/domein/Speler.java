@@ -63,12 +63,11 @@ public class Speler {
         if (gebruikersnaam.length() < 3) {
             throw new IllegalArgumentException("naam_te_kort");
         }
-        
-        if(gebruikersnaam.length()>25){
+
+        if (gebruikersnaam.length() > 25) {
             throw new IllegalArgumentException("naam_te_lang");
         }
-        
-        
+
         if (gebruikersnaam.contains(" ")) {
             throw new IllegalArgumentException("verkeerd_character");
         }
@@ -101,16 +100,12 @@ public class Speler {
     public List<Kaart> getKaartLijst() {
         return kaartLijst;
     }
-    
-    public void voegKaartToe(Kaart kaart){
+
+    public void voegKaartToe(Kaart kaart) {
         kaartLijst.add(kaart);
     }
 
     public void maakWedstrijdStapel(List<String> selectie) {
-        // met for - lus de stapel overlopen + vergelijken met de startstapel en zo de wedstrijdstapel opbouwen
-        int min = 0;
-        int max = wedstrijdStapel.size();
-
         kaartLijst.forEach((kaart) -> {
             for (int i = 0; i < selectie.size(); i++) {
                 if (kaart.getOmschrijving() == selectie.get(i)) {
@@ -121,7 +116,7 @@ public class Speler {
 
         while (wedstrijdStapel.size() > 4) {
 
-            int randomNum = (int) floor(Math.random()*7);
+            int randomNum = (int) floor(Math.random() * 7);
 
             wedstrijdStapel.remove(randomNum);
 
