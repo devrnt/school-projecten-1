@@ -125,4 +125,9 @@ public class DomeinController {
         }
         return output1;
     }
+    
+//    public void maakSet(){
+//        Set set = new Set();
+//    }
+    
 }
