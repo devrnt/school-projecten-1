@@ -35,42 +35,41 @@ public class Set {
         Speler speler1 = spelerRepo.geefSpeler(spelersStringList[0]);
         Speler speler2 = spelerRepo.geefSpeler(spelersStringList[1]);
 
-        if (setRonde == 1) {
+        if (setRonde % 2 != 0) {
 
-            int leeftijdSpeler1 = huidigJaar - speler1.getGeboortejaar();
-            int leeftijdSpeler2 = huidigJaar - speler2.getGeboortejaar();
+            if (setRonde == 1) {
 
-            if (leeftijdSpeler1 > leeftijdSpeler2) {
-                return speler1.getGebruikersnaam();
-            } else if (leeftijdSpeler1 == leeftijdSpeler2) {
-                int compare = speler1.getGebruikersnaam().compareTo(speler2.getGebruikersnaam());
+                int leeftijdSpeler1 = huidigJaar - speler1.getGeboortejaar();
+                int leeftijdSpeler2 = huidigJaar - speler2.getGeboortejaar();
 
-                if (compare < 0) {
+                if (leeftijdSpeler1 > leeftijdSpeler2) {
                     return speler1.getGebruikersnaam();
-                } else if (compare > 0) {
-                    return speler2.getGebruikersnaam();
+                } else if (leeftijdSpeler1 == leeftijdSpeler2) {
+                    int compare = speler1.getGebruikersnaam().compareTo(speler2.getGebruikersnaam());
+
+                    if (compare < 0) {
+                        return speler1.getGebruikersnaam();
+                    } else if (compare > 0) {
+                        return speler2.getGebruikersnaam();
+                    } else {
+                        //als het gelijk is nog iets vinden 
+                    }
                 } else {
-                    //als het gelijk is nog iets vinden 
+                    return speler2.getGebruikersnaam();
                 }
-            } else {
-                return speler2.getGebruikersnaam();
-            }
 
-        }
-
-        if (setRonde % 2 == 0) {
-            if (bepaalActieveSpeler() == speler1.getGebruikersnaam()) {
-                return speler2.getGebruikersnaam();
-            } else {
-                return speler1.getGebruikersnaam();
-            }
-        }
-        
-        if(setRonde % 2 != 0){
-            if(bepaalActieveSpeler()== speler1.getGebruikersnaam()){
+            } else if (bepaalActieveSpeler().equals(speler1.getGebruikersnaam())) {
                 return speler2.getGebruikersnaam();
             } else {
                 speler1.getGebruikersnaam();
+            }
+
+            if (setRonde % 2 == 0) {
+                if (bepaalActieveSpeler().equals(speler1.getGebruikersnaam())) {
+                    return speler2.getGebruikersnaam();
+                } else {
+                    return speler1.getGebruikersnaam();
+                }
             }
         }//niet oke, gewoon een test
 
