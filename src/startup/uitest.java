@@ -6,6 +6,7 @@
 package startup;
 
 import domein.DomeinController;
+import fxml.Card;
 import fxml.TaalPickerController;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -23,9 +24,9 @@ public class uitest extends Application{
     
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/taalpicker.fxml"));
-        loader.setController(new TaalPickerController(new DomeinController()));
-        Pane root = loader.load();
+        
+        Card card = new Card("+2", "blue");
+        Pane root = card.getContent();
         Scene scene = new Scene(root);
         
         stage.setTitle("Taalpicker test");
@@ -33,8 +34,6 @@ public class uitest extends Application{
         stage.show();
         
         stage.show();
-        System.out.println("done");
-        this.stage = stage;
     }
     
     public static void next(){
