@@ -36,6 +36,7 @@ public class Card {
         pane.setMinSize(0, 0);
         pane.setPrefSize(84, 104);
         pane.setMaxSize(84, 104);
+        this.omschrijving = omschrijving;
     }
     
     public Pane getContent(){
@@ -54,5 +55,9 @@ public class Card {
 
     public String getOmschrijving(){
         return omschrijving;
+    }
+    
+    public boolean getSelected(){
+        return selected;
     }
 }
