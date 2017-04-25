@@ -72,7 +72,12 @@ public class WedstrijdStapelKiezerController implements Initializable {
                             @Override
                             public void handle(MouseEvent event) {
                                 card.selectPane();
-                                geselecteerd.add(card.getOmschrijving());
+                                if(geselecteerd.contains(card.getOmschrijving())){
+                                    geselecteerd.remove(card.getOmschrijving());
+                                }else{
+                                    geselecteerd.add(card.getOmschrijving());
+                                }
+                                System.out.println(geselecteerd.toString());
                             }
                         });
                         grid.add(card.getContent(), i % 4, (int) Math.floor(i/4));
@@ -82,7 +87,12 @@ public class WedstrijdStapelKiezerController implements Initializable {
                             @Override
                             public void handle(MouseEvent event) {
                                 card.selectPane();
-                                geselecteerd.add(card.getOmschrijving());
+                                if(geselecteerd.contains(card.getOmschrijving())){
+                                    geselecteerd.remove(card.getOmschrijving());
+                                }else{
+                                    geselecteerd.add(card.getOmschrijving());
+                                }
+                                System.out.println(geselecteerd.toString());
                             }
                         });
                         grid.add(card.getContent(), i % 4, (int) Math.floor(i/4));                        
@@ -103,23 +113,30 @@ public class WedstrijdStapelKiezerController implements Initializable {
         selectButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                
+                dc.maakWedstrijdStapel(spelerView.getSelectionModel().getSelectedItem().toString(), geselecteerd);
+                geselecteerd.clear();
+                spelerLijst.remove(spelerView.getSelectionModel().getSelectedItem().toString());
             }
         });
         
         buyButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                GridPane grid = new GridPane();
+                for(int i = 0; i < 4; i++){
+                    grid.getColumnConstraints().add(new ColumnConstraints(84));
+                }
+                List<String> kaarten =  dc.toonStartStapel(spelerView.getSelectionModel().getSelectedItem().toString());
+                for(int i = 0; i < Math.ceil(kaarten.size()/4); i++){
+                    grid.getRowConstraints().add(new RowConstraints(104));
+                }
             }
         });
         
         nextButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(spelerLijst.isEmpty()){
-                    
-                }
+                //volgende scherm
             }
         });
     }
