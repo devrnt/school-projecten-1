@@ -19,7 +19,7 @@ public class UC7 {
         do {
             System.out.printf("Huidig krediet: %.1f%n", dc.geefKredietSpeler(speler));
             System.out.printf("Aan te kopen kaarten: %n");
-            for (int i = 0; i < alleKaarten.size() - 1; i++) {
+            for (int i = 0; i < alleKaarten.size(); i++) {
                 String[] parts = alleKaarten.get(i).split(" ");
                 String omschrijving = parts[0];
                 String prijsS = parts[1];
