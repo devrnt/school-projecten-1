@@ -14,7 +14,7 @@ import java.util.List;
  * @author Jonas
  */
 public class Wedstrijd {
-    
+
     private Speler speler1; //werken met gewoon de userName ipv de volledige speler?
     private Speler speler2;
     private Speler actief;
@@ -23,63 +23,85 @@ public class Wedstrijd {
     public Speler getWinnaar() {
         return winnaar;
     }
-    
-    public Wedstrijd(){
-        
+
+    public Wedstrijd() {
+
     }
-    
-    public void registreerSpeler(Speler speler){
-        if(speler != null){
-            if(speler1 == null){
+
+    public void registreerSpeler(Speler speler) {
+        if (speler != null) {
+            if (speler1 == null) {
                 speler1 = speler;
                 speler.setBeschikbaar(false);
-            }else if(speler2 == null){
+            } else if (speler2 == null) {
                 speler.setBeschikbaar(false);
                 speler2 = speler;
             }
         }
     }
-    
-    public List<String> geefGeregistreerdeSpelers(){
+
+    public List<String> geefGeregistreerdeSpelers() {
         List<String> lijst = new ArrayList<>();
-        if(speler1 != null){
-            if(speler2 != null){ lijst.add(speler2.getGebruikersnaam()); }
+        if (speler1 != null) {
+            if (speler2 != null) {
+                lijst.add(speler2.getGebruikersnaam());
+            }
             lijst.add(speler1.getGebruikersnaam());
         }
         return lijst;
     }
-    
-    public String geefActieveSpeler(){
+
+    public String geefActieveSpeler() {
         return actief.getGebruikersnaam();
     }
-    
-    public List<String> geefSpelersZonderWedstrijdStapel(){
+
+    public List<String> geefSpelersZonderWedstrijdStapel() {
         List<String> lijst = new ArrayList<>();
-        if(speler1.getWedstrijdStapel().isEmpty()){ lijst.add(speler1.getGebruikersnaam()); }
-        if(speler2.getWedstrijdStapel().isEmpty()){ lijst.add(speler2.getGebruikersnaam()); }
+        if (speler1.getWedstrijdStapel().isEmpty()) {
+            lijst.add(speler1.getGebruikersnaam());
+        }
+        if (speler2.getWedstrijdStapel().isEmpty()) {
+            lijst.add(speler2.getGebruikersnaam());
+        }
         return lijst;
     }
+
     public void maakWedstrijdStapel(String naam, List<String> selectie) {
-        if (naam.equals(speler1.getGebruikersnaam())){
+        if (naam.equals(speler1.getGebruikersnaam())) {
             speler1.maakWedstrijdStapel(selectie);
-        }
-        else if (naam.equals(speler2.getGebruikersnaam())){
+        } else if (naam.equals(speler2.getGebruikersnaam())) {
             speler2.maakWedstrijdStapel(selectie);
         }
     }
-    
-    public void verhoogKrediet(){
+
+    public void verhoogKrediet() {
         winnaar.setKrediet(winnaar.getKrediet() + 5);
     }
-    
-    
+
+    public void verminderKrediet(double prijs, String speler) {
+        if (speler.equals(speler1.getGebruikersnaam())) {
+            speler1.setKrediet(speler1.getKrediet()-prijs);
+        } else if (speler.equals(speler2.getGebruikersnaam())) {
+            speler2.setKrediet(speler1.getKrediet()-prijs);
+        }
+        //Dit moet van een bepaalde speler gedaan worden afhankelijk van uc7 -Juan Carlos        
+    }
+
     // mehtode schrijven die speler retourneert op basis van de naam
     public Speler geefSpeler(String naam) {
         if (naam.equals(speler1.getGebruikersnaam())) {
-           return speler1;
+            return speler1;
         } else if (naam.equals(speler2.getGebruikersnaam())) {
             return speler2;
         }
-        return null;   
+        return null;
+    }
+    
+    public void voegKaartToeAanStartStapel(Kaart kaart, String speler){
+        if (speler.equals(speler1.getGebruikersnaam())) {
+            speler1.voegKaartToe(kaart);
+        } else if (speler.equals(speler2.getGebruikersnaam())) {
+            speler2.voegKaartToe(kaart);
+        }
     }
 }

@@ -82,10 +82,9 @@ public class DomeinController {
     // lijst van Strings 
     public List<String> toonStartStapel(String naam) {
         // Speler ophalen uit wedstrijd
-        Speler speler = wedstrijd.geefSpeler(naam);
-        List<String> output = new ArrayList<String>();
-        for (Kaart kaart : speler.getKaartLijst()) {
-
+        Speler spelerL = wedstrijd.geefSpeler(naam);
+        List<String> output = new ArrayList<>();
+        for (Kaart kaart : spelerL.getKaartLijst()) {
             output.add(kaart.getOmschrijving());
         }
 
@@ -112,6 +111,10 @@ public class DomeinController {
     public void verhoogKrediet() {
         wedstrijd.verhoogKrediet();
     }
+    
+    public void verminderKrediet(double prijs, String speler) {
+        wedstrijd.verminderKrediet(prijs, speler);
+    }
 
     public double geefKredietSpeler(String naam) {
 
@@ -120,10 +123,20 @@ public class DomeinController {
 
     public List<String> toonAlleKaarten() {
         List<String> output1 = new ArrayList<>();
-        for (Kaart kaart : kaartRepository.getKaarten()) {
-            output1.add(String.format("%s %d",kaart.getOmschrijving(), kaart.getPrijs()));
-        }
+        kaartRepository.getKaarten().forEach((kaart) -> {
+            output1.add(kaart.getOmschrijving() + " " + kaart.getPrijs());
+        });
         return output1;
+    }
+    
+    public void setStartStapel(List<String> gekochteKaarten, String speler){
+        List<Kaart> alleKaarten = kaartRepository.getKaarten();
+        gekochteKaarten.forEach((kaart) -> {
+            alleKaarten.stream().filter((kaartO) -> (kaart.equals(kaartO.getOmschrijving()))).forEachOrdered((kaartO) -> {
+                wedstrijd.voegKaartToeAanStartStapel(kaartO, speler);
+            });
+        });
+        
     }
     
 //    public void maakSet(){
