@@ -34,6 +34,7 @@ public class Set {
 
         Speler speler1 = spelerRepo.geefSpeler(spelersStringList[0]);
         Speler speler2 = spelerRepo.geefSpeler(spelersStringList[1]);
+        //eerst nog een controle maken of de speler zijn beurt bevroren heeft boolean
 
         if (setRonde % 2 != 0) {
 

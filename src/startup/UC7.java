@@ -25,7 +25,7 @@ public class UC7 {
                 String prijsS = parts[1];
                 double prijsD = Double.parseDouble(prijsS);
                 
-                if (prijsD == 0) {
+                if (prijsD == 0) {//overbodige controle 
                 } else if (omschrijving.equals(startStapel.get(i))) {
                 } else {
                     System.out.printf(i + 1 + ") " + omschrijving + " €" + prijsS + "%n");
