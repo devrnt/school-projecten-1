@@ -29,13 +29,13 @@ public class Set {
 
     public String bepaalActieveSpeler() {
         String actieveSpeler = null;
+        List<String> spelers = wedstrijd.geefGeregistreerdeSpelers();
+        String[] spelersStringList = spelers.toArray(new String[0]);
+
+        Speler speler1 = spelerRepo.geefSpeler(spelersStringList[0]);
+        Speler speler2 = spelerRepo.geefSpeler(spelersStringList[1]);
 
         if (setRonde == 1) {
-            List<String> spelers = wedstrijd.geefGeregistreerdeSpelers();
-            String[] spelersStringList = spelers.toArray(new String[0]);
-
-            Speler speler1 = spelerRepo.geefSpeler(spelersStringList[0]);
-            Speler speler2 = spelerRepo.geefSpeler(spelersStringList[1]);
 
             int leeftijdSpeler1 = huidigJaar - speler1.getGeboortejaar();
             int leeftijdSpeler2 = huidigJaar - speler2.getGeboortejaar();
@@ -57,6 +57,23 @@ public class Set {
             }
 
         }
+
+        if (setRonde % 2 == 0) {
+            if (bepaalActieveSpeler() == speler1.getGebruikersnaam()) {
+                return speler2.getGebruikersnaam();
+            } else {
+                return speler1.getGebruikersnaam();
+            }
+        }
+        
+        if(setRonde % 2 != 0){
+            if(bepaalActieveSpeler()== speler1.getGebruikersnaam()){
+                return speler2.getGebruikersnaam();
+            } else {
+                speler1.getGebruikersnaam();
+            }
+        }//niet oke, gewoon een test
+
         return actieveSpeler;
 
         //we kunnen ook een speler teruggeven
