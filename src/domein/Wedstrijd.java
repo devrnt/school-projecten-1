@@ -7,6 +7,8 @@ package domein;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -19,6 +21,8 @@ public class Wedstrijd {
     private Speler speler2;
     private Speler actief;
     private Speler winnaar;
+    private List<Kaart> setStapel = new ArrayList<Kaart>();
+    private int aantalSets;
 
     public Speler getWinnaar() {
         return winnaar;
@@ -77,6 +81,36 @@ public class Wedstrijd {
     public void verhoogKrediet() {
         winnaar.setKrediet(winnaar.getKrediet() + 5);
     }
+    
+    public void bepaalSpelerAanDeBeurtEersteSet() {
+            int huidigJaar = Calendar.getInstance().get(Calendar.YEAR);
+                int leeftijdSpeler1 = huidigJaar - speler1.getGeboortejaar();
+                int leeftijdSpeler2 = huidigJaar - speler2.getGeboortejaar();
+
+                if (leeftijdSpeler1 > leeftijdSpeler2) {
+                    actief = speler1;
+                } else if (leeftijdSpeler2 > leeftijdSpeler1) {
+                    actief = speler2;
+                }
+                else if (leeftijdSpeler1 == leeftijdSpeler2) {
+                    int compare = speler1.getGebruikersnaam().compareTo(speler2.getGebruikersnaam());
+
+                    if (compare < 0) {
+                        actief = speler1;
+                    } else if (compare > 0) {
+                       actief = speler2;
+                    } 
+                } 
+    }
+    
+    public void bepaalSpelerAanDeBeurtVolgendeSet() {
+        if (actief == speler1) {
+            actief = speler2;
+        }
+        else {
+            actief = speler1;
+        }
+    }
 
     public void verminderKrediet(double prijs, String speler) {
         if (speler.equals(speler1.getGebruikersnaam())) {
@@ -103,5 +137,14 @@ public class Wedstrijd {
         } else if (speler.equals(speler2.getGebruikersnaam())) {
             speler2.voegKaartToe(kaart);
         }
+    }
+
+    public void maakSetStapel() {
+       for (int i = 1; i <= 4; i++) {
+           for (int j = 1; j <= 10; j++) {
+               setStapel.add(new Kaart("+" + j, "+", ""+j, 0));
+           }
+       }
+       Collections.shuffle(setStapel);
     }
 }

@@ -12,6 +12,8 @@ import domein.DomeinController;
  * @author Jonas
  */
 public class UC6 {
-   
+       public static void testUC6(DomeinController dc) {
+           dc.maakSetStapel();
+       }
     
 }

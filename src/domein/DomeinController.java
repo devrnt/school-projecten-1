@@ -142,5 +142,9 @@ public class DomeinController {
 //    public void maakSet(){
 //        Set set = new Set();
 //    }
+
+    public void maakSetStapel() {
+       wedstrijd.maakSetStapel();
+    }
     
 }

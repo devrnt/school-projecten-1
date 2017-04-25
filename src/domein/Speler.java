@@ -20,6 +20,8 @@ public class Speler {
     private List<Kaart> kaartLijst;
     private boolean beschikbaar;
     private List<Kaart> wedstrijdStapel;
+        private List<Kaart> spelbord;
+        private int score;
 
     public boolean isBeschikbaar() {
         return beschikbaar;
@@ -33,6 +35,7 @@ public class Speler {
 
         wedstrijdStapel = new ArrayList<>();
         kaartLijst = new ArrayList<>();
+        spelbord = new ArrayList<>();
         this.gebruikersnaam = gebruikersnaam;
         this.geboortejaar = geboortejaar;
         this.krediet = krediet;
