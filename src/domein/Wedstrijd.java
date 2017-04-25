@@ -97,11 +97,4 @@ public class Wedstrijd {
         return null;
     }
     
-    public void voegKaartToeAanStartStapel(Kaart kaart, String speler){
-        if (speler.equals(speler1.getGebruikersnaam())) {
-            speler1.voegKaartToe(kaart);
-        } else if (speler.equals(speler2.getGebruikersnaam())) {
-            speler2.voegKaartToe(kaart);
-        }
-    }
 }

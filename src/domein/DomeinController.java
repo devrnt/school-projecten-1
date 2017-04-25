@@ -111,7 +111,7 @@ public class DomeinController {
     public void verhoogKrediet() {
         wedstrijd.verhoogKrediet();
     }
-    
+
     public void verminderKrediet(double prijs, String speler) {
         wedstrijd.verminderKrediet(prijs, speler);
     }
@@ -121,26 +121,32 @@ public class DomeinController {
         return wedstrijd.geefSpeler(naam).getKrediet();
     }
 
-    public List<String> toonAlleKaarten() {
+    public List<String> toonBetalendeKaarten() {
         List<String> output1 = new ArrayList<>();
         kaartRepository.getKaarten().forEach((kaart) -> {
-            output1.add(kaart.getOmschrijving() + " " + kaart.getPrijs());
+            if (kaart.getPrijs() != 0 || kaart.getWaarde().contains("/")) {
+                output1.add(kaart.getOmschrijving() + " " + kaart.getPrijs());
+            }
         });
         return output1;
     }
     
-    public void setStartStapel(List<String> gekochteKaarten, String speler){
-        List<Kaart> alleKaarten = kaartRepository.getKaarten();
-        gekochteKaarten.forEach((kaart) -> {
-            alleKaarten.stream().filter((kaartO) -> (kaart.equals(kaartO.getOmschrijving()))).forEachOrdered((kaartO) -> {
-                wedstrijd.voegKaartToeAanStartStapel(kaartO, speler);
-            });
-        });
-        
+    public void voegBetaaldeKaartenToe(String speler, List<String> gekochteKaarten){
+       List<Kaart> gekochteKaartenKaart = new ArrayList<>();
+       List<Kaart> alleKaarten = kaartRepository.getKaarten(); //dinges aanmaken in domeincontroller
+       
+       for(String kaartS: gekochteKaarten){
+           for(Kaart kaartK: alleKaarten){
+               if(kaartS.equals(kaartK.getOmschrijving()))
+                   gekochteKaartenKaart.add(kaartK);
+           }
+       }
+       // moet nog naar databank gaan, vragen aan leerkracht
+       
+       
     }
-    
+
 //    public void maakSet(){
 //        Set set = new Set();
 //    }
-    
 }
