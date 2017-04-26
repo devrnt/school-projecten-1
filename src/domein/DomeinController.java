@@ -21,6 +21,9 @@ public class DomeinController {
     private Taal taal;
     private Wedstrijd wedstrijd;
     private Speler speler;
+    private List<Kaart> alleKaarten;
+
+    ;
 
     public Taal getTaal() {
         return taal;
@@ -30,9 +33,14 @@ public class DomeinController {
         this.taal = taal;
     }
 
+    public List<Kaart> geefAlleKaarten() {
+        return alleKaarten;
+    }
+
     public DomeinController() {
         spelerRepository = new SpelerRepository();  //het aanmaken van de repositorys gebeurt hier zodat ze niet elke keer opnieuw aangemaakt moeten worden
         kaartRepository = new KaartRepository(); //test
+        alleKaarten = kaartRepository.getKaarten();
     }
 
     public void maakSpeler(String naam, int geboortejaar) {
@@ -121,32 +129,28 @@ public class DomeinController {
         return wedstrijd.geefSpeler(naam).getKrediet();
     }
 
-    public List<String> toonBetalendeKaarten() {
+    public List<String> toonBetalendeKaarten() { //UC7
         List<String> output1 = new ArrayList<>();
-        kaartRepository.getKaarten().forEach((kaart) -> {
-            if (kaart.getPrijs() != 0 || kaart.getWaarde().contains("/")) {
+        geefAlleKaarten().forEach((kaart) -> {
+            if (kaart.getPrijs() != 0) {
                 output1.add(kaart.getOmschrijving() + " " + kaart.getPrijs());
             }
         });
         return output1;
     }
-    
-    public void voegBetaaldeKaartenToe(String speler, List<String> gekochteKaarten){
-       List<Kaart> gekochteKaartenKaart = new ArrayList<>();
-       List<Kaart> alleKaarten = kaartRepository.getKaarten(); //dinges aanmaken in domeincontroller
-       
-       for(String kaartS: gekochteKaarten){
-           for(Kaart kaartK: alleKaarten){
-               if(kaartS.equals(kaartK.getOmschrijving()))
-                   gekochteKaartenKaart.add(kaartK);
-           }
-       }
-       // moet nog naar databank gaan, vragen aan leerkracht
-       
-       
+
+    public void voegBetaaldeKaartToeAanStartStapel(String speler, String omschrijving) { //UC7
+
+        for (Kaart kaart : geefAlleKaarten()) {
+            if (omschrijving.equals(kaart.getOmschrijving())) {
+                wedstrijd.voegBetaaldeKaartenToeAanStartStapel(speler, kaart);   
+            }
+        }
     }
+
+}
 
 //    public void maakSet(){
 //        Set set = new Set();
 //    }
-}
+

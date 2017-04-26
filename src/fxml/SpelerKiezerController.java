@@ -6,17 +6,22 @@
 package fxml;
 
 import domein.DomeinController;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 /**
@@ -27,45 +32,60 @@ public class SpelerKiezerController implements Initializable {
 
     @FXML
     public VBox content;
-    public Button kiesButton;
+    public Button maakButton;
     public Button exitButton;
 
     private DomeinController dc;
+    private AnchorPane main;
 
-    public SpelerKiezerController(DomeinController dc) {
+    public SpelerKiezerController(DomeinController dc, AnchorPane main) {
         this.dc = dc;
+        this.main = main;
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         List<String> lijst = dc.geefLijstBeschikbareSpelers();
         List<String> picked = new ArrayList<>();
-        for(String text: lijst){
+        for (String text : lijst) {
             Label label = new Label(text);
-           
-            label.setOnMouseClicked(new EventHandler<MouseEvent>(){
+
+            label.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    if(label.getStyle().equals("") && picked.size() < 2){
+                    if (label.getStyle().equals("") && picked.size() < 2) {
                         label.setStyle("-fx-background-color: #f25a5a;");
                         picked.add(label.getText());
-                    }else{
+                    } else {
                         label.setStyle("");
                         picked.remove(label.getText());
                     }
-                }                
+                }
             });
             content.getChildren().add(label);
         }
-        
-        kiesButton.setOnAction(new EventHandler<ActionEvent>() {
+
+        maakButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                dc.maakWedstrijd();
-                if(picked.size() == 2){
-                    for(String naam: picked){
+                if (picked.size() == 2) {
+
+                    dc.maakWedstrijd();
+                    for (String naam : picked) {
                         dc.registreerSpeler(naam);
                     }
+                    try {
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/wedstrijdstapelKiezer.fxml"));
+                        loader.setResources(dc.getTaal().getBundle());
+                        WedstrijdStapelKiezerController ctrl = new WedstrijdStapelKiezerController(dc);
+                        loader.setController(ctrl);
+                        AnchorPane content = loader.load();
+                        main.getChildren().clear();
+                        main.getChildren().add(content);
+                    } catch (IOException ex) {
+                        Logger.getLogger(SpelerKiezerController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
                 }
             }
         });

@@ -67,11 +67,16 @@ public class Wedstrijd {
     }
 
     public void maakWedstrijdStapel(String naam, List<String> selectie) {
-        if (naam.equals(speler1.getGebruikersnaam())) {
-            speler1.maakWedstrijdStapel(selectie);
-        } else if (naam.equals(speler2.getGebruikersnaam())) {
-            speler2.maakWedstrijdStapel(selectie);
-        }
+        geefSpeler(naam).maakWedstrijdStapel(selectie);
+    }
+    
+    public void voegBetaaldeKaartenToeAanStartStapel(String naam, Kaart gekochteKaart){
+
+        List<Kaart> oudeStartStapel = geefSpeler(naam).getKaartLijst();
+        List<Kaart> nieuweStartStapel = oudeStartStapel;
+        nieuweStartStapel.add(gekochteKaart);
+        
+        geefSpeler(naam).setStartStapel(nieuweStartStapel);
     }
 
     public void verhoogKrediet() {
@@ -79,12 +84,7 @@ public class Wedstrijd {
     }
 
     public void verminderKrediet(double prijs, String speler) {
-        if (speler.equals(speler1.getGebruikersnaam())) {
-            speler1.setKrediet(speler1.getKrediet()-prijs);
-        } else if (speler.equals(speler2.getGebruikersnaam())) {
-            speler2.setKrediet(speler1.getKrediet()-prijs);
-        }
-        //Dit moet van een bepaalde speler gedaan worden afhankelijk van uc7 -Juan Carlos        
+        geefSpeler(speler).setKrediet(speler1.getKrediet() - prijs);     
     }
 
     // mehtode schrijven die speler retourneert op basis van de naam
@@ -96,5 +96,5 @@ public class Wedstrijd {
         }
         return null;
     }
-    
+
 }
