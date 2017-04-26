@@ -19,7 +19,11 @@ public class Speler {
     private int geboortejaar;
     private List<Kaart> kaartLijst;
     private boolean beschikbaar;
+
+    private List<Kaart> spelbord;    //max 9 kaarten
     private List<Kaart> wedstrijdStapel;
+    private int setScore;
+    private boolean spelbordBevroren;
 
     public boolean isBeschikbaar() {
         return beschikbaar;
@@ -33,6 +37,7 @@ public class Speler {
 
         wedstrijdStapel = new ArrayList<>();
         kaartLijst = new ArrayList<>();
+        spelbord = new ArrayList<>();
         this.gebruikersnaam = gebruikersnaam;
         this.geboortejaar = geboortejaar;
         this.krediet = krediet;
@@ -47,6 +52,10 @@ public class Speler {
         return krediet;
     }
 
+    public boolean isSpelbordBevroren() {
+        return spelbordBevroren;
+    }
+
     public void setKrediet(double krediet) {
         this.krediet = krediet;
     }
@@ -57,6 +66,14 @@ public class Speler {
 
     public List<Kaart> getWedstrijdStapel() {
         return wedstrijdStapel;
+    }
+
+    public int getSetScore() {
+        return setScore;
+    }
+
+    public List<Kaart> getSpelbord() {
+        return spelbord;
     }
 
     //later doen met reguliere expresies.
@@ -98,6 +115,10 @@ public class Speler {
         kaartLijst = lijst;
     }
 
+    public void voegBovensteKaartVanSetStapelToeAanSpelbord(Kaart bovensteKaart) {
+        spelbord.add(bovensteKaart);
+    }
+
     public List<Kaart> getKaartLijst() {
         return kaartLijst;
     }
@@ -115,7 +136,6 @@ public class Speler {
             }
         });
         Random random = new Random();
-        
 
         while (wedstrijdStapel.size() > 4) {
 
