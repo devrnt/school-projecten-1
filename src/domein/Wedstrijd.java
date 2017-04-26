@@ -73,13 +73,13 @@ public class Wedstrijd {
     public void maakWedstrijdStapel(String naam, List<String> selectie) {
         geefSpeler(naam).maakWedstrijdStapel(selectie);
     }
-    
-    public void voegBetaaldeKaartenToeAanStartStapel(String naam, Kaart gekochteKaart){
+
+    public void voegBetaaldeKaartenToeAanStartStapel(String naam, Kaart gekochteKaart) {
 
         List<Kaart> oudeStartStapel = geefSpeler(naam).getKaartLijst();
         List<Kaart> nieuweStartStapel = oudeStartStapel;
         nieuweStartStapel.add(gekochteKaart);
-        
+
         geefSpeler(naam).setStartStapel(nieuweStartStapel);
     }
 
@@ -89,6 +89,7 @@ public class Wedstrijd {
 
     public void bepaalSpelerAanDeBeurtEersteSet() {
         int huidigJaar = Calendar.getInstance().get(Calendar.YEAR);
+
         int leeftijdSpeler1 = huidigJaar - speler1.getGeboortejaar();
         int leeftijdSpeler2 = huidigJaar - speler2.getGeboortejaar();
 
@@ -116,7 +117,7 @@ public class Wedstrijd {
     }
 
     public void verminderKrediet(double prijs, String speler) {
-        geefSpeler(speler).setKrediet(speler1.getKrediet() - prijs);     
+        geefSpeler(speler).setKrediet(geefSpeler(speler).getKrediet() - prijs);
     }
 
     // mehtode schrijven die speler retourneert op basis van de naam
@@ -156,10 +157,10 @@ public class Wedstrijd {
     }
 
     public boolean setEinde() {
-        if (speler1.getSetScore() > 20 || speler2.getSetScore() > 20) {
+        if (speler1.getScore() > 20 || speler2.getScore() > 20) {
             return true;
         }
-        if (speler1.getSpelbord().size() >= 9 || speler2.getSetScore() > 20) {
+        if (speler1.getSpelbord().size() >= 9 || speler2.getSpelbord().size() >= 9) {
             return true;
         }
         if (speler1.isSpelbordBevroren() == true && speler2.isSpelbordBevroren() == true) {
@@ -168,5 +169,49 @@ public class Wedstrijd {
             return false;
         }
 
+    }
+
+    public void beeindigBeurt() {
+        //nog schrijven
+    }
+
+    public void legWedstrijdkaart(Kaart kaart) {
+        if (actief.getWedstrijdStapel().size() >= 0) {
+            actief.voegKaartVanWedstrijdStapelToeAanSpelbord(kaart);
+            actief.verwijderKaartVanWedstrijdStapel(kaart);
+        }
+    }
+
+    public void bevriesSpelbord() {
+        if (actief.isSpelbordBevroren() == false) {
+            actief.setSpelbordBevroren(true);
+        }
+    }
+
+    public Speler geefUitslag() {
+        int scoreSpeler1 = speler1.getScore();
+        int scoreSpeler2 = speler2.getScore();
+
+        int aantalKaartenSpelbordSpeler1 = speler1.getWedstrijdStapel().size();
+        int aantalKaartenSpelbordSpeler2 = speler2.getWedstrijdStapel().size();
+
+        boolean bSpeler1;
+        boolean bSpeler2;
+
+        if (aantalKaartenSpelbordSpeler1 == 9 || aantalKaartenSpelbordSpeler2 == 9) {
+            if (aantalKaartenSpelbordSpeler1 == 9) {
+                if (scoreSpeler1 <= 20) {
+                    return speler1;
+                }
+            }
+            if (aantalKaartenSpelbordSpeler2 == 9) {
+                if (scoreSpeler2 <= 20) {
+                    return speler2;
+                }
+
+            }
+        }
+
+        return actief;//tijdelijk
     }
 }
