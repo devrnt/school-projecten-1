@@ -13,6 +13,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -46,14 +49,16 @@ public class SpelerKiezerController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         List<String> lijst = dc.geefLijstBeschikbareSpelers();
-        List<String> picked = new ArrayList<>();
+        ObservableList<String> picked = FXCollections.observableArrayList();
+        maakButton.disableProperty().bind(Bindings.size(picked).isNotEqualTo(2));
+
         for (String text : lijst) {
             Label label = new Label(text);
 
             label.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    if (label.getStyle().equals("") && picked.size() < 2) {
+                    if (label.getStyle().equals("")) {
                         label.setStyle("-fx-background-color: #f25a5a;");
                         picked.add(label.getText());
                     } else {
@@ -68,26 +73,25 @@ public class SpelerKiezerController implements Initializable {
         maakButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if (picked.size() == 2) {
 
-                    dc.maakWedstrijd();
-                    for (String naam : picked) {
-                        dc.registreerSpeler(naam);
-                    }
-                    try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/wedstrijdstapelKiezer.fxml"));
-                        loader.setResources(dc.getTaal().getBundle());
-                        WedstrijdStapelKiezerController ctrl = new WedstrijdStapelKiezerController(dc);
-                        loader.setController(ctrl);
-                        AnchorPane content = loader.load();
-                        main.getChildren().clear();
-                        main.getChildren().add(content);
-                    } catch (IOException ex) {
-                        Logger.getLogger(SpelerKiezerController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
+                dc.maakWedstrijd();
+                for (String naam : picked) {
+                    dc.registreerSpeler(naam);
                 }
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/wedstrijdstapelKiezer.fxml"));
+                    loader.setResources(dc.getTaal().getBundle());
+                    WedstrijdStapelKiezerController ctrl = new WedstrijdStapelKiezerController(dc);
+                    loader.setController(ctrl);
+                    AnchorPane content = loader.load();
+                    main.getChildren().clear();
+                    main.getChildren().add(content);
+                } catch (IOException ex) {
+                    Logger.getLogger(SpelerKiezerController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
             }
+
         });
     }
 
