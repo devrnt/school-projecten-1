@@ -73,7 +73,6 @@ public class SpelerMapper {
 
         return speler;
     }*/
-
     public List<Speler> geefLijstSpelers() {
         List<Speler> spelerLijst = new ArrayList<>();
 
@@ -93,7 +92,7 @@ public class SpelerMapper {
         return spelerLijst;
     }
 
-    private void geefKaartenSpeler(Speler speler, int spelerID){
+    private void geefKaartenSpeler(Speler speler, int spelerID) {
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL)) {
             PreparedStatement query = conn.prepareStatement("SELECT * FROM ID222177_g14.Kaart INNER JOIN ID222177_g14.Kaarttype USING (omschrijving) WHERE spelerID = ?");
             query.setInt(1, spelerID);
@@ -106,15 +105,45 @@ public class SpelerMapper {
             throw new RuntimeException(ex);
         }
     }
-    
-    /*public void updateKrediet(Speler speler) {
+
+    public void updateSpeler(Speler speler) {
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL)) {
+            //updaten krediet
             PreparedStatement query = conn.prepareStatement("UPDATE ID222177_g14.Speler SET krediet = ?  WHERE gebruikersnaam = ?");
             query.setDouble(2, speler.getKrediet());
             query.setString(2, speler.getGebruikersnaam());
             query.executeQuery();
+
+            //updaten gekochte kaarten
+            List<Kaart> localKaarten = speler.getKaartLijst();
+            List<String> serverKaarten = new ArrayList<>();
+            PreparedStatement query2 = conn.prepareStatement("SELECT omschrijving FROM ID222177_g14.Kaart INNER JOIN ID222177_g14.Speler USING (gebruikersnaam) WHERE gebruikersnaam = ?");
+            query2.setString(1, speler.getGebruikersnaam());
+            try (ResultSet rs = query.executeQuery()) {
+                while (rs.next()) {
+                    serverKaarten.add(rs.getString("omschrijving"));
+                }
+            }
+            
+            PreparedStatement idQuery = conn.prepareStatement("SELECT spelerID FROM ID222177_g14.Speler WHERE gebruikersnaam = ?");
+            idQuery.setString(1, speler.getGebruikersnaam());
+            int id;
+            try (ResultSet rs = query.executeQuery()) {
+                id = rs.getInt("spelerID");
+            }
+            
+            for (Kaart kaart : localKaarten) {
+                if (!serverKaarten.contains(kaart.getOmschrijving())) {
+                    PreparedStatement insertStatement = conn.prepareStatement("INSERT INTO ID222177_g14.Kaart (spelerID, omschrijving)"
+                        + "VALUES (?, ?)");
+                    insertStatement.setInt(1, id);
+                    insertStatement.setString(2, kaart.getOmschrijving());
+                    insertStatement.executeUpdate();
+                }
+            }
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
-    }*/
+    }
+
 }

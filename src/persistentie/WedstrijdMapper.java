@@ -51,4 +51,19 @@ public class WedstrijdMapper {
         return wedstrijdLijst;
     }
 
+    public Wedstrijd laadWedstrijd(String naam){
+        Wedstrijd wedstrijd = new Wedstrijd();
+        try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL)) {
+            PreparedStatement query = conn.prepareStatement("SELECT * FROM ID222177_g14.Wedstrijd WHERE naam = ?");
+            query.setString(1, naam);
+            try (ResultSet rs = query.executeQuery()) {
+                while (rs.next()) {
+                    
+                }
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        return wedstrijd;
+    }
 }

@@ -154,6 +154,14 @@ public class DomeinController {
        wedstrijd.maakSetStapel();
     }
     
+    public void bewaarWedstrijd(String naam){
+        //opslaan van de wedstrijd
+        wedstrijdRepository.bewaarWedstrijd(naam, wedstrijd);
+        for(String gNaam: wedstrijd.geefGeregistreerdeSpelers()){
+            spelerRepository.updateSpeler(wedstrijd.geefSpeler(gNaam));
+        }
+    }
+    
     public List<String> toonLijstWedstrijden(){
         return wedstrijdRepository.toonLijstWedstrijden();
     }
