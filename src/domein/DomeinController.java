@@ -18,6 +18,7 @@ public class DomeinController {
 
     private SpelerRepository spelerRepository;
     private KaartRepository kaartRepository;
+    private WedstrijdRepository wedstrijdRepository;
     private Taal taal;
     private Wedstrijd wedstrijd;
     private Speler speler;
@@ -39,7 +40,8 @@ public class DomeinController {
 
     public DomeinController() {
         spelerRepository = new SpelerRepository();  //het aanmaken van de repositorys gebeurt hier zodat ze niet elke keer opnieuw aangemaakt moeten worden
-        kaartRepository = new KaartRepository(); //test
+        kaartRepository = new KaartRepository(); 
+        wedstrijdRepository = new WedstrijdRepository();
         alleKaarten = kaartRepository.getKaarten();
     }
 
@@ -150,6 +152,14 @@ public class DomeinController {
     
     public void maakSetStapel() {
        wedstrijd.maakSetStapel();
+    }
+    
+    public List<String> toonLijstWedstrijden(){
+        return wedstrijdRepository.toonLijstWedstrijden();
+    }
+    
+    public void laadWedstrijd(String naam){
+        wedstrijd = wedstrijdRepository.laadWedstrijd(naam);
     }
     
 }

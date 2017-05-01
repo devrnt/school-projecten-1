@@ -52,7 +52,7 @@ public class StartUp {
                     case 2:
                         UC1.testUC1(dc);
                         break;
-                    case 3: flag=false;
+                    case 3: UC9.testUC9(dc);
                         break;
                     case 4: flag=false;
                 }
