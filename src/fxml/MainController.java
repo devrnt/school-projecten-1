@@ -75,7 +75,7 @@ public class MainController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/spelerKiezer.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/kiezer.fxml"));
                     loader.setResources(dc.getTaal().getBundle());
                     SpelerKiezerController ctrl = new SpelerKiezerController(dc, main);
                     loader.setController(ctrl);
@@ -102,7 +102,28 @@ public class MainController implements Initializable {
         laadButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("toDO");
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/kiezer.fxml"));
+                    loader.setResources(dc.getTaal().getBundle());
+                    WedstrijdKiezerController ctrl = new WedstrijdKiezerController(dc, main);
+                    loader.setController(ctrl);
+                    AnchorPane content = loader.load();
+                    main.getChildren().clear();
+                    main.getChildren().add(content);
+                    
+                    ((Button)content.getChildren().get(2)).setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent event) {
+                            main.setDisable(true);
+                            menu.setDisable(false);
+                        }
+                    });
+                    
+                    menu.setDisable(true);
+                    main.setDisable(false);
+                } catch (IOException ex) {
+                    Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         

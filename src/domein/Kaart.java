@@ -18,10 +18,10 @@ public class Kaart {
 
     /**
      *
-     * @param omschrijving
-     * @param type
-     * @param waarde
-     * @param prijs
+     * @param omschrijving omschrijving van de kaart
+     * @param type type van de kaart
+     * @param waarde waarde van de kaart
+     * @param prijs prijs van de kaart
      */
     public Kaart(String omschrijving, String type, String waarde, int prijs) {
         this.omschrijving = omschrijving;
@@ -31,15 +31,15 @@ public class Kaart {
     }
 
     /**
-     *
-     * @return
+     * Geeft de prijs van de kaart
+     * @return int prijs van de kaart
      */
     public int getPrijs(){
         return prijs;
     }
     
     /**
-     *
+     * Geeft de omschrijving van de kaart
      * @return
      */
     public String getOmschrijving() {
@@ -47,8 +47,8 @@ public class Kaart {
     }
 
     /**
-     *
-     * @return
+     * Geeft de type van de kaart
+     * @return type van de kaart
      */
     public String getType() {
         return type;
