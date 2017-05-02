@@ -24,20 +24,33 @@ public class DomeinController {
     private Speler speler;
     private List<Kaart> alleKaarten;
 
-    
-    /*Test*/
+    /**
+     * Geeft de Taal van de applicatie
+     * @return Taal van de applicatie
+     */
     public Taal getTaal() {
         return taal;
     }
 
+    /**
+     * Setter van de taal van de applicatie
+     * @param taal taal van de applicatie
+     */
     public void setTaal(Taal taal) {
         this.taal = taal;
     }
 
+    /**
+     * Geeft een lijst van alle kaarten
+     * @return lijst van alle kaarten
+     */
     public List<Kaart> geefAlleKaarten() {
         return alleKaarten;
     }
 
+    /**
+     * Default constructor
+     */
     public DomeinController() {
         spelerRepository = new SpelerRepository();  //het aanmaken van de repositorys gebeurt hier zodat ze niet elke keer opnieuw aangemaakt moeten worden
         kaartRepository = new KaartRepository(); 
@@ -45,6 +58,12 @@ public class DomeinController {
         alleKaarten = kaartRepository.getKaarten();
     }
 
+    /**
+     * Maakt een Nieuwe Speler met opgegeven naam en geboortejaar
+     * @param naam naam van de speler
+     * @param geboortejaar geboortejaar van de speler
+     * @exception IllegalArgumentException Wanneer er geen legale naam of geboortejaar is opgegeven
+     */
     public void maakSpeler(String naam, int geboortejaar) {
         Speler nieuweSpeler = new Speler(naam, geboortejaar, 0);
 
@@ -62,22 +81,41 @@ public class DomeinController {
         kaartRepository.voegStartkaartenToeAanSpeler(nieuweSpeler);
     }
 
+    /**
+     * Geeft de lijst van de beschikbare spelers
+     * @return lijst van beschikbare spelers
+     */
     public List<String> geefLijstBeschikbareSpelers() {
         return spelerRepository.geefLijstBeschikbareSpelers();
     }
 
+    /**
+     * Maakt een nieuwe wedstrijd
+     */
     public void maakWedstrijd() {
         wedstrijd = new Wedstrijd();
     }
 
+    /**
+     * Registreert een speler aan de hand van gebruikersnaam
+     * @param gebruikersnaam gebruikersnaam van de speler
+     */
     public void registreerSpeler(String gebruikersnaam) {
         wedstrijd.registreerSpeler(spelerRepository.geefSpeler(gebruikersnaam));
     }
 
+    /**
+     * Geeft een lijst van alle geregistreerde spelers
+     * @return lijst van alle geregistreerde spelers
+     */
     public List<String> geefGeregistreerdeSpelers() {
         return wedstrijd.geefGeregistreerdeSpelers();
     }
 
+    /**
+     * Geeft een lijst van spelers zonder wedstrijdstapel
+     * @return lijst van spelers zonder wedstrijdstapel
+     */
     public List<String> geefSpelerZonderWedstrijdStapel() {
         return wedstrijd.geefSpelersZonderWedstrijdStapel();
     }
@@ -90,6 +128,12 @@ public class DomeinController {
         return new ArrayList<>(Arrays.asList(geregistreerdeSpelers.get(0).getGebruikersnaam(), geregistreerdeSpelers.get(1).getGebruikersnaam()));
     }*/
     // lijst van Strings 
+
+    /**
+     * Geeft de startstapel van de opgeven speler
+     * @param naam van de speler
+     * @return lijst van kaarten die de startstapel vormen voor de opgeven speler 
+     */
     public List<String> toonStartStapel(String naam) {
         // Speler ophalen uit wedstrijd
         Speler spelerL = wedstrijd.geefSpeler(naam);
@@ -101,36 +145,70 @@ public class DomeinController {
         return output;
     }
 
+    /**
+     * Geeft het aantal kaarten in de wedstrijdstapel
+     * @return aantal kaarten in de wedstrijdstapel
+     */
     public int geefAantalKaartenWedstrijdStapel() {
         return speler.getWedstrijdStapel().size();
     }
 
+    /**
+     *Maakt een wedstrijdstapel aan
+     * @param naam naam van de speler
+     * @param stapel lijst van kaarten die de sstapel van de speler vormen
+     */
     public void maakWedstrijdStapel(String naam, List<String> stapel) {
 
         wedstrijd.maakWedstrijdStapel(naam, stapel);
     }
 
+    /**
+     * Geeft het krediet van de winnaar
+     * @return double krediet van de winnaar
+     */
     public double geefKredietWinnaar() {
         return wedstrijd.getWinnaar().getKrediet();
     }
 
+    /**
+     * Geeft naam van de winnaar
+     * @return String naam van de winnaar
+     */
     public String geefNaamWinnaar() {
         return wedstrijd.getWinnaar().getGebruikersnaam();
     }
 
+    /**
+     * Verhoogt het krediet met 5
+     */
     public void verhoogKrediet() {
         wedstrijd.verhoogKrediet();
     }
 
+    /**
+     * Verminderd het krediet van de opgegeven speler met de opgegeven prijs
+     * @param prijs prijs van de kaart
+     * @param speler speler
+     */
     public void verminderKrediet(double prijs, String speler) {
         wedstrijd.verminderKrediet(prijs, speler);
     }
 
+    /**
+     * Geeft het krediet van de opgegeven speler
+     * @param naam naam van de speler
+     * @return double krediet van de meegegeven speler
+     */
     public double geefKredietSpeler(String naam) {
 
         return wedstrijd.geefSpeler(naam).getKrediet();
     }
 
+    /**
+     * Toont alle kaarten waar de speler kan voor betalen
+     * @return lijst van kaarten die betalend zijn
+     */
     public List<String> toonBetalendeKaarten() { //UC7
         List<String> output1 = new ArrayList<>();
         geefAlleKaarten().forEach((kaart) -> {
@@ -141,6 +219,11 @@ public class DomeinController {
         return output1;
     }
 
+    /**
+     * Voegt de betaalde kaart van de speler toe aan zijn startstapel
+     * @param speler speler
+     * @param omschrijving omschrijving van de kaart
+     */
     public void voegBetaaldeKaartToeAanStartStapel(String speler, String omschrijving) { //UC7
 
         for (Kaart kaart : geefAlleKaarten()) {
@@ -150,10 +233,17 @@ public class DomeinController {
         }
     }
     
+    /**
+     * Maakt een setStapel
+     */
     public void maakSetStapel() {
        wedstrijd.maakSetStapel();
     }
     
+    /**
+     * Bewaard de wedstrijd
+     * @param naam naam van de speler
+     */
     public void bewaarWedstrijd(String naam){
         //opslaan van de wedstrijd
         wedstrijdRepository.bewaarWedstrijd(naam, wedstrijd);
@@ -162,10 +252,18 @@ public class DomeinController {
         }
     }
     
+    /**
+     * Toont een lijst van wedstrijden
+     * @return lijst van wedstrijden
+     */
     public List<String> toonLijstWedstrijden(){
         return wedstrijdRepository.toonLijstWedstrijden();
     }
     
+    /**
+     * Laad de wedstrijd
+     * @param naam naam van de speler
+     */
     public void laadWedstrijd(String naam){
         wedstrijd = wedstrijdRepository.laadWedstrijd(naam);
     }

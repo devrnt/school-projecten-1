@@ -17,6 +17,9 @@ public class KaartRepository {
 
     private final KaartMapper mapper;
 
+    /**
+     *
+     */
     public KaartRepository() {
         mapper = new KaartMapper();
         //spelers = new ArrayList<>();
@@ -29,6 +32,12 @@ public class KaartRepository {
 
         mapper.voegToe(kaart, speler);
     } */
+
+    /**
+     *
+     * @return
+     */
+
     public List<Kaart> getStartKaarten() {
         List<Kaart> startkaarten = new ArrayList<>();
 
@@ -41,6 +50,10 @@ public class KaartRepository {
         return startkaarten;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Kaart> getKaarten() {
         List<Kaart> kaarten = new ArrayList<>();
 
@@ -51,6 +64,10 @@ public class KaartRepository {
         return kaarten;
     }
 
+    /**
+     *
+     * @param speler
+     */
     public void voegStartkaartenToeAanSpeler(Speler speler) {
         mapper.voegStartkaartenToe(speler);
     }

@@ -19,14 +19,24 @@ public class Set {
     int huidigJaar = Calendar.getInstance().get(Calendar.YEAR);
     private int setRonde;
 
+    /**
+     *
+     */
     public Set() {
 
     }
 
+    /**
+     *
+     */
     public void maakSetStapel() {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public String bepaalActieveSpeler() {
         String actieveSpeler = null;
         List<String> spelers = wedstrijd.geefGeregistreerdeSpelers();
