@@ -47,4 +47,8 @@ public class SpelerRepository {
         return null;
     }
     
+    public void updateSpeler(Speler speler){
+        mapper.updateSpeler(speler); 
+    }
+    
 }
