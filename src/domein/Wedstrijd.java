@@ -109,11 +109,8 @@ public class Wedstrijd {
      */
     public void voegBetaaldeKaartenToeAanStartStapel(String naam, Kaart gekochteKaart) {
 
-        List<Kaart> oudeStartStapel = geefSpeler(naam).getKaartLijst();
-        List<Kaart> nieuweStartStapel = oudeStartStapel;
-        nieuweStartStapel.add(gekochteKaart);
+        geefSpeler(naam).getKaartLijst().add(gekochteKaart);
 
-        geefSpeler(naam).setStartStapel(nieuweStartStapel);
     }
 
     /**

@@ -247,8 +247,9 @@ public class DomeinController {
     public void bewaarWedstrijd(String naam){
         //opslaan van de wedstrijd
         wedstrijdRepository.bewaarWedstrijd(naam, wedstrijd);
+        
         for(String gNaam: wedstrijd.geefGeregistreerdeSpelers()){
-            spelerRepository.updateSpeler(wedstrijd.geefSpeler(gNaam));
+            spelerRepository.updateSpeler(wedstrijd.geefSpeler(gNaam)); //update het krediet en de aangekochte kaarten van de speler
         }
     }
     
