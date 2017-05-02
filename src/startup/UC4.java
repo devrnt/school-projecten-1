@@ -14,46 +14,63 @@ public class UC4 {
 
         // Dit moet gebeuren voor de beide speler
         List<String> selectie = new ArrayList<>();
-        
-        
-        System.out.println("Geef telkens de index van de kaart die u wenst toe te voegen aan uw deck. (Uw selectie moet bestaan uit 6 kaarten)");
+
+        System.out.println(dc.getTaal().getVertaling("uitleg_selectie"));
         while (selectie.size() < 6) {
 
             List<String> startstapel = dc.toonStartStapel(speler);
             for (String selectieKaart : selectie) {
-            for (int i = 0; i < startstapel.size(); i++) {
-                if (selectieKaart.equals(startstapel.get(i))) {
-                    startstapel.remove(i);
+                for (int i = 0; i < startstapel.size(); i++) {
+                    if (selectieKaart.equals(startstapel.get(i))) {
+                        startstapel.remove(i);
+                    }
                 }
             }
-        }
-            System.out.println("Geef een index van een kaart");
             int keuze = -1;
             int wilKaartKopen = 0;
 
             for (int i = 0; i < startstapel.size(); i++) {
                 System.out.println(i + 1 + ") " + startstapel.get(i));
             }
+
+            System.out.println(dc.getTaal().getVertaling("kaart_kopen"));
+            System.out.println("1. " + dc.getTaal().getVertaling("ja"));
+            System.out.println("2. " + dc.getTaal().getVertaling("nee"));
+            System.out.print(" > ");
+
             while (wilKaartKopen < 1 || wilKaartKopen > 2) {
-                System.out.println("Wilt u een kaart kopen?");
-                System.out.println("1. Ja");
-                System.out.println("2. Nee");
-                wilKaartKopen = input.nextInt(); //INPUTMISMATCH MOGELIJKHEID
+                boolean done = false;
+                while (!done) {
+                    try {
+                        wilKaartKopen = input.nextInt(); //INPUTMISMATCH MOGELIJKHEID
+                        done = true;
+                    } catch (InputMismatchException e) {
+                        System.err.println("Not a valid input. Error: " + e.getMessage());
+                    }
+                }
             }
 
             if (wilKaartKopen == 1) {
                 UC7.testUC7(dc, speler);
-                
+
             } else {
+                System.out.println(dc.getTaal().getVertaling("geef_index"));
+                System.out.print(" > ");
+
                 while (keuze < 0 || keuze >= startstapel.size()) {
-                    System.out.printf("Maak uw keuze%n");
-                    System.out.print(" > ");
-                    keuze = input.nextInt() - 1;
+                    boolean done = false;
+                    while (!done) {
+                        try {
+                            keuze = input.nextInt() - 1;
+                            done = true;
+                        } catch (InputMismatchException e) {
+                            System.err.println("Not a valid input. Error: " + e.getMessage());
+                        }
+                    }
                 }
                 selectie.add(startstapel.get(keuze));
             }
         }
-
         dc.maakWedstrijdStapel(speler, selectie);
     }
 }

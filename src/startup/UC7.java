@@ -2,6 +2,7 @@ package startup;
 
 import domein.DomeinController;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,12 +23,11 @@ public class UC7 {
                 }
             }
         }
-
         int nogEenKaartKopen = 1;
 
         while (nogEenKaartKopen == 1) {
-            System.out.printf("Huidig krediet: %.1f%n", dc.geefKredietSpeler(speler));
-            System.out.printf("Aan te kopen kaarten: %n");
+            System.out.printf(dc.getTaal().getVertaling("huidig_krediet") + "%.1f%n", dc.geefKredietSpeler(speler));
+            System.out.println(dc.getTaal().getVertaling("kaarten_tekoop"));
             for (int i = 0; i < betalendeKaarten.size(); i++) {
                 String[] parts = betalendeKaarten.get(i).split(" ");
                 String omschrijving = parts[0];
@@ -35,13 +35,19 @@ public class UC7 {
 
                 System.out.printf(i + 1 + ") " + omschrijving + " €" + prijsS + "%n");
             }
+
             int keuze = -1;
-
+            System.out.printf(dc.getTaal().getVertaling("geef_index") + ".%n > ");
             while (keuze < 0 || keuze > betalendeKaarten.size()) {
-
-                System.out.printf("Maak uw keuze.%n > ");
-                keuze = input.nextInt() - 1;
-
+                boolean done = false;
+                while (!done) {
+                    try {
+                        keuze = input.nextInt() - 1;
+                        done = true;
+                    } catch (InputMismatchException e) {
+                        System.err.println("Not a valid input. Error: " + e.getMessage());
+                    }
+                }
             }
 
             String[] parts = betalendeKaarten.get(keuze).split(" ");
@@ -56,14 +62,24 @@ public class UC7 {
             } else {
 
                 System.out.println("U heeft niet genoeg krediet om de kaart te kopen");
-                System.out.printf("Huidig krediet: %.1f%n", dc.geefKredietSpeler(speler));
+                System.out.printf(dc.getTaal().getVertaling("huidig_krediet") + "%.1f%n", dc.geefKredietSpeler(speler));
             }
 
+            System.out.println(dc.getTaal().getVertaling("nog_aankopen"));
+            System.out.println("1. " + dc.getTaal().getVertaling("ja"));
+            System.out.println("2. " + dc.getTaal().getVertaling("nee"));
+            System.out.print(" > ");
+
             do {
-                System.out.println("Wilt u nog een kaart te kopen?");
-                System.out.println("1. Ja");
-                System.out.println("2. Nee");
-                nogEenKaartKopen = input.nextInt();
+                boolean done = false;
+                while (!done) {
+                    try {
+                        nogEenKaartKopen = input.nextInt();
+                        done = true;
+                    } catch (InputMismatchException e) {
+                        System.err.println("Not a valid input. Error: " + e.getMessage());
+                    }
+                }
             } while (nogEenKaartKopen < 1 || nogEenKaartKopen > 2);
         }
     }
