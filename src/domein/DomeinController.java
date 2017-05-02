@@ -24,8 +24,8 @@ public class DomeinController {
     private Speler speler;
     private List<Kaart> alleKaarten;
 
-    ;
-
+    
+    /*Test*/
     public Taal getTaal() {
         return taal;
     }
