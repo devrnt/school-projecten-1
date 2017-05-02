@@ -19,14 +19,14 @@ public class UC8 {
         Scanner input = new Scanner(System.in);
         int keuze = 0;
 
-        System.out.println("Geef een unieke naam voor de wedstrijd");
+        System.out.println(dc.getTaal().getVertaling("unieke_naamWedstrijd"));
         System.out.printf(" > ");
         String naamWedstrijd = input.next();
 
         dc.bewaarWedstrijd(naamWedstrijd);
-        System.out.println("Wilt u verder spelen?");
-        System.out.println("1. Ja");
-        System.out.println("2. Nee");
+        System.out.println(dc.getTaal().getVertaling("verder_spelen"));
+        System.out.println(dc.getTaal().getVertaling("ja"));
+        System.out.println(dc.getTaal().getVertaling("nee"));
 
         while (keuze < 1 || keuze > 2) {
             try {
@@ -39,7 +39,7 @@ public class UC8 {
 
         switch (keuze) {
             case 1: return;
-            case 2: System.out.println("Het programma wordt afgesloten"); //wordt heel het programma afgesloten of wat gebeurt er hier?
+            case 2: System.out.println(dc.getTaal().getVertaling("afsluiten")); //wordt heel het programma afgesloten of wat gebeurt er hier?
                 System.exit(0);
         }
 
