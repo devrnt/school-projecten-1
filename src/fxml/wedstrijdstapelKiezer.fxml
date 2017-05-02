@@ -17,8 +17,8 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button fx:id="returnButton" layoutX="14.0" layoutY="336.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="%return" />
-      <Button fx:id="nextButton" layoutX="14.0" layoutY="275.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="%next" />
+      <Button fx:id="nextButton" layoutX="14.0" layoutY="336.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="%next" />
+      <Button fx:id="returnButton" layoutX="14.0" layoutY="275.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" text="%terug_selectie" />
       <ScrollPane fx:id="scrollPane" layoutX="204.0" layoutY="65.0" prefHeight="320.0" prefWidth="366.0">
          <content>
             <GridPane fx:id="gridPane">

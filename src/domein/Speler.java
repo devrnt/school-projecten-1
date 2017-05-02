@@ -22,7 +22,7 @@ public class Speler {
 
     private List<Kaart> spelbord;    //max 9 kaarten
     private List<Kaart> wedstrijdStapel;
-    private int setScore;
+    private int score;
     private boolean spelbordBevroren;
 
     public boolean isBeschikbaar() {
@@ -60,6 +60,10 @@ public class Speler {
         this.krediet = krediet;
     }
 
+    public void setSpelbordBevroren(boolean spelbordBevroren) {
+        this.spelbordBevroren = spelbordBevroren;
+    }
+
     public int getGeboortejaar() {
         return geboortejaar;
     }
@@ -68,12 +72,19 @@ public class Speler {
         return wedstrijdStapel;
     }
 
-    public int getSetScore() {
-        return setScore;
+    public int getScore() {
+        return score;
     }
 
     public List<Kaart> getSpelbord() {
         return spelbord;
+    }
+    
+    //nog een methode voor de spelebord score
+    
+    public int berekenScoreSpelbord(){
+        //berekenscore
+        return 0;
     }
 
     //later doen met reguliere expresies.
@@ -116,7 +127,25 @@ public class Speler {
     }
 
     public void voegBovensteKaartVanSetStapelToeAanSpelbord(Kaart bovensteKaart) {
-        spelbord.add(bovensteKaart);
+        if (spelbord.size() < 9) {
+            spelbord.add(bovensteKaart);
+        }
+    }
+
+    //kunnen samengevoegd worden
+    public void voegKaartVanWedstrijdStapelToeAanSpelbord(Kaart kaart) {
+        if (spelbord.size() < 9) {
+            spelbord.add(kaart);
+        }
+    }
+
+    public void verwijderKaartVanWedstrijdStapel(Kaart kaart) {
+        for (Kaart k : wedstrijdStapel) {
+            if (k.getOmschrijving().equals(kaart.getOmschrijving())) {
+                wedstrijdStapel.remove(kaart);
+            }
+
+        }
     }
 
     public List<Kaart> getKaartLijst() {

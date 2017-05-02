@@ -34,4 +34,8 @@ public class Taal {
     public String getVertaling(String key){
         return bundle.getString(key);
     }
+    
+    public Locale getLocale(){
+        return loc;
+    }
 }
