@@ -24,6 +24,7 @@ public class UC5 {
          
         dc.verhoogKrediet();
         
+        System.out.printf(dc.getTaal().getVertaling("winnaar") + "%s" + dc.getTaal().getVertaling("krediet") + "%d", dc.geefNaamWinnaar() , dc.geefKredietWinnaar());      
     }    
 }
     
