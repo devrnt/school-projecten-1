@@ -24,14 +24,25 @@ public class Wedstrijd {
     private List<Kaart> setStapel;
     private int aantalSets;
 
+    /**
+     *
+     * @return
+     */
     public Speler getWinnaar() {
         return winnaar;
     }
 
+    /**
+     *
+     */
     public Wedstrijd() {
 
     }
 
+    /**
+     *
+     * @param speler
+     */
     public void registreerSpeler(Speler speler) {
         if (speler != null) {
             if (speler1 == null) {
@@ -44,6 +55,10 @@ public class Wedstrijd {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<String> geefGeregistreerdeSpelers() {
         List<String> lijst = new ArrayList<>();
         if (speler1 != null) {
@@ -55,10 +70,18 @@ public class Wedstrijd {
         return lijst;
     }
 
+    /**
+     *
+     * @return
+     */
     public String geefActieveSpeler() {
         return actief.getGebruikersnaam();
     }
 
+    /**
+     *
+     * @return
+     */
     public List<String> geefSpelersZonderWedstrijdStapel() {
         List<String> lijst = new ArrayList<>();
         if (speler1.getWedstrijdStapel().isEmpty()) {
@@ -70,10 +93,20 @@ public class Wedstrijd {
         return lijst;
     }
 
+    /**
+     *
+     * @param naam
+     * @param selectie
+     */
     public void maakWedstrijdStapel(String naam, List<String> selectie) {
         geefSpeler(naam).maakWedstrijdStapel(selectie);
     }
 
+    /**
+     *
+     * @param naam
+     * @param gekochteKaart
+     */
     public void voegBetaaldeKaartenToeAanStartStapel(String naam, Kaart gekochteKaart) {
 
         List<Kaart> oudeStartStapel = geefSpeler(naam).getKaartLijst();
@@ -83,10 +116,16 @@ public class Wedstrijd {
         geefSpeler(naam).setStartStapel(nieuweStartStapel);
     }
 
+    /**
+     *
+     */
     public void verhoogKrediet() {
         winnaar.setKrediet(winnaar.getKrediet() + 5);
     }
 
+    /**
+     *
+     */
     public void bepaalSpelerAanDeBeurtEersteSet() {
         int huidigJaar = Calendar.getInstance().get(Calendar.YEAR);
 
@@ -108,6 +147,9 @@ public class Wedstrijd {
         }
     }
 
+    /**
+     *
+     */
     public void bepaalSpelerAanDeBeurtVolgendeSet() {
         if (actief == speler1) {
             actief = speler2;
@@ -116,11 +158,22 @@ public class Wedstrijd {
         }
     }
 
+    /**
+     *
+     * @param prijs
+     * @param speler
+     */
     public void verminderKrediet(double prijs, String speler) {
         geefSpeler(speler).setKrediet(geefSpeler(speler).getKrediet() - prijs);
     }
 
     // mehtode schrijven die speler retourneert op basis van de naam
+
+    /**
+     *
+     * @param naam
+     * @return
+     */
     public Speler geefSpeler(String naam) {
         if (naam.equals(speler1.getGebruikersnaam())) {
             return speler1;
@@ -130,6 +183,11 @@ public class Wedstrijd {
         return null;
     }
 
+    /**
+     *
+     * @param kaart
+     * @param speler
+     */
     public void voegKaartToeAanStartStapel(Kaart kaart, String speler) {
         if (speler.equals(speler1.getGebruikersnaam())) {
             speler1.voegKaartToe(kaart);
@@ -138,6 +196,9 @@ public class Wedstrijd {
         }
     }
 
+    /**
+     *
+     */
     public void maakSetStapel() {
         setStapel = new ArrayList<>();
         for (int i = 1; i <= 4; i++) {
@@ -148,6 +209,9 @@ public class Wedstrijd {
         Collections.shuffle(setStapel);
     }
 
+    /**
+     *
+     */
     public void voegBovensteKaartVanSetStapelToeAanSpelbord() {
         actief.voegBovensteKaartVanSetStapelToeAanSpelbord(setStapel.get(0));
 
@@ -156,6 +220,10 @@ public class Wedstrijd {
         setStapel.remove(0); // is het nodig om de kaart van de setstapel te verwijderen?
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean setEinde() {
         if (speler1.getScore() > 20 || speler2.getScore() > 20) {
             return true;
@@ -171,10 +239,17 @@ public class Wedstrijd {
 
     }
 
+    /**
+     *
+     */
     public void beeindigBeurt() {
         //nog schrijven
     }
 
+    /**
+     *
+     * @param kaart
+     */
     public void legWedstrijdkaart(Kaart kaart) {
         if (actief.getWedstrijdStapel().size() >= 0) {
             actief.voegKaartVanWedstrijdStapelToeAanSpelbord(kaart);
@@ -182,12 +257,19 @@ public class Wedstrijd {
         }
     }
 
+    /**
+     *
+     */
     public void bevriesSpelbord() {
         if (actief.isSpelbordBevroren() == false) {
             actief.setSpelbordBevroren(true);
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public Speler geefUitslag() {
         int scoreSpeler1 = speler1.getScore();
         int scoreSpeler2 = speler2.getScore();

@@ -25,14 +25,28 @@ public class Speler {
     private int score;
     private boolean spelbordBevroren;
 
+    /**
+     *
+     * @return
+     */
     public boolean isBeschikbaar() {
         return beschikbaar;
     }
 
+    /**
+     *
+     * @param beschikbaar
+     */
     public void setBeschikbaar(boolean beschikbaar) {
         this.beschikbaar = beschikbaar;
     }
 
+    /**
+     *
+     * @param gebruikersnaam
+     * @param geboortejaar
+     * @param krediet
+     */
     public Speler(String gebruikersnaam, int geboortejaar, double krediet) {
 
         wedstrijdStapel = new ArrayList<>();
@@ -44,43 +58,84 @@ public class Speler {
         beschikbaar = true;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getGebruikersnaam() {
         return gebruikersnaam;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getKrediet() {
         return krediet;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isSpelbordBevroren() {
         return spelbordBevroren;
     }
 
+    /**
+     *
+     * @param krediet
+     */
     public void setKrediet(double krediet) {
         this.krediet = krediet;
     }
 
+    /**
+     *
+     * @param spelbordBevroren
+     */
     public void setSpelbordBevroren(boolean spelbordBevroren) {
         this.spelbordBevroren = spelbordBevroren;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getGeboortejaar() {
         return geboortejaar;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Kaart> getWedstrijdStapel() {
         return wedstrijdStapel;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getScore() {
         return score;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Kaart> getSpelbord() {
         return spelbord;
     }
     
     //nog een methode voor de spelebord score
+
+    /**
+     *
+     * @return
+     */
     
     public int berekenScoreSpelbord(){
         //berekenscore
@@ -88,6 +143,11 @@ public class Speler {
     }
 
     //later doen met reguliere expresies.
+
+    /**
+     *
+     * @param gebruikersnaam
+     */
     public void controleerGebruikersnaam(String gebruikersnaam) {
         if (gebruikersnaam.length() < 3) {
             throw new IllegalArgumentException("naam_te_kort");
@@ -113,6 +173,10 @@ public class Speler {
         }
     }
 
+    /**
+     *
+     * @param geboortejaar
+     */
     public void controleerLeeftijd(int geboortejaar) {
         int leeftijd = Calendar.getInstance().get(Calendar.YEAR) - geboortejaar;
         if (leeftijd < 6) {
@@ -122,10 +186,18 @@ public class Speler {
         }
     }
 
+    /**
+     *
+     * @param lijst
+     */
     public void setStartStapel(List<Kaart> lijst) {
         kaartLijst = lijst;
     }
 
+    /**
+     *
+     * @param bovensteKaart
+     */
     public void voegBovensteKaartVanSetStapelToeAanSpelbord(Kaart bovensteKaart) {
         if (spelbord.size() < 9) {
             spelbord.add(bovensteKaart);
@@ -133,12 +205,21 @@ public class Speler {
     }
 
     //kunnen samengevoegd worden
+
+    /**
+     *
+     * @param kaart
+     */
     public void voegKaartVanWedstrijdStapelToeAanSpelbord(Kaart kaart) {
         if (spelbord.size() < 9) {
             spelbord.add(kaart);
         }
     }
 
+    /**
+     *
+     * @param kaart
+     */
     public void verwijderKaartVanWedstrijdStapel(Kaart kaart) {
         for (Kaart k : wedstrijdStapel) {
             if (k.getOmschrijving().equals(kaart.getOmschrijving())) {
@@ -148,14 +229,26 @@ public class Speler {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Kaart> getKaartLijst() {
         return kaartLijst;
     }
 
+    /**
+     *
+     * @param kaart
+     */
     public void voegKaartToe(Kaart kaart) {
         kaartLijst.add(kaart);
     }
 
+    /**
+     *
+     * @param selectie
+     */
     public void maakWedstrijdStapel(List<String> selectie) {
         kaartLijst.forEach((kaart) -> {
             for (int i = 0; i < selectie.size(); i++) {
