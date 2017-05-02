@@ -20,22 +20,22 @@ public class Set {
     private int setRonde;
 
     /**
-     *
+     * Default constructor
      */
     public Set() {
 
     }
 
     /**
-     *
+     * 
      */
     public void maakSetStapel() {
 
     }
 
     /**
-     *
-     * @return
+     * Bepaalt de actieve speler
+     * @return String naam van de actieve speler
      */
     public String bepaalActieveSpeler() {
         String actieveSpeler = null;

@@ -40,7 +40,7 @@ public class Kaart {
     
     /**
      * Geeft de omschrijving van de kaart
-     * @return
+     * @return String omschrijving van de kaart
      */
     public String getOmschrijving() {
         return omschrijving;
@@ -48,15 +48,15 @@ public class Kaart {
 
     /**
      * Geeft de type van de kaart
-     * @return type van de kaart
+     * @return String type van de kaart
      */
     public String getType() {
         return type;
     }
 
     /**
-     *
-     * @return
+     * Geeft de waarde van de kaart
+     * @return String waarde van de kaart
      */
     public String getWaarde() {
         return waarde;
