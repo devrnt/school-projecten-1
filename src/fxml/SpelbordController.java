@@ -50,28 +50,29 @@ public class SpelbordController implements Initializable{
         saveButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                //toDo venster maken waar ze naam vragen
+                dc.bewaarWedstrijd("");
             }
         });
         
         wisselButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                //hand herschrijven naar specifieke kaarten die gewisseld kunnen worden, dan terug schrijven naar de normale hand
             }
         });
         
         endTurnButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                
+                //beëindig beurt, updaten setcounter en score van spelers, spelbord van spelers
             }
         });
         
         passButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                //todo bevriezen van de speler, en beurt beeindig
             }
         });
     }

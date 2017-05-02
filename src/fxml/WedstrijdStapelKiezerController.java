@@ -6,9 +6,12 @@
 package fxml;
 
 import domein.DomeinController;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -18,6 +21,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -26,6 +30,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -48,9 +53,11 @@ public class WedstrijdStapelKiezerController implements Initializable {
     public Button returnButton;
 
     private DomeinController dc;
+    private AnchorPane main;
 
-    public WedstrijdStapelKiezerController(DomeinController dc) {
+    public WedstrijdStapelKiezerController(DomeinController dc, AnchorPane main) {
         this.dc = dc;
+        this.main = main;
     }
 
     @Override
@@ -205,7 +212,18 @@ public class WedstrijdStapelKiezerController implements Initializable {
         nextButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                //volgende scherm
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/spelbord.fxml"));
+                    loader.setResources(dc.getTaal().getBundle());
+                    SpelbordController ctrl = new SpelbordController(dc);
+                    loader.setController(ctrl);
+                    AnchorPane content = loader.load();
+                    main.getChildren().clear();
+                    main.getChildren().add(content);
+                } catch (IOException ex) {
+                    Logger.getLogger(SpelerKiezerController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
             }
         });
     }

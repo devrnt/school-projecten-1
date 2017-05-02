@@ -81,7 +81,7 @@ public class SpelerKiezerController implements Initializable {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/wedstrijdstapelKiezer.fxml"));
                     loader.setResources(dc.getTaal().getBundle());
-                    WedstrijdStapelKiezerController ctrl = new WedstrijdStapelKiezerController(dc);
+                    WedstrijdStapelKiezerController ctrl = new WedstrijdStapelKiezerController(dc, main);
                     loader.setController(ctrl);
                     AnchorPane content = loader.load();
                     main.getChildren().clear();
