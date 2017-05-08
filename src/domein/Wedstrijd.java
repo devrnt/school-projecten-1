@@ -25,23 +25,23 @@ public class Wedstrijd {
     private int aantalSets;
 
     /**
-     *
-     * @return
+     * Geeft de winnaar
+     * @return Speler winnaar
      */
     public Speler getWinnaar() {
         return winnaar;
     }
 
     /**
-     *
+     * Default constructor
      */
     public Wedstrijd() {
 
     }
 
     /**
-     *
-     * @param speler
+     * Registreert de speler
+     * @param speler speler
      */
     public void registreerSpeler(Speler speler) {
         if (speler != null) {
@@ -56,8 +56,8 @@ public class Wedstrijd {
     }
 
     /**
-     *
-     * @return
+     * Geeft de geregistreerde spelers
+     * @return lijst van alle geregistreerde spelers
      */
     public List<String> geefGeregistreerdeSpelers() {
         List<String> lijst = new ArrayList<>();
@@ -71,16 +71,16 @@ public class Wedstrijd {
     }
 
     /**
-     *
-     * @return
+     * Geeft de actieve speler
+     * @return actieve speler
      */
     public String geefActieveSpeler() {
         return actief.getGebruikersnaam();
     }
 
     /**
-     *
-     * @return
+     * Geeft de spelers zonder een wedstrijdstapel
+     * @return lijst van spelers zonder wedstrijdstapel
      */
     public List<String> geefSpelersZonderWedstrijdStapel() {
         List<String> lijst = new ArrayList<>();
@@ -94,18 +94,18 @@ public class Wedstrijd {
     }
 
     /**
-     *
-     * @param naam
-     * @param selectie
+     * Maakt een wedstrijdstapel
+     * @param naam naam van de speler
+     * @param selectie selectie van de speler
      */
     public void maakWedstrijdStapel(String naam, List<String> selectie) {
         geefSpeler(naam).maakWedstrijdStapel(selectie);
     }
 
     /**
-     *
-     * @param naam
-     * @param gekochteKaart
+     * Voegt de betaalde kaarten toe aan de startstapel
+     * @param naam van de speler
+     * @param gekochteKaart kaart die de speler heeft gekocht
      */
     public void voegBetaaldeKaartenToeAanStartStapel(String naam, Kaart gekochteKaart) {
 
@@ -114,14 +114,14 @@ public class Wedstrijd {
     }
 
     /**
-     *
+     * Verhoogt het krediet van de winnaar met 5
      */
     public void verhoogKrediet() {
         winnaar.setKrediet(winnaar.getKrediet() + 5);
     }
 
     /**
-     *
+     * Bepaald Speler Aan de Beurt van de eerste set
      */
     public void bepaalSpelerAanDeBeurtEersteSet() {
         int huidigJaar = Calendar.getInstance().get(Calendar.YEAR);
@@ -145,7 +145,7 @@ public class Wedstrijd {
     }
 
     /**
-     *
+     * Bepaald speler aan de beurt van de volgende set
      */
     public void bepaalSpelerAanDeBeurtVolgendeSet() {
         if (actief == speler1) {
@@ -156,9 +156,9 @@ public class Wedstrijd {
     }
 
     /**
-     *
-     * @param prijs
-     * @param speler
+     * Verminderd het krediet met de opgegeven hoeveelheid
+     * @param prijs aantal waarmee het krediet moet verminderd worden
+     * @param speler speler waarvan het krediet moet verminderd worden
      */
     public void verminderKrediet(double prijs, String speler) {
         geefSpeler(speler).setKrediet(geefSpeler(speler).getKrediet() - prijs);
@@ -167,9 +167,9 @@ public class Wedstrijd {
     // mehtode schrijven die speler retourneert op basis van de naam
 
     /**
-     *
-     * @param naam
-     * @return
+     * Geeft de speler
+     * @param naam naam van de speler
+     * @return speler
      */
     public Speler geefSpeler(String naam) {
         if (naam.equals(speler1.getGebruikersnaam())) {
@@ -181,9 +181,9 @@ public class Wedstrijd {
     }
 
     /**
-     *
-     * @param kaart
-     * @param speler
+     * Voegt een kaart toe aan de  startstapel
+     * @param kaart kaart die aan de startstapel moet worden toegevoegd
+     * @param speler speler
      */
     public void voegKaartToeAanStartStapel(Kaart kaart, String speler) {
         if (speler.equals(speler1.getGebruikersnaam())) {
@@ -194,7 +194,7 @@ public class Wedstrijd {
     }
 
     /**
-     *
+     * Maakt een setstapel
      */
     public void maakSetStapel() {
         setStapel = new ArrayList<>();
@@ -207,7 +207,7 @@ public class Wedstrijd {
     }
 
     /**
-     *
+     * Voegt de bovenste kaart van set stapel toe aan het spelbord
      */
     public void voegBovensteKaartVanSetStapelToeAanSpelbord() {
         actief.voegBovensteKaartVanSetStapelToeAanSpelbord(setStapel.get(0));
@@ -218,8 +218,8 @@ public class Wedstrijd {
     }
 
     /**
-     *
-     * @return
+     * Returned true als de set ten einde is
+     * @return true als de set ten einde is en false als de set niet ten einde is
      */
     public boolean setEinde() {
         if (speler1.getScore() > 20 || speler2.getScore() > 20) {
@@ -237,14 +237,14 @@ public class Wedstrijd {
     }
 
     /**
-     *
+     * beeindigd de beurt
      */
     public void beeindigBeurt() {
         //nog schrijven
     }
 
     /**
-     *
+     * 
      * @param kaart
      */
     public void legWedstrijdkaart(Kaart kaart) {
@@ -255,7 +255,7 @@ public class Wedstrijd {
     }
 
     /**
-     *
+     * Bevriest het spelbord
      */
     public void bevriesSpelbord() {
         if (actief.isSpelbordBevroren() == false) {
@@ -264,8 +264,8 @@ public class Wedstrijd {
     }
 
     /**
-     *
-     * @return
+     * Geeft de winnaar van de set
+     * @return winnaar van de set
      */
     public Speler geefUitslag() {
         int scoreSpeler1 = speler1.getScore();

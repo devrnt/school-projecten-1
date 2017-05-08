@@ -17,33 +17,33 @@ public class WedstrijdRepository {
     private WedstrijdMapper mapper;
     
     /**
-     *
+     * Default constructor
      */
     public WedstrijdRepository(){
         mapper = new WedstrijdMapper();
     }
     
     /**
-     *
-     * @param naam
-     * @param wedstrijd
+     * Bewaart De wedstrijd
+     * @param naam naam van de speler
+     * @param wedstrijd naam van de wedstrijd
      */
     public void bewaarWedstrijd(String naam, Wedstrijd wedstrijd){
         mapper.bewaarWedstrijd(naam, wedstrijd);
     }
     
     /**
-     *
-     * @return
+     * Toont de lijst van wedstrijden
+     * @return lijst van wedstrijden
      */
     public List<String> toonLijstWedstrijden(){
         return mapper.toonWedstrijdLijst();
     }
     
     /**
-     *
-     * @param naam
-     * @return
+     * Laad de wedstrijd
+     * @param naam van de speler die de wedstrijd wil laden
+     * @return wedstrijd
      */
     public Wedstrijd laadWedstrijd(String naam){
         return null;

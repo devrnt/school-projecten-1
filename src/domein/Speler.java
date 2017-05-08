@@ -26,16 +26,16 @@ public class Speler {
     private boolean spelbordBevroren;
 
     /**
-     *
-     * @return
+     * Return true als de speler beschikbaar is en false als de speler niet beschikbaar is
+     * @return true als de speler beschikbaar is en false als de speler niet beschikbaar is
      */
     public boolean isBeschikbaar() {
         return beschikbaar;
     }
 
     /**
-     *
-     * @param beschikbaar
+     * Zet de beschikbaarheid op true of false
+     * @param beschikbaar boolean of de speler beschikbaar is of niet
      */
     public void setBeschikbaar(boolean beschikbaar) {
         this.beschikbaar = beschikbaar;
@@ -43,9 +43,9 @@ public class Speler {
 
     /**
      *
-     * @param gebruikersnaam
-     * @param geboortejaar
-     * @param krediet
+     * @param gebruikersnaam gebruikersnaam van de speler
+     * @param geboortejaar geboortejaar van de speler
+     * @param krediet krediet van de speler
      */
     public Speler(String gebruikersnaam, int geboortejaar, double krediet) {
 
@@ -59,72 +59,72 @@ public class Speler {
     }
 
     /**
-     *
-     * @return
+     * Geeft de gebruikersnaam van de speler
+     * @return String gebruikersnaam van de speler
      */
     public String getGebruikersnaam() {
         return gebruikersnaam;
     }
 
     /**
-     *
-     * @return
+     * Geeft het krediet van de speler
+     * @return int krediet
      */
     public double getKrediet() {
         return krediet;
     }
 
     /**
-     *
-     * @return
+     * Returned true als het spelbord is bevroren en false als het spelbord niet is bevroren
+     * @return true als het spelbord is bevroren en false als het spelbord niet is bevroren
      */
     public boolean isSpelbordBevroren() {
         return spelbordBevroren;
     }
 
     /**
-     *
-     * @param krediet
+     * Setter van krediet
+     * @param krediet krediet van de speler
      */
     public void setKrediet(double krediet) {
         this.krediet = krediet;
     }
 
     /**
-     *
-     * @param spelbordBevroren
+     * setter van spelbordbevroren
+     * @param spelbordBevroren boolean of het spelbord is bevroren of niet
      */
     public void setSpelbordBevroren(boolean spelbordBevroren) {
         this.spelbordBevroren = spelbordBevroren;
     }
 
     /**
-     *
-     * @return
+     * Geeft het geboortejaar van de speler
+     * @return int geboortejaar van de speler
      */
     public int getGeboortejaar() {
         return geboortejaar;
     }
 
     /**
-     *
-     * @return
+     * Geeft de wedstrijdstapel van de speler
+     * @return lijst van de wedstrijdstapel
      */
     public List<Kaart> getWedstrijdStapel() {
         return wedstrijdStapel;
     }
 
     /**
-     *
-     * @return
+     * Geeft de score van de speler
+     * @return int score van de speler
      */
     public int getScore() {
         return score;
     }
 
     /**
-     *
-     * @return
+     * Geeft het spelbord
+     * @return lijst van kaarten dat het spelbord van de speler is
      */
     public List<Kaart> getSpelbord() {
         return spelbord;
@@ -133,8 +133,8 @@ public class Speler {
     //nog een methode voor de spelebord score
 
     /**
-     *
-     * @return
+     * Berekend de score van het spelbord
+     * @return int score
      */
     
     public int berekenScoreSpelbord(){
@@ -145,8 +145,9 @@ public class Speler {
     //later doen met reguliere expresies.
 
     /**
-     *
-     * @param gebruikersnaam
+     * Controleert de gebruikersnaam
+     * @param gebruikersnaam gebruikersnaam van de speler
+     * @exception illegalArgumentException Wanneer de invoer verkeerd is
      */
     public void controleerGebruikersnaam(String gebruikersnaam) {
         if (gebruikersnaam.length() < 3) {
@@ -174,8 +175,9 @@ public class Speler {
     }
 
     /**
-     *
-     * @param geboortejaar
+     * Controleert de leeftijd
+     * @param geboortejaar geboortejaar van de speler
+     * @exception illegalArgumentException Wanneer de invoer verkeerd is
      */
     public void controleerLeeftijd(int geboortejaar) {
         int leeftijd = Calendar.getInstance().get(Calendar.YEAR) - geboortejaar;
@@ -187,16 +189,16 @@ public class Speler {
     }
 
     /**
-     *
-     * @param lijst
+     * Setter van de startstapel
+     * @param lijst lijst van kaarten
      */
     public void setStartStapel(List<Kaart> lijst) {
         kaartLijst = lijst;
     }
 
     /**
-     *
-     * @param bovensteKaart
+     * Voegt de bovenste kaart van set stapel toe aan spelbord
+     * @param bovensteKaart bovendstekaart
      */
     public void voegBovensteKaartVanSetStapelToeAanSpelbord(Kaart bovensteKaart) {
         if (spelbord.size() < 9) {
@@ -207,8 +209,8 @@ public class Speler {
     //kunnen samengevoegd worden
 
     /**
-     *
-     * @param kaart
+     * Voegt de meegegeven kaart van wedstrijdstapel toe aan spelbord
+     * @param kaart kaart
      */
     public void voegKaartVanWedstrijdStapelToeAanSpelbord(Kaart kaart) {
         if (spelbord.size() < 9) {
@@ -217,8 +219,8 @@ public class Speler {
     }
 
     /**
-     *
-     * @param kaart
+     * Verwijderd de meegegeven kaart van de wedstrijdstapel
+     * @param kaart kaart
      */
     public void verwijderKaartVanWedstrijdStapel(Kaart kaart) {
         for (Kaart k : wedstrijdStapel) {
@@ -230,15 +232,15 @@ public class Speler {
     }
 
     /**
-     *
-     * @return
+     * Geeft de KaartLijst
+     * @return lijst van kaarten
      */
     public List<Kaart> getKaartLijst() {
         return kaartLijst;
     }
 
     /**
-     *
+     * Voegt kaart toe aan kaartlijst
      * @param kaart
      */
     public void voegKaartToe(Kaart kaart) {
@@ -246,7 +248,7 @@ public class Speler {
     }
 
     /**
-     *
+     * Maakt een WedstrijdStapel
      * @param selectie
      */
     public void maakWedstrijdStapel(List<String> selectie) {

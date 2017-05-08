@@ -14,7 +14,7 @@ public class SpelerRepository {
     private List<Speler> spelers;   //kan ook met een map gedaan worden, (naam, speler)
 
     /**
-     *
+     * Default constructor
      */
     public SpelerRepository() {
         mapper = new SpelerMapper();
@@ -23,8 +23,8 @@ public class SpelerRepository {
     }
 
     /**
-     *
-     * @param speler
+     * Voegt een nieuwe speler toe
+     * @param speler speler
      */
     public void voegSpelerToe(Speler speler) {
         if (bestaatSpeler(speler.getGebruikersnaam())) {
@@ -44,7 +44,7 @@ public class SpelerRepository {
     }
 
     /**
-     *
+     * Geeft een lijst van alle beschikbare spelers
      * @return
      */
     public List<String> geefLijstBeschikbareSpelers() {
@@ -56,9 +56,9 @@ public class SpelerRepository {
     }
 
     /**
-     *
-     * @param gebruikersnaam
-     * @return
+     * Geeft de speler aan de hand van de gebruikersnaam
+     * @param gebruikersnaam gebruikersnaam van de speler
+     * @return Speler
      */
     public Speler geefSpeler(String gebruikersnaam){
         for(Speler speler: spelers){
@@ -68,8 +68,8 @@ public class SpelerRepository {
     }
     
     /**
-     *
-     * @param speler
+     * Update de Speler
+     * @param speler speler
      */
     public void updateSpeler(Speler speler){
         mapper.updateSpeler(speler); 
