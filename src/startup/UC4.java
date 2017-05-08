@@ -45,7 +45,9 @@ public class UC4 {
                         wilKaartKopen = input.nextInt(); //INPUTMISMATCH MOGELIJKHEID
                         done = true;
                     } catch (InputMismatchException e) {
-                        System.err.println("Not a valid input. Error: " + e.getMessage());
+                        System.err.println(dc.getTaal().getVertaling("integer_input") + " Error: " + e.getMessage());
+                        System.out.print(" > ");
+                        input.nextLine();
                     }
                 }
             }
@@ -64,7 +66,9 @@ public class UC4 {
                             keuze = input.nextInt() - 1;
                             done = true;
                         } catch (InputMismatchException e) {
-                            System.err.println("Not a valid input. Error: " + e.getMessage());
+                            System.err.println(dc.getTaal().getVertaling("integer_input") + " Error: " + e.getMessage());
+                            System.out.print(" > ");
+                            input.nextLine();
                         }
                     }
                 }

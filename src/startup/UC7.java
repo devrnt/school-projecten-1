@@ -45,7 +45,9 @@ public class UC7 {
                         keuze = input.nextInt() - 1;
                         done = true;
                     } catch (InputMismatchException e) {
-                        System.err.println("Not a valid input. Error: " + e.getMessage());
+                        System.err.println(dc.getTaal().getVertaling("integer_input") + " Error: " + e.getMessage());
+                        System.out.print(" > ");
+                        input.nextLine();
                     }
                 }
             }
@@ -77,7 +79,9 @@ public class UC7 {
                         nogEenKaartKopen = input.nextInt();
                         done = true;
                     } catch (InputMismatchException e) {
-                        System.err.println("Not a valid input. Error: " + e.getMessage());
+                        System.err.println(dc.getTaal().getVertaling("integer_input") + " Error: " + e.getMessage());
+                        System.out.print(" > ");
+                        input.nextLine();
                     }
                 }
             } while (nogEenKaartKopen < 1 || nogEenKaartKopen > 2);
