@@ -120,6 +120,28 @@ public class DomeinController {
         return wedstrijd.geefSpelersZonderWedstrijdStapel();
     }
 
+    public List<String> geefWedstrijdStapel(String naam){
+        List <Kaart> wedstrijdStapel = wedstrijd.geefSpeler(naam).getWedstrijdStapel();
+        List <String> output = new ArrayList<>();
+        for(Kaart krt : wedstrijdStapel){
+            output.add(krt.getOmschrijving());
+        }
+        return output;
+        
+        
+    }
+    
+    public void legWedstrijdkaart(String kaart){
+//        Kaart kaartWed = 
+
+        
+//        wedstrijd.legWedstrijdkaart(kaart);//nog aanpassen
+    }
+ 
+    
+    public String geefActieveSpeler(){
+        return wedstrijd.geefActieveSpeler();
+    }
     /*public List<String> registreerSpeler(String gebruikersnaam){
         Speler speler = spelerRepository.geefSpeler(gebruikersnaam);
         if(speler != null && geregistreerdeSpelers.size() < 2){
@@ -144,6 +166,7 @@ public class DomeinController {
 
         return output;
     }
+    
 
     /**
      * Geeft het aantal kaarten in de wedstrijdstapel
@@ -218,6 +241,7 @@ public class DomeinController {
         });
         return output1;
     }
+    
 
     /**
      * Voegt de betaalde kaart van de speler toe aan zijn startstapel
@@ -237,6 +261,7 @@ public class DomeinController {
      * Maakt een setStapel
      */
     public void maakSetStapel() {
+        
        wedstrijd.maakSetStapel();
     }
     
@@ -268,5 +293,57 @@ public class DomeinController {
     public void laadWedstrijd(String naam){
         wedstrijd = wedstrijdRepository.laadWedstrijd(naam);
     }
+    
+    public void voegBovensteKaartVanSetStapelToeAanSpelbord(){
+        wedstrijd.voegBovensteKaartVanSetStapelToeAanSpelbord();
+    }
+    
+    public List<String> geefSpelbord(String speler){
+//        List <Kaart> spelbord = speler.getSpelbord();
+        List <Kaart> spelbord = wedstrijd.geefSpeler(speler).getSpelbord();
+
+        List <String> output=new ArrayList<>();
+        for(Kaart krt: spelbord){
+            output.add(krt.getOmschrijving());
+            
+        }
+        return output;
+    }
+    
+    public void bepaalSpelerAanDeBeurtEersteSet(){
+        wedstrijd.bepaalSpelerAanDeBeurtEersteSet();
+    }
+    
+    public List<String> geefSetStapel(){
+        List<String> output = new ArrayList<>();
+        for(Kaart kaart : wedstrijd.geefSetStapel()){
+            output.add(kaart.getOmschrijving());
+        }
+        return output;
+    }
+    
+    
+    
+    public int geefSetScore(String naam){
+        return wedstrijd.geefSpeler(naam).getSetScore();
+    }
+    
+    public void beeindigBeurt(){
+        wedstrijd.beeindigBeurt();
+    }
+    
+    
+    public void bevriesSpelbord(){
+        wedstrijd.bevriesSpelbord();
+    }
+    
+    public boolean setEinde(){
+        return wedstrijd.setEinde()==true;
+    }
+    
+    public void geefUitslag(){
+        wedstrijd.geefUitslag();
+    }
+    
     
 }

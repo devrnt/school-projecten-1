@@ -26,6 +26,7 @@ public class UC6 {
 
         while (dc.setEinde() == false) {
             dc.bepaalSpelerAanDeBeurtEersteSet();
+            //controle set
 
             String spelerAanBeurt = dc.geefActieveSpeler();
 

@@ -22,8 +22,9 @@ public class Speler {
 
     private List<Kaart> spelbord;    //max 9 kaarten
     private List<Kaart> wedstrijdStapel;
-    private int score;
+    private int setScore;
     private boolean spelbordBevroren;
+    private int spelbordScore;
 
     /**
      * Return true als de speler beschikbaar is en false als de speler niet beschikbaar is
@@ -118,8 +119,8 @@ public class Speler {
      * Geeft de score van de speler
      * @return int score van de speler
      */
-    public int getScore() {
-        return score;
+    public int getSetScore() {
+        return setScore;
     }
 
     /**
@@ -129,7 +130,7 @@ public class Speler {
     public List<Kaart> getSpelbord() {
         return spelbord;
     }
-    
+
     //nog een methode voor de spelebord score
 
     /**
@@ -173,6 +174,8 @@ public class Speler {
             throw new IllegalArgumentException("start_cijfer");
         }
     }
+    
+    
 
     /**
      * Controleert de leeftijd
@@ -215,6 +218,17 @@ public class Speler {
     public void voegKaartVanWedstrijdStapelToeAanSpelbord(Kaart kaart) {
         if (spelbord.size() < 9) {
             spelbord.add(kaart);
+        int scoreKaart = Integer.parseInt(kaart.getWaarde());
+        if(kaart.getType().equals("-")){
+            spelbordScore = spelbordScore - scoreKaart;
+        } else if(kaart.getType().equals("+")){
+            spelbordScore = spelbordScore + scoreKaart;
+        } else{
+            //spelbordScore = spelbordScore +/- scoreKaart
+        }
+        } else {
+            throw new IllegalArgumentException("Spelbord is vol");
+
         }
     }
 
@@ -223,10 +237,15 @@ public class Speler {
      * @param kaart kaart
      */
     public void verwijderKaartVanWedstrijdStapel(Kaart kaart) {
-        for (Kaart k : wedstrijdStapel) {
-            if (k.getOmschrijving().equals(kaart.getOmschrijving())) {
-                wedstrijdStapel.remove(kaart);
+        if (wedstrijdStapel.size() > 0) {
+            for (Kaart k : wedstrijdStapel) {
+                if (k.getOmschrijving().equals(kaart.getOmschrijving())) {
+                    wedstrijdStapel.remove(kaart);
+                }
+
             }
+        } else {
+            throw new IllegalArgumentException("je hebt geen wedstrijdstapel");
 
         }
     }
@@ -267,4 +286,15 @@ public class Speler {
 
         }
     }
+
+    public int getSpelbordScore() {
+        return spelbordScore;
+    }
+
+    public void setSetScore(int setScore) {
+        this.setScore = setScore;
+    }
+    
+    
+
 }

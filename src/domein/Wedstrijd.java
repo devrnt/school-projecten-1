@@ -6,7 +6,6 @@
 package domein;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
@@ -26,6 +25,7 @@ public class Wedstrijd {
 
     /**
      * Geeft de winnaar
+     *
      * @return Speler winnaar
      */
     public Speler getWinnaar() {
@@ -41,6 +41,7 @@ public class Wedstrijd {
 
     /**
      * Registreert de speler
+     *
      * @param speler speler
      */
     public void registreerSpeler(Speler speler) {
@@ -55,8 +56,13 @@ public class Wedstrijd {
         }
     }
 
+    public List<Kaart> geefSetStapel() {
+        return setStapel;
+    }
+
     /**
      * Geeft de geregistreerde spelers
+     *
      * @return lijst van alle geregistreerde spelers
      */
     public List<String> geefGeregistreerdeSpelers() {
@@ -72,6 +78,7 @@ public class Wedstrijd {
 
     /**
      * Geeft de actieve speler
+     *
      * @return actieve speler
      */
     public String geefActieveSpeler() {
@@ -80,6 +87,7 @@ public class Wedstrijd {
 
     /**
      * Geeft de spelers zonder een wedstrijdstapel
+     *
      * @return lijst van spelers zonder wedstrijdstapel
      */
     public List<String> geefSpelersZonderWedstrijdStapel() {
@@ -95,6 +103,7 @@ public class Wedstrijd {
 
     /**
      * Maakt een wedstrijdstapel
+     *
      * @param naam naam van de speler
      * @param selectie selectie van de speler
      */
@@ -104,6 +113,7 @@ public class Wedstrijd {
 
     /**
      * Voegt de betaalde kaarten toe aan de startstapel
+     *
      * @param naam van de speler
      * @param gekochteKaart kaart die de speler heeft gekocht
      */
@@ -124,6 +134,7 @@ public class Wedstrijd {
      * Bepaald Speler Aan de Beurt van de eerste set
      */
     public void bepaalSpelerAanDeBeurtEersteSet() {
+
         int huidigJaar = Calendar.getInstance().get(Calendar.YEAR);
 
         int leeftijdSpeler1 = huidigJaar - speler1.getGeboortejaar();
@@ -144,19 +155,27 @@ public class Wedstrijd {
         }
     }
 
-    /**
-     * Bepaald speler aan de beurt van de volgende set
-     */
-    public void bepaalSpelerAanDeBeurtVolgendeSet() {
-        if (actief == speler1) {
-            actief = speler2;
-        } else {
+    public void bepaalSpelerAanBeurtVolgende() {
+        if (speler2.isSpelbordBevroren() == true) {
             actief = speler1;
         }
+        if (aantalSets % 2 != 0) {
+            bepaalSpelerAanDeBeurtEersteSet();
+        }
+        if (aantalSets % 2 == 0) {
+            if (actief == speler1) {
+                actief = speler2;
+            } else {
+                actief = speler1;
+            }
+        }
+
     }
+    //methode volgende set bepaal actieve speler
 
     /**
      * Verminderd het krediet met de opgegeven hoeveelheid
+     *
      * @param prijs aantal waarmee het krediet moet verminderd worden
      * @param speler speler waarvan het krediet moet verminderd worden
      */
@@ -165,9 +184,9 @@ public class Wedstrijd {
     }
 
     // mehtode schrijven die speler retourneert op basis van de naam
-
     /**
      * Geeft de speler
+     *
      * @param naam naam van de speler
      * @return speler
      */
@@ -181,7 +200,8 @@ public class Wedstrijd {
     }
 
     /**
-     * Voegt een kaart toe aan de  startstapel
+     * Voegt een kaart toe aan de startstapel
+     *
      * @param kaart kaart die aan de startstapel moet worden toegevoegd
      * @param speler speler
      */
@@ -204,13 +224,14 @@ public class Wedstrijd {
             }
         }
         Collections.shuffle(setStapel);
+
     }
 
     /**
      * Voegt de bovenste kaart van set stapel toe aan het spelbord
      */
     public void voegBovensteKaartVanSetStapelToeAanSpelbord() {
-        actief.voegBovensteKaartVanSetStapelToeAanSpelbord(setStapel.get(0));
+        actief.voegBovensteKaartVanSetStapelToeAanSpelbord(setStapel.get(0));//zet dit uit om te testen of het werkt in test.java
 
         /* hieronder staat het als het een list van kaarten moet zijn */
         //actief.setStartStapel((List<Kaart>) setStapel.get(0)); //cast oke?
@@ -219,10 +240,12 @@ public class Wedstrijd {
 
     /**
      * Returned true als de set ten einde is
-     * @return true als de set ten einde is en false als de set niet ten einde is
+     *
+     * @return true als de set ten einde is en false als de set niet ten einde
+     * is
      */
     public boolean setEinde() {
-        if (speler1.getScore() > 20 || speler2.getScore() > 20) {
+        if (speler1.getSpelbordScore() > 20 || speler2.getSpelbordScore() > 20) {
             return true;
         }
         if (speler1.getSpelbord().size() >= 9 || speler2.getSpelbord().size() >= 9) {
@@ -240,11 +263,13 @@ public class Wedstrijd {
      * beeindigd de beurt
      */
     public void beeindigBeurt() {
-        //nog schrijven
+        bepaalSpelerAanDeBeurt();
+        voegBovensteKaartVanSetStapelToeAanSpelbord();
+
     }
 
     /**
-     * 
+     *
      * @param kaart
      */
     public void legWedstrijdkaart(Kaart kaart) {
@@ -258,39 +283,81 @@ public class Wedstrijd {
      * Bevriest het spelbord
      */
     public void bevriesSpelbord() {
-        if (actief.isSpelbordBevroren() == false) {
+        if (!actief.isSpelbordBevroren()) {
             actief.setSpelbordBevroren(true);
         }
     }
 
-    /**
-     * Geeft de winnaar van de set
-     * @return winnaar van de set
-     */
-    public Speler geefUitslag() {
-        int scoreSpeler1 = speler1.getScore();
-        int scoreSpeler2 = speler2.getScore();
+    public void bepaalSpelerAanDeBeurt() {
+        if (speler1.isSpelbordBevroren() == true) {
+            actief = speler2;
+            
+            
+            
+        } if(speler2.isSpelbordBevroren()==true) {
+            actief = speler1;
+        }
+           int scoreSpeler = speler1.getSpelbordScore();
+           int scoreSpeler = speler2.getSpelbordScore();
+            
 
-        int aantalKaartenSpelbordSpeler1 = speler1.getWedstrijdStapel().size();
-        int aantalKaartenSpelbordSpeler2 = speler2.getWedstrijdStapel().size();
+            int aantalKaartenSpelbordSpeler1 = speler1.getWedstrijdStapel().size();
+            int aantalKaartenSpelbordSpeler2 = speler2.getWedstrijdStapel().size();
 
-        boolean bSpeler1;
-        boolean bSpeler2;
-
-        if (aantalKaartenSpelbordSpeler1 == 9 || aantalKaartenSpelbordSpeler2 == 9) {
-            if (aantalKaartenSpelbordSpeler1 == 9) {
+            if (aantalKaartenSpelbordSpeler1 == 9 && aantalKaartenSpelbordSpeler2 != 9) {
                 if (scoreSpeler1 <= 20) {
-                    return speler1;
+                    winnaar = speler1;
                 }
             }
-            if (aantalKaartenSpelbordSpeler2 == 9) {
-                if (scoreSpeler2 <= 20) {
-                    return speler2;
-                }
 
+            if (aantalKaartenSpelbordSpeler2 == 9 && aantalKaartenSpelbordSpeler1 != 9) {
+                if (scoreSpeler2 <= 20) {
+                    winnaar = speler2;
+                }
+            }
+
+            if (aantalKaartenSpelbordSpeler1 < 9 && aantalKaartenSpelbordSpeler2 < 9) {
+                if (scoreSpeler1 > scoreSpeler2) {
+                    winnaar = speler1;
+                } else if (scoreSpeler2 == scoreSpeler1) {
+                    winnaar = null;
+                } else {
+                    winnaar = speler2;
+                }
+            }
+            if (winnaar == speler1) {
+                int huidigeScore = speler1.getSetScore();
+                int nieuweScore = huidigeScore++;
+                speler1.setSetScore(nieuweScore);
+            }
+
+            if (winnaar == speler2) {
+                int huidigeScore = speler2.getSetScore();
+                int nieuweScore = huidigeScore++;
+                speler2.setSetScore(nieuweScore);
             }
         }
 
-        return actief;//tijdelijk
+    
+
+    public Speler getSpeler1() {
+        return speler1;
     }
+
+    public Speler getSpeler2() {
+        return speler2;
+    }
+
+    /**
+     * Geeft de winnaar van de set
+     *
+     * @return winnaar van de set
+     */
+    public Speler geefUitslag() {
+        int scoreSpeler1 = speler1.getSpelbordScore();
+        int scoreSpeler2 = speler2.getSpelbordScore();
+        return winnaar;
+    }
+
+   
 }
