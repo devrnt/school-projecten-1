@@ -9,6 +9,7 @@ import domein.DomeinController;
 import domein.Speler;
 import domein.SpelerRepository;
 import domein.Wedstrijd;
+
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +22,7 @@ public class test {
 
     public static void main(String[] args) {
         DomeinController dc = new DomeinController();
+         
 
         try {
             Class.forName("com.mysql.jdbc.Driver");

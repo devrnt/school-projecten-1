@@ -135,7 +135,7 @@ public class DomeinController {
 //        Kaart kaartWed = 
 
         
-//        wedstrijd.legWedstrijdkaart(kaart);//nog aanpassen
+ //       wedstrijd.legWedstrijdkaart(kaart); nog aanpassen van string naar kaart
     }
  
     
@@ -314,12 +314,20 @@ public class DomeinController {
         wedstrijd.bepaalSpelerAanDeBeurtEersteSet();
     }
     
+    public void bepaalSpelerAanVolgendeBeurt(){
+        wedstrijd.bepaalSpelerAanVolgendeBeurt();
+    }
+    
     public List<String> geefSetStapel(){
         List<String> output = new ArrayList<>();
         for(Kaart kaart : wedstrijd.geefSetStapel()){
             output.add(kaart.getOmschrijving());
         }
         return output;
+    }
+    
+    public int getAantalSets(){
+        return wedstrijd.getAantalSets();
     }
     
     
@@ -338,7 +346,7 @@ public class DomeinController {
     }
     
     public boolean setEinde(){
-        return wedstrijd.setEinde()==true;
+        return wedstrijd.setEinde();
     }
     
     public void geefUitslag(){

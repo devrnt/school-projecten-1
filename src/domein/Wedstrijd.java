@@ -76,6 +76,12 @@ public class Wedstrijd {
         return lijst;
     }
 
+    public int getAantalSets() {
+        return aantalSets;
+    }
+    
+    
+
     /**
      * Geeft de actieve speler
      *
@@ -155,10 +161,14 @@ public class Wedstrijd {
         }
     }
 
-    public void bepaalSpelerAanBeurtVolgende() {
+    public void bepaalSpelerAanVolgendeBeurt() {
         if (speler2.isSpelbordBevroren() == true) {
             actief = speler1;
         }
+        if(speler1.isSpelbordBevroren()== true){
+            actief = speler2;
+        }
+        
         if (aantalSets % 2 != 0) {
             bepaalSpelerAanDeBeurtEersteSet();
         }
@@ -263,9 +273,7 @@ public class Wedstrijd {
      * beeindigd de beurt
      */
     public void beeindigBeurt() {
-        bepaalSpelerAanDeBeurt();
-        voegBovensteKaartVanSetStapelToeAanSpelbord();
-
+        bepaalSpelerAanVolgendeBeurt();
     }
 
     /**
@@ -273,7 +281,8 @@ public class Wedstrijd {
      * @param kaart
      */
     public void legWedstrijdkaart(Kaart kaart) {
-        if (actief.getWedstrijdStapel().size() >= 0) {
+       
+        if (actief.getWedstrijdStapel().size() > 0) {
             actief.voegKaartVanWedstrijdStapelToeAanSpelbord(kaart);
             actief.verwijderKaartVanWedstrijdStapel(kaart);
         }
@@ -288,16 +297,6 @@ public class Wedstrijd {
         }
     }
 
-    public void bepaalSpelerAanDeBeurt() {
-        if (speler1.isSpelbordBevroren() == true) {
-            actief = speler2;
-
-        }
-        if (speler2.isSpelbordBevroren() == true) {
-            actief = speler1;
-        }
-
-    }
 
     public Speler getSpeler1() {
         return speler1;
