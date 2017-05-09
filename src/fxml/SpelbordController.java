@@ -48,15 +48,16 @@ public class SpelbordController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        dc.bepaalSpelerAanDeBeurtEersteSet();
 
         saveButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 //toDo venster maken waar ze naam vragen | L
                 saveButton.getParent().setDisable(true);
-                Label saveLabel = new Label("Temporary"); //"Geef de naam om op te slaan"
+                Label saveLabel = new Label(dc.getTaal().getVertaling("save_label")); //"Geef de naam om op te slaan"
                 TextField saveInput = new TextField(); //input
-                Button acceptButton = new Button("Also temporary"); // button om het te bevestigen
+                Button acceptButton = new Button(dc.getTaal().getVertaling("opslaan")); // button om het te bevestigen
                 Stage popup = new Stage();
                 acceptButton.disableProperty().bind(Bindings.isEmpty(saveInput.textProperty()));
                 acceptButton.setOnAction(new EventHandler<ActionEvent>() {
