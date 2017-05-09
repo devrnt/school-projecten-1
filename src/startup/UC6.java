@@ -121,11 +121,50 @@ public class UC6 {
                         }
                     }
                 }
-//              dc.legWedstrijdkaart(wedstrijdStapel.equals(wedstrijdStapel.get(i)); METHODE SCHRIJVEN VOOR wedstrijdkaart te leggen op vna string naar Kaart
-                dc.legWedstrijdkaart(wedstrijdStapel.get(kaartKeuze));
+
+                int keuzeType = 3;
+
+                if (dc.geefKaartType(wedstrijdStapel.get(kaartKeuze)).equals("+/-")) {
+                    boolean succes = false;
+                    System.out.printf("Wilt u de min gebruiken plus gebruiken");
+                    while (!succes) {
+                        do {
+                            System.out.printf("1. + ");
+                            System.out.printf("2. - ");
+                            try {
+
+                                keuzeType = input.nextInt();
+                                succes = true;
+                            } catch (InputMismatchException ex) {
+                                System.err.print("Geef een getal in");
+                                System.out.print(" > ");
+                                input.nextInt();
+                            }
+                        } while (keuzeType < 0 || keuzeType > 2);
+
+                    }
+                }
+
+                dc.legWedstrijdkaart(wedstrijdStapel.get(kaartKeuze), keuzeType);
                 System.out.println("%nDe kaart werd toegevoegd aan het spelbord.");
                 //nog de wedstrijdsituatie tonen
-                
+                for (int i = 0; i < spelers.size(); i++) {
+                    System.out.printf("%nDit is het spelbord van %s", spelers.get(i));
+                    for (int k = 0; k < dc.geefSpelbord(spelers.get(i)).size(); k++) {
+                        System.out.printf("%d) %s%n", i + 1, dc.geefSpelbord(spelers.get(i)));
+                    }
+
+                    System.out.printf("----------------");
+                    System.out.printf("%nsetscore van speler %s: %d%n", spelers.get(i), dc.geefSetScore(spelers.get(i)));
+
+                    System.out.printf("Dit is de wedstrijdstapel van %s", spelers.get(i));
+
+                    for (int k = 0; k < dc.geefWedstrijdStapel(spelers.get(i)).size(); k++) {
+                        System.out.printf("%d) %s%n", i + 1, dc.geefWedstrijdStapel(spelers.get(i)));
+                    }
+
+                }
+
                 //DE SPELER KIEST EEN WISSEL????
             }
 

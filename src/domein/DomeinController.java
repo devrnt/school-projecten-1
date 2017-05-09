@@ -131,11 +131,22 @@ public class DomeinController {
         
     }
     
-    public void legWedstrijdkaart(String kaart){
-//        Kaart kaartWed = 
-
+    public void legWedstrijdkaart(String kaart, int keuze){
         
- //       wedstrijd.legWedstrijdkaart(kaart); nog aanpassen van string naar kaart
+        for(Kaart krt : alleKaarten){
+            if(krt.getOmschrijving().equals(kaart));
+            wedstrijd.legWedstrijdkaart(krt, keuze);
+        }
+        
+    }
+    
+    public String geefKaartType(String kaart){
+        String kaartType="";
+        for(Kaart krt: alleKaarten){
+            if(krt.getOmschrijving().equals(kaart));
+            kaartType = krt.getType();
+        }
+        return kaartType;
     }
  
     
