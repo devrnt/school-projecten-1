@@ -74,6 +74,7 @@ public class WedstrijdStapelKiezerController implements Initializable {
         spelerView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+                if(spelerView.getSelectionModel().getSelectedItem() != null){
                 GridPane grid = new GridPane();
                 for (int i = 0; i < 4; i++) {
                     grid.getColumnConstraints().add(new ColumnConstraints(84));
@@ -118,7 +119,7 @@ public class WedstrijdStapelKiezerController implements Initializable {
                 }
 
                 scrollPane.setContent(grid);
-
+            }
             }
         });
 
