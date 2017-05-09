@@ -83,6 +83,6 @@ public class UC3 {
             //System.out.println(dc.getTaal().getVertaling("geregistreerde_spelers"));
             //spelers.forEach((naam)->{ System.out.println(naam); });
         }
-
+        UC5.testUC5(dc);
     }
 }
