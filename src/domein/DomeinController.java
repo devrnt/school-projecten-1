@@ -363,5 +363,7 @@ public class DomeinController {
         wedstrijd.geefUitslag();
     }
     
-    
+    public Speler geefSpeler(String naam){
+        return wedstrijd.geefSpeler(naam);
+    }
 }
