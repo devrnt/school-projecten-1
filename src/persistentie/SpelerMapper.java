@@ -128,7 +128,7 @@ public class SpelerMapper {
             PreparedStatement idQuery = conn.prepareStatement("SELECT spelerID FROM ID222177_g14.Speler WHERE gebruikersnaam = ?");
             idQuery.setString(1, speler.getGebruikersnaam());
             int id;
-            try (ResultSet rs = query.executeQuery()) {
+            try (ResultSet rs = idQuery.executeQuery()) {
                 id = rs.getInt("spelerID");
             }
             
