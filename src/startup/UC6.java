@@ -21,13 +21,13 @@ public class UC6 {
         int speler1ScoreSetVoorSpel = dc.geefSetScore(dc.geefGeregistreerdeSpelers().get(0));
         int speler2ScoreSetVoorSpel = dc.geefSetScore(dc.geefGeregistreerdeSpelers().get(1));
 
-        System.out.println("Dit is begin setstapel");
-        int index = 1;
-
-        for (String kaart : dc.geefSetStapel()) {
-            System.out.printf("%d) %s%n", index, kaart);
-            index++;
-        }
+//        System.out.println("Dit is begin setstapel");
+//        int index = 1;
+//
+//        for (String kaart : dc.geefSetStapel()) {
+//            System.out.printf("%d) %s%n", index, kaart);
+//            index++;
+//        }
         //mijn vraag: is het attr in wedstrijd aantalsets de bedoeling dat het blijft doorlopen 
         //of stopt het bij elke ronde? anders-->
         while (dc.setEinde() == false) {

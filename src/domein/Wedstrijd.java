@@ -343,7 +343,13 @@ public class Wedstrijd {
                 speler2.setSetScore(setScore + 1);
             } //gelijkspel wordt afgehandeld in de dc
         }
-
+        
+        
+        if(speler1.getSetScore()>2){
+            winnaar = speler1;
+        } else if(speler2.getSetScore()>2){
+            winnaar = speler2;
+        }
     }
 
 }

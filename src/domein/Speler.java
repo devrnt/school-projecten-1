@@ -252,7 +252,7 @@ public class Speler {
             spelbord.add(kaart);
 
         } else {
-            throw new IllegalArgumentException("Spelbord is vol");
+            throw new IllegalArgumentException("spelbord_vol");
 
         }
     }
@@ -271,7 +271,7 @@ public class Speler {
 
             }
         } else {
-            throw new IllegalArgumentException("je hebt geen wedstrijdstapel");
+            throw new IllegalArgumentException("geen_wedstrijdstapel");
 
         }
     }
