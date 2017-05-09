@@ -319,48 +319,29 @@ public class Wedstrijd {
         if (aantalKaartenSpelbordSpeler1 == 9 && aantalKaartenSpelbordSpeler2 != 9) {
 
             if (scoreSpeler1 <= 20) {
-                int setScore = winnaar.getSetScore();
-                winnaar = speler1;
-                winnaar.setSetScore(setScore++);
+                int setScore = speler1.getSetScore();
+                speler1.setSetScore(setScore++);
             }
         }
 
         if (aantalKaartenSpelbordSpeler2 == 9 && aantalKaartenSpelbordSpeler1 != 9) {
 
             if (scoreSpeler2 <= 20) {
-                int setScore = winnaar.getSetScore();
+                int setScore = speler2.getSetScore();
 
-                winnaar = speler2;
-                winnaar.setSetScore(setScore++);
+                speler2.setSetScore(setScore++);
 
             }
         }
 
         if (aantalKaartenSpelbordSpeler1 < 9 && aantalKaartenSpelbordSpeler2 < 9) {
             if (scoreSpeler1 > scoreSpeler2) {
-                int setScore = winnaar.getSetScore();
-                winnaar = speler1;
-                winnaar.setSetScore(setScore++);
-            } else if (scoreSpeler2 == scoreSpeler1) {
-                
-                winnaar = null;
-                speler1.setSetScore(speler1.getSetScore()+1);
-                speler2.setSetScore(speler2.getSetScore()+1);
+                int setScore = speler1.getSetScore();
+                speler1.setSetScore(setScore++);
             } else {
-                winnaar = speler2;
-                winnaar.setSetScore(winnaar.getSetScore()+1);
-            }
-        }
-        if (winnaar == speler1) {
-            int huidigeScore = speler1.getSetScore();
-            int nieuweScore = huidigeScore++;
-            speler1.setSetScore(nieuweScore);
-        }
-
-        if (winnaar == speler2) {
-            int huidigeScore = speler2.getSetScore();
-            int nieuweScore = huidigeScore++;
-            speler2.setSetScore(nieuweScore);
+                int setScore = speler2.getSetScore();
+                speler2.setSetScore(setScore + 1);
+            } //gelijkspel wordt afgehandeld in de dc
         }
 
     }

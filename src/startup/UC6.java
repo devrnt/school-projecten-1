@@ -18,6 +18,9 @@ public class UC6 {
 
         //test of setstapel werkt.
         //
+        int speler1ScoreSetVoorSpel = dc.geefSetScore(dc.geefGeregistreerdeSpelers().get(0));
+        int speler2ScoreSetVoorSpel = dc.geefSetScore(dc.geefGeregistreerdeSpelers().get(1));
+
         System.out.println("Dit is begin setstapel");
         int index = 1;
 
@@ -172,6 +175,23 @@ public class UC6 {
                 dc.bevriesSpelbord();
             }
         }
+
+        int speler1ScoreSetNaSpel = dc.geefSetScore(dc.geefGeregistreerdeSpelers().get(0));
+        int speler2ScoreSetNaSpel = dc.geefSetScore(dc.geefGeregistreerdeSpelers().get(1));
+
+        String speler1 = dc.geefGeregistreerdeSpelers().get(0);
+        String speler2 = dc.geefGeregistreerdeSpelers().get(1);
+
+        if (speler1ScoreSetNaSpel > speler2ScoreSetNaSpel) {
+
+            System.out.printf("De winnaar van de set is %s", speler1);
+        }
+        if (speler1ScoreSetNaSpel < speler2ScoreSetNaSpel) {
+            System.out.printf("De winnaar van de set is %s", speler2);
+        }
+        if((speler1ScoreSetNaSpel - speler1ScoreSetVoorSpel) == (speler2ScoreSetNaSpel - speler2ScoreSetVoorSpel)){
+            System.out.printf("Er is een gelijkspel, jullie zijn beide winnaars.");
+        }//als vorige score gelijk is aan huidige
 
         dc.geefUitslag();
 
