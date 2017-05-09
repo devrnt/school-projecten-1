@@ -25,11 +25,12 @@ public class UC9 {
             System.out.println(i + 1 + " " + wedstrijdLijst.get(i));
         }
         System.out.printf(" > ");
-        int keuze = in.nextInt() - 1;
+        int keuze = in.nextInt() - 1; //input controle, try catch
         System.out.println();
         
         dc.laadWedstrijd(wedstrijdLijst.get(keuze));
         System.out.println(dc.getTaal().getVertaling("laden_gelukt"));
+        UC5.testUC5(dc);
         //nu UC5 oproepen?
     }
 }
