@@ -30,7 +30,7 @@ public class UC6 {
 //        }
         //mijn vraag: is het attr in wedstrijd aantalsets de bedoeling dat het blijft doorlopen 
         //of stopt het bij elke ronde? anders-->
-        while (dc.setEinde() == false) {
+        while (!dc.setEinde()) {
             dc.bepaalSpelerAanVolgendeBeurt();
             //eigenlijk mag de dc.bepaalSpelerAanEersteBeurt weg !!
 

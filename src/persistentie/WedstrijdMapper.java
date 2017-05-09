@@ -159,7 +159,7 @@ public class WedstrijdMapper {
                 while (rs.next()) {                    
                     omschrijvingSpeler2 = rs.getString("omschrijving");
                 }
-            }
+            } 
       
         } catch (SQLException ex) {
             throw new RuntimeException(ex);

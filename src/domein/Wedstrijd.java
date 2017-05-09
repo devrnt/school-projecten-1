@@ -160,23 +160,35 @@ public class Wedstrijd {
     }
 
     public void bepaalSpelerAanVolgendeBeurt() {
-        if (speler2.isSpelbordBevroren() == true) {
+        if (speler2.isSpelbordBevroren()) {
+            actief = speler1;
+            return;
+        }
+        if (speler1.isSpelbordBevroren()) {
+            actief = speler2;
+            return;
+        }
+        if (aantalSets == 0) {
+            bepaalSpelerAanDeBeurtEersteSet();
+            return;
+        }
+        if (actief == speler1) {
+            actief = speler2;
+        } else {
             actief = speler1;
         }
-        if (speler1.isSpelbordBevroren() == true) {
-            actief = speler2;
-        }
-
+        /*
         if (aantalSets % 2 != 0) {
             bepaalSpelerAanDeBeurtEersteSet();
         }
         if (aantalSets % 2 == 0) {
-            if (actief == speler1) {
+                    if (actief == speler1) {
                 actief = speler2;
             } else {
                 actief = speler1;
             }
         }
+         */
 
     }
     //methode volgende set bepaal actieve speler
@@ -259,11 +271,10 @@ public class Wedstrijd {
         if (speler1.getSpelbord().size() >= 9 || speler2.getSpelbord().size() >= 9) {
             return true;
         }
-        if (speler1.isSpelbordBevroren() == true && speler2.isSpelbordBevroren() == true) {
+        if (speler1.isSpelbordBevroren() && speler2.isSpelbordBevroren()) {
             return true;
-        } else {
-            return false;
         }
+        return false;
 
     }
 
@@ -343,11 +354,10 @@ public class Wedstrijd {
                 speler2.setSetScore(setScore + 1);
             } //gelijkspel wordt afgehandeld in de dc
         }
-        
-        
-        if(speler1.getSetScore()>2){
+
+        if (speler1.getSetScore() > 2) {
             winnaar = speler1;
-        } else if(speler2.getSetScore()>2){
+        } else if (speler2.getSetScore() > 2) {
             winnaar = speler2;
         }
     }
