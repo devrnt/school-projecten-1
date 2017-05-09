@@ -19,6 +19,7 @@ public class Card {
     private boolean selected;
     private String omschrijving;
     
+    //ui object
     public Card(String omschrijving, String kleur) {
         StackPane innerpane = new StackPane();
         innerpane.setMinSize(0, 0);
