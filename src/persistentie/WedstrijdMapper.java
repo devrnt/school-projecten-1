@@ -102,11 +102,65 @@ public class WedstrijdMapper {
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL)) {
             PreparedStatement query = conn.prepareStatement("SELECT * FROM ID222177_g14.Wedstrijd WHERE naam = ?");
             query.setString(1, naam);
+            int aantalSets;
             try (ResultSet rs = query.executeQuery()) {
-                while (rs.next()) {
-
+                while (rs.next()) {                    
+                    aantalSets = rs.getInt("aantalSets");
                 }
             }
+            
+            PreparedStatement queryScoreSpeler1 = conn.prepareStatement("SELECT score FROM ID222177_g14.Score WHERE naam = ?");
+            queryScoreSpeler1.setString(1, naam);            
+            int scoreSpeler1;
+            int spelerIDSpeler1 = 0;
+            try (ResultSet rs = query.executeQuery()) {
+                while (rs.next()) {                    
+                    scoreSpeler1 = rs.getInt("score");
+                    spelerIDSpeler1 = rs.getInt("spelerID");
+                }
+            }
+            
+            PreparedStatement queryScoreSpeler2 = conn.prepareStatement("SELECT spelerID, score FROM ID222177_g14.Score WHERE naam = ?");
+            queryScoreSpeler2.setString(1, naam);            
+            int scoreSpeler2;
+            int spelerIDSpeler2 = 0;
+            try (ResultSet rs = query.executeQuery()) {
+                while (rs.next()) {                    
+                    scoreSpeler2 = rs.getInt("score");
+                    spelerIDSpeler2 = rs.getInt("spelerID");
+                }
+            }
+            
+            PreparedStatement querySpelerNaam = conn.prepareStatement("SELECT gebruikersnaam FROM ID222177_g14.Speler WHERE spelerID =  ?");
+            querySpelerNaam.setInt(1, spelerIDSpeler1);
+            String naamSpeler1;            
+            try (ResultSet rs = querySpelerNaam.executeQuery()) {
+                naamSpeler1 = rs.getString("gebruikersnaam");
+            }
+            querySpelerNaam.setInt(1, spelerIDSpeler2);
+            String naamSpeler2;
+            try (ResultSet rs = querySpelerNaam.executeQuery()) {
+                naamSpeler2 = rs.getString("gebruikersnaam");
+            }
+            
+            PreparedStatement queryStapelSpeler1 = conn.prepareStatement("SELECT omschrijving FROM ID222177_g14.Wedstrijdstapel WHERE naam = ?");
+            queryScoreSpeler1.setString(1, naam);
+            String omschrijvingSpeler1;
+            try (ResultSet rs = query.executeQuery()) {
+                while (rs.next()) {                 
+                    omschrijvingSpeler1 = rs.getString("omschrijving");
+                }
+            }
+            
+            PreparedStatement queryStapelSpeler2 = conn.prepareStatement("SELECT omschrijving FROM ID222177_g14.Wedstrijdstapel WHERE naam = ?");
+            queryStapelSpeler2.setString(1, naam);
+            String omschrijvingSpeler2;
+            try (ResultSet rs = query.executeQuery()) {
+                while (rs.next()) {                    
+                    omschrijvingSpeler2 = rs.getString("omschrijving");
+                }
+            }
+      
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
