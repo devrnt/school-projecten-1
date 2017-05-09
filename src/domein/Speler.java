@@ -219,7 +219,7 @@ public class Speler {
      * @param bovensteKaart bovendstekaart
      */
     public void voegBovensteKaartVanSetStapelToeAanSpelbord(Kaart bovensteKaart) {
-        if (spelbord.size() < 9) {
+        if (getSpelbord().size() < 9) {
             spelbord.add(bovensteKaart);
         }
     }
@@ -232,7 +232,7 @@ public class Speler {
      * @param keuze
      */
     public void voegKaartVanWedstrijdStapelToeAanSpelbord(Kaart kaart, int keuze) {
-        if (spelbord.size() < 9) {
+        if (getSpelbord().size() < 9) {
             int scoreKaart = Integer.parseInt(kaart.getWaarde());
             switch (keuze) {
                 case 3:
@@ -251,7 +251,8 @@ public class Speler {
             }
             spelbord.add(kaart);
 
-        } else {
+        } 
+        else {
             throw new IllegalArgumentException("spelbord_vol");
 
         }

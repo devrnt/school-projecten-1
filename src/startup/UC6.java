@@ -47,34 +47,55 @@ public class UC6 {
             List<String> spelers = dc.geefGeregistreerdeSpelers();
 
             for (int i = 0; i < spelers.size(); i++) {
-                System.out.printf("%nDit is het spelbord van %s", spelers.get(i));
-                for (int k = 0; k < dc.geefSpelbord(spelers.get(i)).size(); k++) {
-                    System.out.printf("%d) %s%n", i + 1, dc.geefSpelbord(spelers.get(i)));
+                System.out.println("------------------------");
+                System.out.println("------------------------");
+                if (dc.geefSpelbord(spelers.get(i)).isEmpty()) {
+                    System.out.printf("%n" + " %s " + dc.getTaal().getVertaling("spelbord"), spelers.get(i));
+                } else {
+                    System.out.printf(dc.getTaal().getVertaling("spelbord_not_empty") + " %n" +  spelers.get(i));
+
+                    List<String> spelbord = dc.geefSpelbord(spelers.get(i));
+
+                    for (int k = 0; k < spelbord.size(); k++) {
+                        System.out.println(k + 1 + ") " + spelbord.get(k));
+                    }
+
+//                    for (int k = 0; k < dc.geefSpelbord(spelers.get(i)).size(); k++) {
+//                        System.out.printf("%d) %s%n", k + 1, dc.geefSpelbord(spelers.get(i)));
+//                        //wordt nog niet goed getoond
+//                        //ik denk dat forlus weg mag
+//                    }
                 }
 
-                System.out.printf("----------------");
-                System.out.printf("%nsetscore van speler %s: %d%n", spelers.get(i), dc.geefSetScore(spelers.get(i)));
+                System.out.printf("----------------%n");
+                System.out.printf(dc.getTaal().getVertaling("setscore") + " %s: %d%n", spelers.get(i), dc.geefSetScore(spelers.get(i)));
 
-                System.out.printf("Dit is de wedstrijdstapel van %s", spelers.get(i));
+                System.out.printf(dc.getTaal().getVertaling("wedstrijd_stapel") + " %s%n", spelers.get(i));
 
-                for (int k = 0; k < dc.geefWedstrijdStapel(spelers.get(i)).size(); k++) {
-                    System.out.printf("%d) %s%n", i + 1, dc.geefWedstrijdStapel(spelers.get(i)));
+                List<String> wedstrijdStapel = dc.geefWedstrijdStapel(spelers.get(i));
+
+                for (int k = 0; k < wedstrijdStapel.size(); k++) {
+                    System.out.println(k + 1 + ") " + wedstrijdStapel.get(k));
                 }
+
+                System.out.println("");
+                System.out.println("");
 
             }
 
             String spelerAanBeurt = dc.geefActieveSpeler();
-            System.out.printf("De actieve speler is %s%n", spelerAanBeurt);
+            System.out.printf(dc.getTaal().getVertaling("actieve_speler") + "%s%n", spelerAanBeurt);
             System.out.printf("-----------------%n");
 
-            System.out.printf("Wat wilt u doen, %s? (antwoord met het bijhorende cijfer)%n", spelerAanBeurt);
+            System.out.printf(dc.getTaal().getVertaling("speler_aan_beurt_keuze") + " %s?%n", spelerAanBeurt);
 
             Scanner input = new Scanner(System.in);
             int menuKeuze = 0;
-            System.out.println("1. Beëindig beurt%n");
-            System.out.println("2. Gebruik wedstrijdkaart%n");
-            System.out.println("3. Bevries spelbord%n");
-            System.out.println(" > ");
+//            System.out.println(dc.getTaal().getVertaling("kaart_kopen"));
+            System.out.println("1. " + dc.getTaal().getVertaling("beëindig_beurt"));
+            System.out.println("2. " + dc.getTaal().getVertaling("gebruik_wedstrijdkaart"));
+            System.out.println("3. " + dc.getTaal().getVertaling("bevries_spelbord"));
+            System.out.print(" > ");
 
             //ook mogelijk om menu niet altijd opnieuw te tonen
             while (menuKeuze < 1 || menuKeuze > 3) {
@@ -84,41 +105,44 @@ public class UC6 {
                         menuKeuze = input.nextInt();
                         succes = true;
                     } catch (InputMismatchException ex) {
-                        System.err.println("Geef een getal in");
+                        System.err.println(dc.getTaal().getVertaling("integer_input") + " Error: " + ex.getMessage());
                         System.out.print(" > ");
-                        input.nextLine();//is dit nodig?
+                        input.nextLine();
 
                     }
                 }
             }
 
             if (menuKeuze == 1) {
-                dc.beeindigBeurt();
-                //return
+                dc.beeindigBeurt();//werkt nog niet
+                return;
             }
             if (menuKeuze == 2) {
                 int kaartKeuze = -1;
-                System.out.println("Dit is je huidige wedstrijdstapel:%n");
+
+                System.out.println(dc.getTaal().getVertaling("huidige_wedstrijd_stapel") + " ");
                 List<String> wedstrijdStapel = dc.geefWedstrijdStapel(spelerAanBeurt);
                 if (wedstrijdStapel.size() > 0) {
                     for (int i = 0; i < wedstrijdStapel.size(); i++) {
                         System.out.printf("%d) %s%n", i + 1, wedstrijdStapel.get(i));
                     }
                 } else {
-                    System.out.println("Je hebt geen kaarten in je wedstrijdstapel.");
+                    System.out.println(dc.getTaal().getVertaling("geen_wedstrijdstapem_uc6"));
+
                 }
 
-                System.out.println("Welke kaart wil je opleggen:");
+                System.out.println(dc.getTaal().getVertaling("kaart_opleggen") + ": ");
+
                 while (kaartKeuze < 0 || kaartKeuze >= wedstrijdStapel.size()) {
                     boolean succes = false;
-                    System.out.printf("Maak uw keuze(typ het cijfer)%n");
+                    System.out.println(dc.getTaal().getVertaling("keuze_kaart_opleggen"));
                     System.out.print(" > ");
                     while (!succes) {
                         try {
                             kaartKeuze = input.nextInt() - 1;
                             succes = true;
                         } catch (InputMismatchException ex) {
-                            System.err.print("Geef een getal in");
+                            System.err.println(dc.getTaal().getVertaling("integer_input") + " Error: " + ex.getMessage());
                             System.out.print(" > ");
                             input.nextLine();
                         }
@@ -126,20 +150,21 @@ public class UC6 {
                 }
 
                 int keuzeType = 3;
-
+                //geefKaartType klopt niet
                 if (dc.geefKaartType(wedstrijdStapel.get(kaartKeuze)).equals("+/-")) {
                     boolean succes = false;
-                    System.out.printf("Wilt u de min gebruiken plus gebruiken");
+                    System.out.println(dc.getTaal().getVertaling("kaarttype_gebruiken"));
                     while (!succes) {
                         do {
-                            System.out.printf("1. + ");
-                            System.out.printf("2. - ");
+                            System.out.println(dc.getTaal().getVertaling("keuze_kaart_opleggen"));
+                            System.out.println("1. + ");
+                            System.out.println("2. - ");
                             try {
 
                                 keuzeType = input.nextInt();
                                 succes = true;
                             } catch (InputMismatchException ex) {
-                                System.err.print("Geef een getal in");
+                                System.err.println(dc.getTaal().getVertaling("integer_input") + " Error: " + ex.getMessage());
                                 System.out.print(" > ");
                                 input.nextInt();
                             }
@@ -147,28 +172,45 @@ public class UC6 {
 
                     }
                 }
-
+                //legWedstrijdkaart herbekijken
                 dc.legWedstrijdkaart(wedstrijdStapel.get(kaartKeuze), keuzeType);
-                System.out.println("%nDe kaart werd toegevoegd aan het spelbord.");
-                //nog de wedstrijdsituatie tonen
+                System.out.println(dc.getTaal().getVertaling("kaart_toegevoegd_aan_spelbord"));
+
                 for (int i = 0; i < spelers.size(); i++) {
-                    System.out.printf("%nDit is het spelbord van %s", spelers.get(i));
-                    for (int k = 0; k < dc.geefSpelbord(spelers.get(i)).size(); k++) {
-                        System.out.printf("%d) %s%n", i + 1, dc.geefSpelbord(spelers.get(i)));
+                    System.out.println("------------------------");
+                    System.out.println("------------------------");
+                    if (dc.geefSpelbord(spelers.get(i)).isEmpty()) {
+                        System.out.printf("%n" + " %s%n" + dc.getTaal().getVertaling("spelbord"), spelers.get(i));
+                    } else {
+                        System.out.printf(dc.getTaal().getVertaling("spelbord_not_empty") + spelers.get(i));
+
+                        List<String> spelbord = dc.geefSpelbord(spelers.get(i));
+
+                        for (int k = 0; k < spelbord.size(); k++) {
+                            System.out.println(k + 1 + ") " + spelbord.get(k));
+                        }
+
+//                    for (int k = 0; k < dc.geefSpelbord(spelers.get(i)).size(); k++) {
+//                        System.out.printf("%d) %s%n", k + 1, dc.geefSpelbord(spelers.get(i)));
+//                        //wordt nog niet goed getoond
+//                        //ik denk dat forlus weg mag
+//                    }
                     }
 
-                    System.out.printf("----------------");
-                    System.out.printf("%nsetscore van speler %s: %d%n", spelers.get(i), dc.geefSetScore(spelers.get(i)));
+                    System.out.printf("----------------%n");
+                    System.out.printf(dc.getTaal().getVertaling("setscore") + " %s: %d%n", spelers.get(i), dc.geefSetScore(spelers.get(i)));
 
-                    System.out.printf("Dit is de wedstrijdstapel van %s", spelers.get(i));
+                    System.out.printf(dc.getTaal().getVertaling("wedstrijd_stapel") + " %s%n", spelers.get(i));
 
-                    for (int k = 0; k < dc.geefWedstrijdStapel(spelers.get(i)).size(); k++) {
-                        System.out.printf("%d) %s%n", i + 1, dc.geefWedstrijdStapel(spelers.get(i)));
+                    for (int k = 0; k < wedstrijdStapel.size(); k++) {
+                        System.out.println(k + 1 + ") " + wedstrijdStapel.get(k));
                     }
+
+                    System.out.println("");
+                    System.out.println("");
 
                 }
 
-                //DE SPELER KIEST EEN WISSEL????
             }
 
             if (menuKeuze == 3) {
@@ -189,7 +231,7 @@ public class UC6 {
         if (speler1ScoreSetNaSpel < speler2ScoreSetNaSpel) {
             System.out.printf("De winnaar van de set is %s", speler2);
         }
-        if((speler1ScoreSetNaSpel - speler1ScoreSetVoorSpel) == (speler2ScoreSetNaSpel - speler2ScoreSetVoorSpel)){
+        if ((speler1ScoreSetNaSpel - speler1ScoreSetVoorSpel) == (speler2ScoreSetNaSpel - speler2ScoreSetVoorSpel)) {
             System.out.printf("Er is een gelijkspel, jullie zijn beide winnaars.");
         }//als vorige score gelijk is aan huidige
 

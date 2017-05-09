@@ -130,8 +130,9 @@ public class DomeinController {
         
     }
     
+    
     public void legWedstrijdkaart(String kaart, int keuze){
-        
+        //herbekijken
         for(Kaart krt : alleKaarten){
             if(krt.getOmschrijving().equals(kaart));
             wedstrijd.legWedstrijdkaart(krt, keuze);
