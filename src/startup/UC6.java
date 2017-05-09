@@ -25,7 +25,7 @@ public class UC6 {
             System.out.printf("%d) %s%n", index, kaart);
             index++;
         }
-        //mijn vraag: is het attr in wedstrijd aantalsets de bedoeling dat het blijft doorlopen
+        //mijn vraag: is het attr in wedstrijd aantalsets de bedoeling dat het blijft doorlopen 
         //of stopt het bij elke ronde? anders-->
         while (dc.setEinde() == false) {
             dc.bepaalSpelerAanVolgendeBeurt();
