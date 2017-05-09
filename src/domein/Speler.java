@@ -22,13 +22,16 @@ public class Speler {
 
     private List<Kaart> spelbord;    //max 9 kaarten
     private List<Kaart> wedstrijdStapel;
-    private int setScore;
+    private int setScore =0;
     private boolean spelbordBevroren;
-    private int spelbordScore;
+    private int spelbordScore =0;
 
     /**
-     * Return true als de speler beschikbaar is en false als de speler niet beschikbaar is
-     * @return true als de speler beschikbaar is en false als de speler niet beschikbaar is
+     * Return true als de speler beschikbaar is en false als de speler niet
+     * beschikbaar is
+     *
+     * @return true als de speler beschikbaar is en false als de speler niet
+     * beschikbaar is
      */
     public boolean isBeschikbaar() {
         return beschikbaar;
@@ -36,6 +39,7 @@ public class Speler {
 
     /**
      * Zet de beschikbaarheid op true of false
+     *
      * @param beschikbaar boolean of de speler beschikbaar is of niet
      */
     public void setBeschikbaar(boolean beschikbaar) {
@@ -61,6 +65,7 @@ public class Speler {
 
     /**
      * Geeft de gebruikersnaam van de speler
+     *
      * @return String gebruikersnaam van de speler
      */
     public String getGebruikersnaam() {
@@ -69,6 +74,7 @@ public class Speler {
 
     /**
      * Geeft het krediet van de speler
+     *
      * @return int krediet
      */
     public double getKrediet() {
@@ -76,8 +82,11 @@ public class Speler {
     }
 
     /**
-     * Returned true als het spelbord is bevroren en false als het spelbord niet is bevroren
-     * @return true als het spelbord is bevroren en false als het spelbord niet is bevroren
+     * Returned true als het spelbord is bevroren en false als het spelbord niet
+     * is bevroren
+     *
+     * @return true als het spelbord is bevroren en false als het spelbord niet
+     * is bevroren
      */
     public boolean isSpelbordBevroren() {
         return spelbordBevroren;
@@ -85,6 +94,7 @@ public class Speler {
 
     /**
      * Setter van krediet
+     *
      * @param krediet krediet van de speler
      */
     public void setKrediet(double krediet) {
@@ -93,6 +103,7 @@ public class Speler {
 
     /**
      * setter van spelbordbevroren
+     *
      * @param spelbordBevroren boolean of het spelbord is bevroren of niet
      */
     public void setSpelbordBevroren(boolean spelbordBevroren) {
@@ -101,6 +112,7 @@ public class Speler {
 
     /**
      * Geeft het geboortejaar van de speler
+     *
      * @return int geboortejaar van de speler
      */
     public int getGeboortejaar() {
@@ -109,6 +121,7 @@ public class Speler {
 
     /**
      * Geeft de wedstrijdstapel van de speler
+     *
      * @return lijst van de wedstrijdstapel
      */
     public List<Kaart> getWedstrijdStapel() {
@@ -117,6 +130,7 @@ public class Speler {
 
     /**
      * Geeft de score van de speler
+     *
      * @return int score van de speler
      */
     public int getSetScore() {
@@ -125,6 +139,7 @@ public class Speler {
 
     /**
      * Geeft het spelbord
+     *
      * @return lijst van kaarten dat het spelbord van de speler is
      */
     public List<Kaart> getSpelbord() {
@@ -132,21 +147,20 @@ public class Speler {
     }
 
     //nog een methode voor de spelebord score
-
     /**
      * Berekend de score van het spelbord
+     *
      * @return int score
      */
-    
-    public int berekenScoreSpelbord(){
+    public int berekenScoreSpelbord() {
         //berekenscore
         return 0;
     }
 
     //later doen met reguliere expresies.
-
     /**
      * Controleert de gebruikersnaam
+     *
      * @param gebruikersnaam gebruikersnaam van de speler
      * @exception illegalArgumentException Wanneer de invoer verkeerd is
      */
@@ -174,11 +188,10 @@ public class Speler {
             throw new IllegalArgumentException("start_cijfer");
         }
     }
-    
-    
 
     /**
      * Controleert de leeftijd
+     *
      * @param geboortejaar geboortejaar van de speler
      * @exception illegalArgumentException Wanneer de invoer verkeerd is
      */
@@ -193,6 +206,7 @@ public class Speler {
 
     /**
      * Setter van de startstapel
+     *
      * @param lijst lijst van kaarten
      */
     public void setStartStapel(List<Kaart> lijst) {
@@ -201,6 +215,7 @@ public class Speler {
 
     /**
      * Voegt de bovenste kaart van set stapel toe aan spelbord
+     *
      * @param bovensteKaart bovendstekaart
      */
     public void voegBovensteKaartVanSetStapelToeAanSpelbord(Kaart bovensteKaart) {
@@ -210,22 +225,32 @@ public class Speler {
     }
 
     //kunnen samengevoegd worden
-
     /**
      * Voegt de meegegeven kaart van wedstrijdstapel toe aan spelbord
+     *
      * @param kaart kaart
+     * @param keuze
      */
-    public void voegKaartVanWedstrijdStapelToeAanSpelbord(Kaart kaart) {
+    public void voegKaartVanWedstrijdStapelToeAanSpelbord(Kaart kaart, int keuze) {
         if (spelbord.size() < 9) {
+            int scoreKaart = Integer.parseInt(kaart.getWaarde());
+            switch (keuze) {
+                case 3:
+                    if (kaart.getType().equals("-")) {
+                        spelbordScore = spelbordScore - scoreKaart;
+                    } else if (kaart.getType().equals("+")) {
+                        spelbordScore = spelbordScore + scoreKaart;
+                    }   break;
+                case 1://case 1 +
+                    spelbordScore = spelbordScore + scoreKaart;
+                    break;
+                case 2: //case 2 -
+                    spelbordScore = spelbordScore - scoreKaart;
+                    break;
+                
+            }
             spelbord.add(kaart);
-        int scoreKaart = Integer.parseInt(kaart.getWaarde());
-        if(kaart.getType().equals("-")){
-            spelbordScore = spelbordScore - scoreKaart;
-        } else if(kaart.getType().equals("+")){
-            spelbordScore = spelbordScore + scoreKaart;
-        } else{
-            //spelbordScore = spelbordScore +/- scoreKaart
-        }
+
         } else {
             throw new IllegalArgumentException("Spelbord is vol");
 
@@ -234,6 +259,7 @@ public class Speler {
 
     /**
      * Verwijderd de meegegeven kaart van de wedstrijdstapel
+     *
      * @param kaart kaart
      */
     public void verwijderKaartVanWedstrijdStapel(Kaart kaart) {
@@ -252,6 +278,7 @@ public class Speler {
 
     /**
      * Geeft de KaartLijst
+     *
      * @return lijst van kaarten
      */
     public List<Kaart> getKaartLijst() {
@@ -260,6 +287,7 @@ public class Speler {
 
     /**
      * Voegt kaart toe aan kaartlijst
+     *
      * @param kaart
      */
     public void voegKaartToe(Kaart kaart) {
@@ -268,6 +296,7 @@ public class Speler {
 
     /**
      * Maakt een WedstrijdStapel
+     *
      * @param selectie
      */
     public void maakWedstrijdStapel(List<String> selectie) {
@@ -294,7 +323,5 @@ public class Speler {
     public void setSetScore(int setScore) {
         this.setScore = setScore;
     }
-    
-    
 
 }
