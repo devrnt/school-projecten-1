@@ -25,6 +25,10 @@ import java.util.logging.Logger;
  */
 public class SpelerMapper {
 
+    /**
+     * Voegt een nieuwe speler toe aan de databank
+     * @param speler niewe speler
+     */
     public void voegToe(Speler speler) {
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL)) {
             PreparedStatement query = conn.prepareStatement("INSERT INTO ID222177_g14.Speler (gebruikersnaam, krediet, geboortejaar)"
@@ -40,6 +44,11 @@ public class SpelerMapper {
 
     }
 
+    /**
+     * Kijkt of de speler al bestaat in de databank
+     * @param gebruikersnaam
+     * @return
+     */
     public boolean bestaatSpeler(String gebruikersnaam) {
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL)) {
             PreparedStatement query = conn.prepareStatement("SELECT * FROM ID222177_g14.Speler WHERE gebruikersnaam = ?");
@@ -73,6 +82,12 @@ public class SpelerMapper {
 
         return speler;
     }*/
+
+    /**
+     * Geeft een lijst van alle spelers uit de databank
+     * @return lijst van alle spelers
+     */
+
     public List<Speler> geefLijstSpelers() {
         List<Speler> spelerLijst = new ArrayList<>();
 
@@ -106,6 +121,10 @@ public class SpelerMapper {
         }
     }
 
+    /**
+     * Update hat krediet, kaarten van de speler in de databank
+     * @param speler speler
+     */
     public void updateSpeler(Speler speler) {
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL)) {
             //updaten krediet

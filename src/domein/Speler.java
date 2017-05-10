@@ -162,7 +162,7 @@ public class Speler {
      * Controleert de gebruikersnaam
      *
      * @param gebruikersnaam gebruikersnaam van de speler
-     * @exception illegalArgumentException Wanneer de invoer verkeerd is
+     * @exception IllegalArgumentException Wanneer de invoer verkeerd is
      */
     public void controleerGebruikersnaam(String gebruikersnaam) {
         if (gebruikersnaam.length() < 3) {
@@ -193,7 +193,7 @@ public class Speler {
      * Controleert de leeftijd
      *
      * @param geboortejaar geboortejaar van de speler
-     * @exception illegalArgumentException Wanneer de invoer verkeerd is
+     * @exception IllegalArgumentException Wanneer de invoer verkeerd is
      */
     public void controleerLeeftijd(int geboortejaar) {
         int leeftijd = Calendar.getInstance().get(Calendar.YEAR) - geboortejaar;
@@ -219,7 +219,7 @@ public class Speler {
      * @param bovensteKaart bovendstekaart
      */
     public void voegBovensteKaartVanSetStapelToeAanSpelbord(Kaart bovensteKaart) {
-        if (spelbord.size() < 9) {
+        if (getSpelbord().size() < 9) {
             spelbord.add(bovensteKaart);
         }
     }
@@ -232,7 +232,7 @@ public class Speler {
      * @param keuze
      */
     public void voegKaartVanWedstrijdStapelToeAanSpelbord(Kaart kaart, int keuze) {
-        if (spelbord.size() < 9) {
+        if (getSpelbord().size() < 9) {
             int scoreKaart = Integer.parseInt(kaart.getWaarde());
             switch (keuze) {
                 case 3:
@@ -251,8 +251,9 @@ public class Speler {
             }
             spelbord.add(kaart);
 
-        } else {
-            throw new IllegalArgumentException("Spelbord is vol");
+        } 
+        else {
+            throw new IllegalArgumentException("spelbord_vol");
 
         }
     }
@@ -271,7 +272,7 @@ public class Speler {
 
             }
         } else {
-            throw new IllegalArgumentException("je hebt geen wedstrijdstapel");
+            throw new IllegalArgumentException("geen_wedstrijdstapel");
 
         }
     }

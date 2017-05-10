@@ -75,9 +75,21 @@ public class Wedstrijd {
         }
         return lijst;
     }
-
+    
+    /**
+     * Geeft het aantal sets van de wedstrijd
+     * @return int aantal sets van de wedstrijd
+     */
     public int getAantalSets() {
         return aantalSets;
+    }
+    
+    /**
+     * Setter van aantalSets
+     * @param aantalSets aantal sets van de wedstrijd
+     */
+    public void setAantalSets(int aantalSets) {
+        this.aantalSets = aantalSets;
     }
 
     /**
@@ -160,23 +172,35 @@ public class Wedstrijd {
     }
 
     public void bepaalSpelerAanVolgendeBeurt() {
-        if (speler2.isSpelbordBevroren() == true) {
+        if (speler2.isSpelbordBevroren()) {
+            actief = speler1;
+            return;
+        }
+        if (speler1.isSpelbordBevroren()) {
+            actief = speler2;
+            return;
+        }
+        if (aantalSets == 0) {
+            bepaalSpelerAanDeBeurtEersteSet();
+            return;
+        }
+        if (actief == speler1) {
+            actief = speler2;
+        } else {
             actief = speler1;
         }
-        if (speler1.isSpelbordBevroren() == true) {
-            actief = speler2;
-        }
-
+        /*
         if (aantalSets % 2 != 0) {
             bepaalSpelerAanDeBeurtEersteSet();
         }
         if (aantalSets % 2 == 0) {
-            if (actief == speler1) {
+                    if (actief == speler1) {
                 actief = speler2;
             } else {
                 actief = speler1;
             }
         }
+         */
 
     }
     //methode volgende set bepaal actieve speler
@@ -259,11 +283,10 @@ public class Wedstrijd {
         if (speler1.getSpelbord().size() >= 9 || speler2.getSpelbord().size() >= 9) {
             return true;
         }
-        if (speler1.isSpelbordBevroren() == true && speler2.isSpelbordBevroren() == true) {
+        if (speler1.isSpelbordBevroren() && speler2.isSpelbordBevroren()) {
             return true;
-        } else {
-            return false;
         }
+        return false;
 
     }
 
@@ -305,9 +328,7 @@ public class Wedstrijd {
     }
 
     /**
-     * Geeft de winnaar van de set
-     *
-     * @return winnaar van de set
+     * Geeft de winnaar van de set 
      */
     public void geefUitslag() {
         int scoreSpeler1 = speler1.getSpelbordScore();
@@ -344,6 +365,11 @@ public class Wedstrijd {
             } //gelijkspel wordt afgehandeld in de dc
         }
 
+        if (speler1.getSetScore() > 2) {
+            winnaar = speler1;
+        } else if (speler2.getSetScore() > 2) {
+            winnaar = speler2;
+        }
     }
-
+    
 }
