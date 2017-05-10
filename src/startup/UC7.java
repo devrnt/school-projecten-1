@@ -63,7 +63,7 @@ public class UC7 {
                 dc.verminderKrediet(prijsD, speler);
             } else {
 
-                System.out.println("U heeft niet genoeg krediet om de kaart te kopen");
+                System.out.println(dc.getTaal().getVertaling("nietgenoeg_krediet"));
                 System.out.printf(dc.getTaal().getVertaling("huidig_krediet") + "%.1f%n", dc.geefKredietSpeler(speler));
             }
 
