@@ -20,6 +20,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -74,12 +75,23 @@ public class SpelbordController implements Initializable {
 
     private void updateScherm() {
         //updaten setNummer
-        setCounter.setText(MessageFormat.format("", dc.getAantalSets()));
+        setCounter.setText(MessageFormat.format(dc.getTaal().getVertaling("setcounter"), dc.getAantalSets()));
 
         //updaten scores
-        score1.setText(String.valueOf(dc.geefSetScore(dc.geefGeregistreerdeSpelers().get(0))));
-        score2.setText(String.valueOf(dc.geefSetScore(dc.geefGeregistreerdeSpelers().get(1))));
+        score1.setText(String.valueOf(dc.geefGeregistreerdeSpelers().get(0) + dc.geefSetScore(dc.geefGeregistreerdeSpelers().get(0))));
+        score2.setText(String.valueOf(dc.geefGeregistreerdeSpelers().get(1) + dc.geefSetScore(dc.geefGeregistreerdeSpelers().get(1))));
 
+        //score actieve speler border geven
+        if(dc.geefActieveSpeler().equals(dc.geefGeregistreerdeSpelers().get(0))){
+            score1.setStyle("-fx-border-color: black;");
+            score2.setStyle("");
+        }else if(dc.geefActieveSpeler().equals(dc.geefGeregistreerdeSpelers().get(1))){
+            score2.setStyle("-fx-border-color: black;");
+            score1.setStyle("");
+        }else{  //for debug
+            System.out.println("Mag niet");
+        }
+        
         //updaten spelborden
         List<String> bord1 = dc.geefSpelbord(dc.geefGeregistreerdeSpelers().get(0));
         for (int i = 0; i < bord1.size(); i++) {
@@ -136,6 +148,7 @@ public class SpelbordController implements Initializable {
                             }
                         });
                         HBox hbox = new HBox(posBut, omschrijving, negBut);
+                        hbox.setPadding(new Insets(10));
                         wisselStage.setScene(new Scene(hbox));
                         wisselStage.showAndWait();
                         saveButton.getParent().setDisable(false);
@@ -168,15 +181,17 @@ public class SpelbordController implements Initializable {
                     @Override
                     public void handle(ActionEvent event) {
                         if (!dc.toonLijstWedstrijden().contains(saveInput.getText())) {
-                            //dc.bewaarWedstrijd(saveInput.getText());
+                            dc.bewaarWedstrijd(saveInput.getText());
                             saveButton.getParent().setDisable(false);
                             popup.close();
                         }
                     }
                 });
                 HBox hbox = new HBox(saveLabel, saveInput, acceptButton);
+                hbox.setPadding(new Insets(10));
                 popup.setScene(new Scene(hbox));
                 popup.showAndWait();
+                saveButton.getParent().setDisable(false);
             }
         });
 

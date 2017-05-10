@@ -131,6 +131,7 @@ public class WedstrijdStapelKiezerController implements Initializable {
         buyButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                geselecteerd.clear();
                 GridPane grid = new GridPane();
                 for (int i = 0; i < 4; i++) {
                     grid.getColumnConstraints().add(new ColumnConstraints(84));
