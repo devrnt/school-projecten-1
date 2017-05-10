@@ -162,7 +162,7 @@ public class Speler {
      * Controleert de gebruikersnaam
      *
      * @param gebruikersnaam gebruikersnaam van de speler
-     * @exception illegalArgumentException Wanneer de invoer verkeerd is
+     * @exception IllegalArgumentException Wanneer de invoer verkeerd is
      */
     public void controleerGebruikersnaam(String gebruikersnaam) {
         if (gebruikersnaam.length() < 3) {
@@ -193,7 +193,7 @@ public class Speler {
      * Controleert de leeftijd
      *
      * @param geboortejaar geboortejaar van de speler
-     * @exception illegalArgumentException Wanneer de invoer verkeerd is
+     * @exception IllegalArgumentException Wanneer de invoer verkeerd is
      */
     public void controleerLeeftijd(int geboortejaar) {
         int leeftijd = Calendar.getInstance().get(Calendar.YEAR) - geboortejaar;

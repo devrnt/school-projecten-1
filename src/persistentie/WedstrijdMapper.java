@@ -46,21 +46,21 @@ public class WedstrijdMapper {
             PreparedStatement querySpeler1 = conn.prepareStatement("INSERT INTO ID222177_g14.Score (spelerID, naam, score)"
                     + "VALUES (?, ?, ?)");
             querySpeler1.setInt(1, id1);
-            querySpeler1.setString(2, wedstrijd.getSpeler1().getGebruikersnaam());
+            querySpeler1.setString(2, naam);
             querySpeler1.setInt(3, wedstrijd.getSpeler1().getSetScore());
             querySpeler1.executeQuery();
 
             PreparedStatement querySpeler2 = conn.prepareStatement("INSERT INTO ID222177_g14.Score (spelerID, naam, score)"
                     + "VALUES (?, ?, ?)");
             querySpeler2.setInt(1, id2);
-            querySpeler2.setString(2, wedstrijd.getSpeler2().getGebruikersnaam());
+            querySpeler2.setString(2, naam);
             querySpeler2.setInt(3, wedstrijd.getSpeler2().getSetScore());
             querySpeler2.executeQuery();
 
             PreparedStatement queryStapelSpeler1 = conn.prepareStatement("INSERT INTO ID222177_g14.Wedstrijdstapel (spelerID, naam, omschrijving)"
                     + "VALUES (?, ?, ?)");
             queryStapelSpeler1.setInt(1, id1);
-            queryStapelSpeler1.setString(2, wedstrijd.getSpeler1().getGebruikersnaam());
+            queryStapelSpeler1.setString(2, naam);
             for (Kaart kaart : wedstrijd.getSpeler1().getWedstrijdStapel()) {
                 queryStapelSpeler1.setString(3, kaart.getOmschrijving());
                 queryStapelSpeler1.executeQuery();                
@@ -68,7 +68,7 @@ public class WedstrijdMapper {
             PreparedStatement queryStapelSpeler2 = conn.prepareStatement("INSERT INTO ID222177_g14.Wedstrijdstapel (spelerID, naam, omschrijving)"
                     + "VALUES (?, ?, ?)");
             queryStapelSpeler2.setInt(1, id2);
-            queryStapelSpeler2.setString(2, wedstrijd.getSpeler2().getGebruikersnaam());
+            queryStapelSpeler2.setString(2, naam);
             for (Kaart kaart : wedstrijd.getSpeler2().getWedstrijdStapel()) {
                 queryStapelSpeler2.setString(3, kaart.getOmschrijving());
                 queryStapelSpeler2.executeQuery();
@@ -102,7 +102,7 @@ public class WedstrijdMapper {
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL)) {
             PreparedStatement query = conn.prepareStatement("SELECT * FROM ID222177_g14.Wedstrijd WHERE naam = ?");
             query.setString(1, naam);
-            int aantalSets;
+            int aantalSets = 0;
             try (ResultSet rs = query.executeQuery()) {
                 while (rs.next()) {                    
                     aantalSets = rs.getInt("aantalSets");
@@ -111,7 +111,7 @@ public class WedstrijdMapper {
             
             PreparedStatement queryScoreSpeler1 = conn.prepareStatement("SELECT spelerID, score FROM ID222177_g14.Score WHERE naam = ?");
             queryScoreSpeler1.setString(1, naam);            
-            int scoreSpeler1;
+            int scoreSpeler1 = 0;
             int spelerIDSpeler1 = 0;
             try (ResultSet rs = queryScoreSpeler1.executeQuery()) {
                 while (rs.next()) {                    
@@ -122,7 +122,7 @@ public class WedstrijdMapper {
             
             PreparedStatement queryScoreSpeler2 = conn.prepareStatement("SELECT spelerID, score FROM ID222177_g14.Score WHERE naam = ?");
             queryScoreSpeler2.setString(1, naam);            
-            int scoreSpeler2;
+            int scoreSpeler2 = 0;
             int spelerIDSpeler2 = 0;
             try (ResultSet rs = queryScoreSpeler2.executeQuery()) {
                 while (rs.next()) {                    
@@ -171,8 +171,30 @@ public class WedstrijdMapper {
                     
                     KaartenSpeler2.add(new Kaart(omschrijvingSpeler2, type, waarde, prijs));
                 }
-            } 
-      
+            }
+            
+            PreparedStatement querySpeler1 = conn.prepareStatement("SELECT * FROM ID222177_g14.Speler WHERE spelerID = ?");
+            querySpeler1.setInt(1, spelerIDSpeler1);
+            Speler speler1 = null;
+            try (ResultSet rs = querySpeler1.executeQuery()) {
+                while (rs.next()) {
+                    speler1 = new Speler(rs.getString("gebruikersnaam"), rs.getInt("geboortejaar"), rs.getDouble("krediet"));
+                }
+            }
+            
+            PreparedStatement querySpeler2 = conn.prepareStatement("SELECT * FROM ID222177_g14.Speler WHERE spelerID = ?");
+            querySpeler1.setInt(1, spelerIDSpeler2);
+            Speler speler2 = null;
+            try (ResultSet rs = querySpeler1.executeQuery()) {
+                while (rs.next()) {
+                    speler2 = new Speler(rs.getString("gebruikersnaam"), rs.getInt("geboortejaar"), rs.getDouble("krediet"));
+                }
+            }
+            
+            wedstrijd.registreerSpeler(speler1);
+            wedstrijd.registreerSpeler(speler2);
+            wedstrijd.setAantalSets(aantalSets);
+            
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
