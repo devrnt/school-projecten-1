@@ -120,7 +120,7 @@ public class SpelbordController implements Initializable {
                         Stage wisselStage = new Stage();
                         Button posBut = new Button("+");
                         Button negBut = new Button("-");
-                        Label omschrijving = new Label("Wil je - of + leggen");
+                        Label omschrijving = new Label(dc.getTaal().getVertaling("+/-"));
                         posBut.setOnAction(new EventHandler<ActionEvent>() {
                             @Override
                             public void handle(ActionEvent event) {

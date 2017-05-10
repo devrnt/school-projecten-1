@@ -71,53 +71,52 @@ public class WedstrijdStapelKiezerController implements Initializable {
         spelerView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if(spelerView.getSelectionModel().getSelectedItem() != null){
-                GridPane grid = new GridPane();
-                for (int i = 0; i < 4; i++) {
-                    grid.getColumnConstraints().add(new ColumnConstraints(84));
-                }
-                List<String> kaarten = dc.toonStartStapel(spelerView.getSelectionModel().getSelectedItem().toString());
-                for (int i = 0; i < Math.ceil(kaarten.size() / 4); i++) {
-                    grid.getRowConstraints().add(new RowConstraints(104));
-                }
-                for (int i = 0; i < kaarten.size(); i++) {
-                    if (kaarten.get(i).charAt(0) == '-') {
-                        Card card = new Card(kaarten.get(i), "red");
-                        card.getContent().setOnMouseClicked(new EventHandler<MouseEvent>() {
-                            @Override
-                            public void handle(MouseEvent event) {
-                                card.selectPane();
-                                if (geselecteerd.contains(card.getOmschrijving())) {
-                                    geselecteerd.remove(card.getOmschrijving());
-                                } else {
-                                    geselecteerd.add(card.getOmschrijving());
+                if (spelerView.getSelectionModel().getSelectedItem() != null) {
+                    GridPane grid = new GridPane();
+                    for (int i = 0; i < 4; i++) {
+                        grid.getColumnConstraints().add(new ColumnConstraints(84));
+                    }
+                    List<String> kaarten = dc.toonStartStapel(spelerView.getSelectionModel().getSelectedItem().toString());
+                    for (int i = 0; i < Math.ceil(kaarten.size() / 4); i++) {
+                        grid.getRowConstraints().add(new RowConstraints(104));
+                    }
+                    for (int i = 0; i < kaarten.size(); i++) {
+                        if (kaarten.get(i).charAt(0) == '-') {
+                            Card card = new Card(kaarten.get(i), "red");
+                            card.getContent().setOnMouseClicked(new EventHandler<MouseEvent>() {
+                                @Override
+                                public void handle(MouseEvent event) {
+                                    card.selectPane();
+                                    if (geselecteerd.contains(card.getOmschrijving())) {
+                                        geselecteerd.remove(card.getOmschrijving());
+                                    } else {
+                                        geselecteerd.add(card.getOmschrijving());
+                                    }
                                 }
-                            }
-                        });
-                        grid.add(card.getContent(), i % 4, (int) Math.floor(i / 4));
-                    } else {
-                        Card card = new Card(kaarten.get(i), "blue");
-                        card.getContent().setOnMouseClicked(new EventHandler<MouseEvent>() {
-                            @Override
-                            public void handle(MouseEvent event) {
-                                card.selectPane();
-                                if (geselecteerd.contains(card.getOmschrijving())) {
-                                    geselecteerd.remove(card.getOmschrijving());
-                                } else {
-                                    geselecteerd.add(card.getOmschrijving());
+                            });
+                            grid.add(card.getContent(), i % 4, (int) Math.floor(i / 4));
+                        } else {
+                            Card card = new Card(kaarten.get(i), "blue");
+                            card.getContent().setOnMouseClicked(new EventHandler<MouseEvent>() {
+                                @Override
+                                public void handle(MouseEvent event) {
+                                    card.selectPane();
+                                    if (geselecteerd.contains(card.getOmschrijving())) {
+                                        geselecteerd.remove(card.getOmschrijving());
+                                    } else {
+                                        geselecteerd.add(card.getOmschrijving());
+                                    }
                                 }
-                            }
-                        });
-                        grid.add(card.getContent(), i % 4, (int) Math.floor(i / 4));
+                            });
+                            grid.add(card.getContent(), i % 4, (int) Math.floor(i / 4));
+                        }
+
                     }
 
+                    scrollPane.setContent(grid);
                 }
-
-                scrollPane.setContent(grid);
-            }
             }
         });
-
 
         selectButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -131,7 +130,7 @@ public class WedstrijdStapelKiezerController implements Initializable {
 
         buyButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event) {  
+            public void handle(ActionEvent event) {
                 GridPane grid = new GridPane();
                 for (int i = 0; i < 4; i++) {
                     grid.getColumnConstraints().add(new ColumnConstraints(84));
@@ -152,9 +151,9 @@ public class WedstrijdStapelKiezerController implements Initializable {
                 }
 
                 Pane pane = new StackPane();
-                
+
                 Label label = new Label(String.valueOf(dc.geefKredietSpeler(spelerView.getSelectionModel().getSelectedItem().toString())));
-                
+
                 pane.getChildren().add(label);
                 grid.add(pane, 0, 0);
 
@@ -167,10 +166,10 @@ public class WedstrijdStapelKiezerController implements Initializable {
                             public void handle(MouseEvent event) {
                                 dc.voegBetaaldeKaartToeAanStartStapel(spelerView.getSelectionModel().getSelectedItem().toString(), card.getOmschrijving());
                                 dc.verminderKrediet(kost, spelerView.getSelectionModel().getSelectedItem().toString());
-                                grid.getChildren().remove(((StackPane)event.getSource()).getParent());
+                                grid.getChildren().remove(((StackPane) event.getSource()).getParent());
                                 label.setText(String.valueOf(dc.geefKredietSpeler(spelerView.getSelectionModel().getSelectedItem().toString())));
                             }
-                        });        
+                        });
                         Label prijs = new Label(kost.toString() + "krediet");       //nog vertaald worden
                         VBox vbox = new VBox(card.getContent(), prijs);
                         grid.add(vbox, i % 4, (int) Math.floor(i / 4));
@@ -180,23 +179,25 @@ public class WedstrijdStapelKiezerController implements Initializable {
                         card.getContent().setOnMouseClicked(new EventHandler<MouseEvent>() {
                             @Override
                             public void handle(MouseEvent event) {
-                                dc.voegBetaaldeKaartToeAanStartStapel(spelerView.getSelectionModel().getSelectedItem().toString(), card.getOmschrijving());
-                                dc.verminderKrediet(kost, spelerView.getSelectionModel().getSelectedItem().toString());
-                                grid.getChildren().remove(((StackPane)event.getSource()).getParent());
-                                label.setText(String.valueOf(dc.geefKredietSpeler(spelerView.getSelectionModel().getSelectedItem().toString())));
+                                if (dc.geefSpeler(spelerView.getSelectionModel().getSelectedItem().toString()).getKrediet() >= kost) {
+                                    dc.voegBetaaldeKaartToeAanStartStapel(spelerView.getSelectionModel().getSelectedItem().toString(), card.getOmschrijving());
+                                    dc.verminderKrediet(kost, spelerView.getSelectionModel().getSelectedItem().toString());
+                                    grid.getChildren().remove(((StackPane) event.getSource()).getParent());
+                                    label.setText(String.valueOf(dc.geefKredietSpeler(spelerView.getSelectionModel().getSelectedItem().toString())));
+                                }
                             }
-                        });       
+                        });
                         Label prijs = new Label(kost.toString());
                         VBox vbox = new VBox(card.getContent(), prijs);
                         grid.add(vbox, i % 4, (int) Math.floor(i / 4));
                     }
 
                 }
-                
+
                 scrollPane.setContent(grid);
             }
         });
-        
+
         returnButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
