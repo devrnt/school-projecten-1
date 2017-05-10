@@ -277,7 +277,7 @@ public class DomeinController {
     }
     
     /**
-     * Bewaard de wedstrijd
+     * Bewaart de wedstrijd
      * @param naam naam van de speler
      */
     public void bewaarWedstrijd(String naam){
@@ -287,6 +287,14 @@ public class DomeinController {
         for(String gNaam: wedstrijd.geefGeregistreerdeSpelers()){
             spelerRepository.updateSpeler(wedstrijd.geefSpeler(gNaam)); //update het krediet en de aangekochte kaarten van de speler
         }
+    }
+    
+    /**
+     * Update de meegegeven speler in de database
+     * @param naam naam van de speler
+     */
+    public void updateSpeler(String naam){
+        spelerRepository.updateSpeler(wedstrijd.geefSpeler(naam));
     }
     
     /**

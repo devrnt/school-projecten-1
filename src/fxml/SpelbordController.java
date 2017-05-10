@@ -24,6 +24,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -43,7 +44,6 @@ public class SpelbordController implements Initializable {
     public GridPane spelbord2;
     public GridPane hand;
     public Button saveButton;
-    public Button wisselButton;
     public Button endTurnButton;
     public Button passButton;
 
@@ -52,61 +52,100 @@ public class SpelbordController implements Initializable {
     public SpelbordController(DomeinController dc) {
         this.dc = dc;
     }
-    
-    private void toonWinnaarScherm(){
+
+    private void toonWinnaarScherm() {
         try {
             AnchorPane win = FXMLLoader.load(SpelbordController.class.getResource("/fxml/winnaar.fxml"));
-            ((Label)win.getChildren().get(1)).setText(dc.getTaal().getVertaling("ui_winner"));
-            ((Label)win.getChildren().get(1)).setText(dc.getTaal().getVertaling("ui_credit"));
+            ((Label) win.getChildren().get(1)).setText(dc.getTaal().getVertaling("ui_winner"));
+            ((Label) win.getChildren().get(1)).setText(dc.getTaal().getVertaling("ui_credit"));
             Stage lastStage = new Stage();
             lastStage.setScene(new Scene(win));
             lastStage.showAndWait();
             //nu of het programma sluiten of teruggaan naar menu (via een van de components het hoofdpaneel opvragen en dan menu enablen en main disablen)
-            
+            //spelers updaten
+            for (String naam : dc.geefGeregistreerdeSpelers()) {
+                dc.updateSpeler(naam);
+            }
+            System.exit(0);
         } catch (IOException ex) {
             Logger.getLogger(SpelbordController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    private void updateScherm(){
+
+    private void updateScherm() {
         //updaten setNummer
         setCounter.setText(MessageFormat.format("", dc.getAantalSets()));
-        
+
         //updaten scores
         score1.setText(String.valueOf(dc.geefSetScore(dc.geefGeregistreerdeSpelers().get(0))));
         score2.setText(String.valueOf(dc.geefSetScore(dc.geefGeregistreerdeSpelers().get(1))));
-        
+
         //updaten spelborden
         List<String> bord1 = dc.geefSpelbord(dc.geefGeregistreerdeSpelers().get(0));
-        for(int i = 0; i < bord1.size(); i++){
+        for (int i = 0; i < bord1.size(); i++) {
             Card card;
-            if(bord1.get(i).charAt(0) == '-'){
+            if (bord1.get(i).charAt(0) == '-') {
                 card = new Card(bord1.get(i), "red");
-            }else{
+            } else {
                 card = new Card(bord1.get(i), "blue");
             }
-            spelbord1.add(card.getContent(), i%3, (int)Math.floor(i/3));
+            spelbord1.add(card.getContent(), i % 3, (int) Math.floor(i / 3));
         }
         List<String> bord2 = dc.geefSpelbord(dc.geefGeregistreerdeSpelers().get(1));
-        for(int i = 0; i < bord2.size(); i++){
+        for (int i = 0; i < bord2.size(); i++) {
             Card card;
-            if(bord2.get(i).charAt(0) == '-'){
+            if (bord2.get(i).charAt(0) == '-') {
                 card = new Card(bord2.get(i), "red");
-            }else{
+            } else {
                 card = new Card(bord2.get(i), "blue");
             }
-            spelbord2.add(card.getContent(), i%3, (int)Math.floor(i/3));
+            spelbord2.add(card.getContent(), i % 3, (int) Math.floor(i / 3));
         }
         //updaten hand
         List<Kaart> handKaarten = dc.geefSpeler(dc.geefActieveSpeler()).getWedstrijdStapel();
-        for(int i = 0; i < handKaarten.size(); i++){
+        for (int i = 0; i < handKaarten.size(); i++) {
             Card card;
-            if(handKaarten.get(i).getOmschrijving().charAt(0) == '-'){
+            if (handKaarten.get(i).getOmschrijving().charAt(0) == '-') {
                 card = new Card(handKaarten.get(i).getOmschrijving(), "red");
-            }else{
+            } else {
                 card = new Card(handKaarten.get(i).getOmschrijving(), "blue");
             }
-            hand.add(card.getContent().getChildren().get(0), 0, i);
+            //hand.add(card.getContent().getChildren().get(0), 0, i);
+            card.getContent().setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    if (dc.geefKaartType(card.getOmschrijving()).equals("+/-")) {
+                        //wissel dialoog
+                        saveButton.getParent().setDisable(true);
+                        Stage wisselStage = new Stage();
+                        Button posBut = new Button("+");
+                        Button negBut = new Button("-");
+                        Label omschrijving = new Label("Wil je - of + leggen");
+                        posBut.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                dc.legWedstrijdkaart(card.getOmschrijving(), 1);
+                                wisselStage.close();
+                            }
+                        });
+                        negBut.setOnAction(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                dc.legWedstrijdkaart(card.getOmschrijving(), 2);
+                                wisselStage.close();
+                            }
+                        });
+                        HBox hbox = new HBox(posBut, omschrijving, negBut);
+                        wisselStage.setScene(new Scene(hbox));
+                        wisselStage.showAndWait();
+                        saveButton.getParent().setDisable(false);
+                    } else {
+                        dc.legWedstrijdkaart(card.getOmschrijving(), 3);
+                    }
+                }
+            });
+            hand.add(card.getContent(), 0, i);
+
         }
     }
 
@@ -138,13 +177,6 @@ public class SpelbordController implements Initializable {
                 HBox hbox = new HBox(saveLabel, saveInput, acceptButton);
                 popup.setScene(new Scene(hbox));
                 popup.showAndWait();
-            }
-        });
-
-        wisselButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                //hand herschrijven naar specifieke kaarten die gewisseld kunnen worden, dan terug schrijven naar de normale hand
             }
         });
 
