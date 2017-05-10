@@ -252,10 +252,10 @@ public class Speler {
             spelbord.add(kaart);
 
         } 
-        else {
-            throw new IllegalArgumentException("spelbord_vol");
-
-        }
+//        else {
+//            throw new IllegalArgumentException("spelbord_vol");
+//
+//        }
     }
 
     /**
@@ -271,10 +271,11 @@ public class Speler {
                 }
 
             }
-        } else {
-            throw new IllegalArgumentException("geen_wedstrijdstapel");
-
-        }
+        } 
+//  else {
+//            throw new IllegalArgumentException("geen_wedstrijdstapel");
+//
+//        }
     }
 
     /**

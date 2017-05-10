@@ -22,6 +22,7 @@ public class Wedstrijd {
     private Speler winnaar;
     private List<Kaart> setStapel;
     private int aantalSets;
+    private Speler winnaarSet;
 
     /**
      * Geeft de winnaar
@@ -180,28 +181,26 @@ public class Wedstrijd {
             actief = speler2;
             return;
         }
-        if (aantalSets == 0) {
-            bepaalSpelerAanDeBeurtEersteSet();
-            return;
-        }
+//        if (aantalSets == 0) {
+//            bepaalSpelerAanDeBeurtEersteSet();
+//            return;
+//        } else 
         if (actief == speler1) {
             actief = speler2;
         } else {
             actief = speler1;
         }
-        /*
-        if (aantalSets % 2 != 0) {
-            bepaalSpelerAanDeBeurtEersteSet();
-        }
-        if (aantalSets % 2 == 0) {
-                    if (actief == speler1) {
-                actief = speler2;
-            } else {
-                actief = speler1;
-            }
-        }
-         */
 
+//        if (aantalSets % 2 != 0) {
+//            bepaalSpelerAanDeBeurtEersteSet();
+//        }
+//        if (aantalSets % 2 == 0) {
+//                    if (actief == speler1) {
+//                actief = speler2;
+//            } else {
+//                actief = speler1;
+//            }
+//        }
     }
     //methode volgende set bepaal actieve speler
 
@@ -327,6 +326,14 @@ public class Wedstrijd {
         return speler2;
     }
 
+    public Speler getWinnaarSet() {
+        return winnaarSet;
+    }
+    
+    
+    
+    
+
     /**
      * Geeft de winnaar van de set 
      */
@@ -341,7 +348,8 @@ public class Wedstrijd {
 
             if (scoreSpeler1 <= 20) {
                 int setScore = speler1.getSetScore();
-                speler1.setSetScore(setScore++);
+                winnaarSet = speler1;
+                winnaarSet.setSetScore(setScore++);
             }
         }
 
@@ -349,8 +357,8 @@ public class Wedstrijd {
 
             if (scoreSpeler2 <= 20) {
                 int setScore = speler2.getSetScore();
-
-                speler2.setSetScore(setScore++);
+                winnaarSet = speler2;
+                winnaarSet.setSetScore(setScore++);
 
             }
         }
@@ -358,18 +366,21 @@ public class Wedstrijd {
         if (aantalKaartenSpelbordSpeler1 < 9 && aantalKaartenSpelbordSpeler2 < 9) {
             if (scoreSpeler1 > scoreSpeler2) {
                 int setScore = speler1.getSetScore();
-                speler1.setSetScore(setScore++);
-            } else {
+                winnaarSet = speler1;
+                winnaarSet.setSetScore(setScore++);
+            } else if (scoreSpeler1 < scoreSpeler2) {
                 int setScore = speler2.getSetScore();
-                speler2.setSetScore(setScore + 1);
-            } //gelijkspel wordt afgehandeld in de dc
-        }
+                winnaarSet = speler2;
+                winnaarSet.setSetScore(setScore + 1);
+            } else {
+                winnaarSet = null;        //gelijkspel wordt afgehandeld in de dc
+            }
 
-        if (speler1.getSetScore() > 2) {
-            winnaar = speler1;
-        } else if (speler2.getSetScore() > 2) {
-            winnaar = speler2;
+            if (speler1.getSetScore() > 2) {
+                winnaarSet = speler1;
+            } else if (speler2.getSetScore() > 2) {
+                winnaarSet = speler2;
+            }
         }
     }
-    
 }

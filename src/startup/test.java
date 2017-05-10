@@ -6,9 +6,11 @@
 package startup;
 
 import domein.DomeinController;
+import domein.Kaart;
 import domein.Speler;
 import domein.SpelerRepository;
 import domein.Wedstrijd;
+import java.util.List;
 
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -22,13 +24,16 @@ public class test {
 
     public static void main(String[] args) {
         DomeinController dc = new DomeinController();
-         
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
-            //testen Use Cases
-//            UC6.testUC6(dc);
+            List<Kaart> allekaarten = dc.geefAlleKaarten();
+            for (Kaart allekrt : allekaarten) {
+                if (allekrt.getType().equals("+"))
+                    System.out.println(allekrt.getOmschrijving());
+                
+            }
 
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(StartUp.class.getName()).log(Level.SEVERE, null, ex);
