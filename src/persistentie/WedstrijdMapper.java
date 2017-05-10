@@ -22,6 +22,11 @@ import java.util.List;
  */
 public class WedstrijdMapper {
 
+    /**
+     * Bewaart de opgegeven wedstrijd in de databank
+     * @param naam
+     * @param wedstrijd
+     */
     public void bewaarWedstrijd(String naam, Wedstrijd wedstrijd) {
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL)) {
             PreparedStatement query = conn.prepareStatement("INSERT INTO ID222177_g14.Wedstrijd (naam, aantalSets)"
@@ -80,6 +85,10 @@ public class WedstrijdMapper {
 
     }
 
+    /**
+     * Toont een lijst van de opgeslagen wedstrijden
+     * @return lijst van opgeslagen wedstrijden
+     */
     public List<String> toonWedstrijdLijst() {
         List<String> wedstrijdLijst = new ArrayList<>();
 
@@ -97,6 +106,11 @@ public class WedstrijdMapper {
         return wedstrijdLijst;
     }
 
+    /**
+     * Laad de wedstrijd uit de databank
+     * @param naam naam van de wedstrijd
+     * @return wedstrijd die opgeslagen is in de databank aan de hand van de naam
+     */
     public Wedstrijd laadWedstrijd(String naam) {
         Wedstrijd wedstrijd = new Wedstrijd();
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL)) {
@@ -191,9 +205,11 @@ public class WedstrijdMapper {
                 }
             }
             
+            speler1.setSetScore(scoreSpeler1);
+            speler2.setSetScore(scoreSpeler2);
             wedstrijd.registreerSpeler(speler1);
             wedstrijd.registreerSpeler(speler2);
-            wedstrijd.setAantalSets(aantalSets);
+            wedstrijd.setAantalSets(aantalSets);            
             
         } catch (SQLException ex) {
             throw new RuntimeException(ex);

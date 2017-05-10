@@ -36,6 +36,12 @@ public class KaartMapper {
 
     } */
 
+    /**
+     * Haalt de kaarten uit de databank
+     * @return lijst van kaarten uit de databank
+     */
+
+
     public List<Kaart> getKaarten() {
         List<Kaart> Kaarten = new ArrayList<>();
 
@@ -59,6 +65,11 @@ public class KaartMapper {
     }
 
     //kan in feite samengevoegd worden met de methode die startkaarten opvraagt
+
+    /**
+     * Voegt de startkaarten van een speler toe in de databank
+     * @param speler
+     */
     public void voegStartkaartenToe(Speler speler) {
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL)) {
             PreparedStatement spelerlijst = conn.prepareStatement("SELECT * FROM ID222177_g14.Speler WHERE gebruikersnaam = ?");
