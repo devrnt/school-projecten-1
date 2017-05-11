@@ -76,17 +76,19 @@ public class Wedstrijd {
         }
         return lijst;
     }
-    
+
     /**
      * Geeft het aantal sets van de wedstrijd
+     *
      * @return int aantal sets van de wedstrijd
      */
     public int getAantalSets() {
         return aantalSets;
     }
-    
+
     /**
      * Setter van aantalSets
+     *
      * @param aantalSets aantal sets van de wedstrijd
      */
     public void setAantalSets(int aantalSets) {
@@ -284,8 +286,9 @@ public class Wedstrijd {
         }
         if (speler1.isSpelbordBevroren() && speler2.isSpelbordBevroren()) {
             return true;
+        } else {
+            return false;
         }
-        return false;
 
     }
 
@@ -329,13 +332,9 @@ public class Wedstrijd {
     public Speler getWinnaarSet() {
         return winnaarSet;
     }
-    
-    
-    
-    
 
     /**
-     * Geeft de winnaar van de set 
+     * Geeft de winnaar van de set
      */
     public void geefUitslag() {
         int scoreSpeler1 = speler1.getSpelbordScore();

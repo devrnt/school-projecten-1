@@ -22,6 +22,7 @@ public class DomeinController {
     private Wedstrijd wedstrijd;
     private Speler speler;
     private List<Kaart> alleKaarten;
+    private boolean setEinde;
 
     /**
      * Geeft de Taal van de applicatie

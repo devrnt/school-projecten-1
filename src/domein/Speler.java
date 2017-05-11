@@ -24,7 +24,7 @@ public class Speler {
     private List<Kaart> wedstrijdStapel;
     private int setScore =0;
     private boolean spelbordBevroren;
-    private int spelbordScore =0;
+    private int spelbordScore;
 
     /**
      * Return true als de speler beschikbaar is en false als de speler niet
