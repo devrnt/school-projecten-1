@@ -127,6 +127,8 @@ public class Speler {
     public List<Kaart> getWedstrijdStapel() {
         return wedstrijdStapel;
     }
+    
+    
 
     /**
      * Geeft de score van de speler
@@ -220,6 +222,7 @@ public class Speler {
      */
     public void voegBovensteKaartVanSetStapelToeAanSpelbord(Kaart bovensteKaart) {
         if (getSpelbord().size() < 9) {
+            spelbordScore += Integer.parseInt(bovensteKaart.getWaarde());
             spelbord.add(bovensteKaart);
         }
     }
@@ -287,6 +290,11 @@ public class Speler {
         return kaartLijst;
     }
 
+    public void setSpelbordScore(int spelbordScore) {
+        this.spelbordScore = spelbordScore;
+    }
+
+    
     /**
      * Voegt kaart toe aan kaartlijst
      *
