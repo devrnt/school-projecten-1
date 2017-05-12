@@ -68,19 +68,16 @@ public class TaalPickerController implements Initializable{
         
         
         button_nl.setOnAction((ActionEvent event) -> {
-            System.out.println("Nederlands");
             dc.setTaal(new Taal("nl"));
             taalGekozen();
         });
         
         button_fr.setOnAction((ActionEvent event) -> {
-            System.out.println("Français");
             dc.setTaal(new Taal("fr"));
             taalGekozen();
         });
         
         button_en.setOnAction((ActionEvent event) -> {
-            System.out.println("English");
             dc.setTaal(new Taal("en"));
             taalGekozen();
         });
