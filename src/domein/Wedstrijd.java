@@ -284,11 +284,7 @@ public class Wedstrijd {
         if (speler1.getSpelbord().size() >= 9 || speler2.getSpelbord().size() >= 9) {
             return true;
         }
-        if (speler1.isSpelbordBevroren() && speler2.isSpelbordBevroren()) {
-            return true;
-        } else {
-            return false;
-        }
+        return speler1.isSpelbordBevroren() && speler2.isSpelbordBevroren();
 
     }
 

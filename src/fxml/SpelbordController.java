@@ -54,6 +54,21 @@ public class SpelbordController implements Initializable {
         this.dc = dc;
     }
 
+    private void endTurn() {
+        dc.beeindigBeurt();
+        if (dc.setEinde()) {
+            dc.geefUitslag();   //identificatie van winnaar set geven?
+            if(dc.geefSetScore(dc.geefGeregistreerdeSpelers().get(0)) >= 3 || dc.geefSetScore(dc.geefGeregistreerdeSpelers().get(1)) >= 3){
+                dc.verhoogKrediet();
+                toonWinnaarScherm();
+            }
+        } else {
+            dc.voegBovensteKaartVanSetStapelToeAanSpelbord();
+            updateScherm();
+        }
+
+    }
+
     private void toonWinnaarScherm() {
         try {
             AnchorPane win = FXMLLoader.load(SpelbordController.class.getResource("/fxml/winnaar.fxml"));
@@ -82,16 +97,16 @@ public class SpelbordController implements Initializable {
         score2.setText(String.valueOf(dc.geefGeregistreerdeSpelers().get(1) + ": " + dc.geefSetScore(dc.geefGeregistreerdeSpelers().get(1))));
 
         //score actieve speler border geven
-        if(dc.geefActieveSpeler().equals(dc.geefGeregistreerdeSpelers().get(0))){
+        if (dc.geefActieveSpeler().equals(dc.geefGeregistreerdeSpelers().get(0))) {
             score1.setStyle("-fx-border-color: black;");
             score2.setStyle("");
-        }else if(dc.geefActieveSpeler().equals(dc.geefGeregistreerdeSpelers().get(1))){
+        } else if (dc.geefActieveSpeler().equals(dc.geefGeregistreerdeSpelers().get(1))) {
             score2.setStyle("-fx-border-color: black;");
             score1.setStyle("");
-        }else{  //for debug
+        } else {  //for debug
             System.out.println("Mag niet");
         }
-        
+
         //updaten spelborden
         List<String> bord1 = dc.geefSpelbord(dc.geefGeregistreerdeSpelers().get(0));
         for (int i = 0; i < bord1.size(); i++) {
@@ -152,8 +167,10 @@ public class SpelbordController implements Initializable {
                         wisselStage.setScene(new Scene(hbox));
                         wisselStage.showAndWait();
                         saveButton.getParent().setDisable(false);
+                        updateScherm();
                     } else {
                         dc.legWedstrijdkaart(card.getOmschrijving(), 3);
+                        updateScherm();
                     }
                 }
             });
@@ -164,7 +181,9 @@ public class SpelbordController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        dc.maakSetStapel();
         dc.bepaalSpelerAanDeBeurtEersteSet();
+        dc.voegBovensteKaartVanSetStapelToeAanSpelbord();
         updateScherm();
 
         saveButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -199,8 +218,7 @@ public class SpelbordController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 //beëindig beurt, updaten setcounter en score van spelers, spelbord van spelers
-                dc.beeindigBeurt();
-                updateScherm();
+                endTurn();
             }
         });
 
@@ -209,8 +227,7 @@ public class SpelbordController implements Initializable {
             public void handle(ActionEvent event) {
                 //todo bevriezen van de speler, en beurt beeindig
                 dc.bevriesSpelbord();
-                dc.beeindigBeurt();
-                updateScherm();
+                endTurn();
             }
         });
     }

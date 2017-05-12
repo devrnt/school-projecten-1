@@ -18,7 +18,7 @@ public class UC5 {
             UC6.testUC6(dc);
             spelersWedstrijd = dc.geefGeregistreerdeSpelers();
             // herschrijven
-        } while (dc.geefSetScore(spelersWedstrijd.get(0)) < 3 || dc.geefSetScore(spelersWedstrijd.get(1)) < 3);
+        } while (dc.geefSetScore(spelersWedstrijd.get(0)) < 3 && dc.geefSetScore(spelersWedstrijd.get(1)) < 3);
 
         dc.verhoogKrediet();
 
