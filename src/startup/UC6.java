@@ -42,6 +42,7 @@ public class UC6 {
                 }
 
                 System.out.printf("%n");
+                System.out.printf("De spelbordcore is %d%n", dc.geefSpelbordScore(spelers.get(i)));
                 System.out.printf(dc.getTaal().getVertaling("setscore") + "%s: %d%n", spelers.get(i), dc.geefSetScore(spelers.get(i)));
 
                 System.out.printf(dc.getTaal().getVertaling("wedstrijd_stapel") + "%s%n", spelers.get(i));
@@ -177,7 +178,7 @@ public class UC6 {
                     System.out.println("");
 
                 }
-
+                dc.bepaalSpelerAanVolgendeBeurt();
             }
 
             if (menuKeuze == 3) {
@@ -191,7 +192,8 @@ public class UC6 {
             if (dc.geefNaamSetWinnaar() == null) {
                 System.out.println(dc.getTaal().getVertaling("set_gelijkspel"));
             } else {
-                System.out.printf(dc.getTaal().getVertaling("set_winnaar") + " %s " + dc.getTaal().getVertaling("set_winnaar_score") + " %d ", dc.geefNaamSetWinnaar(), dc.geefSetScore(dc.geefNaamSetWinnaar()));
+                System.out.printf(dc.getTaal().getVertaling("set_winnaar") + " %s "
+                        + dc.getTaal().getVertaling("set_winnaar_score") + " %d ", dc.geefNaamSetWinnaar(), dc.geefSetScore(dc.geefNaamSetWinnaar()));
 
             }
         }

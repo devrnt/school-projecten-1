@@ -20,10 +20,11 @@ public class Speler {
     private boolean beschikbaar;
 
     private List<Kaart> spelbord;    //max 9 kaarten
-    private List<Kaart> wedstrijdStapel;
-    private int setScore =0;
-    private boolean spelbordBevroren;
     private int spelbordScore;
+
+    private List<Kaart> wedstrijdStapel;
+    private int setScore = 0;
+    private boolean spelbordBevroren;
 
     /**
      * Return true als de speler beschikbaar is en false als de speler niet
@@ -126,8 +127,6 @@ public class Speler {
     public List<Kaart> getWedstrijdStapel() {
         return wedstrijdStapel;
     }
-    
-    
 
     /**
      * Geeft de score van de speler
@@ -221,7 +220,6 @@ public class Speler {
      */
     public void voegBovensteKaartVanSetStapelToeAanSpelbord(Kaart bovensteKaart) {
         if (getSpelbord().size() < 9) {
-            spelbordScore += Integer.parseInt(bovensteKaart.getWaarde());
             spelbord.add(bovensteKaart);
         }
     }
@@ -242,18 +240,19 @@ public class Speler {
                         spelbordScore = spelbordScore - scoreKaart;
                     } else if (kaart.getType().equals("+")) {
                         spelbordScore = spelbordScore + scoreKaart;
-                    }   break;
+                    }
+                    break;
                 case 1://case 1 +
                     spelbordScore = spelbordScore + scoreKaart;
                     break;
                 case 2: //case 2 -
                     spelbordScore = spelbordScore - scoreKaart;
                     break;
-                
+
             }
             spelbord.add(kaart);
 
-        } 
+        }
 //        else {
 //            throw new IllegalArgumentException("spelbord_vol");
 //
@@ -273,7 +272,7 @@ public class Speler {
                 }
 
             }
-        } 
+        }
 //  else {
 //            throw new IllegalArgumentException("geen_wedstrijdstapel");
 //
@@ -293,7 +292,10 @@ public class Speler {
         this.spelbordScore = spelbordScore;
     }
 
-    
+    public void verhoogSpelbordScore(int score) {
+        spelbordScore += score;
+    }
+
     /**
      * Voegt kaart toe aan kaartlijst
      *

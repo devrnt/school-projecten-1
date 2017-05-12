@@ -141,7 +141,7 @@ public class DomeinController {
 
     public void legWedstrijdkaart(String kaart, int keuze) {
         //herbekijken
-        for (Kaart krt : alleKaarten) {
+        for (Kaart krt : geefAlleKaarten()) {
             if (kaart == null ? krt.getOmschrijving() == null : kaart.equals(krt.getOmschrijving())) {
                 wedstrijd.legWedstrijdkaart(krt, keuze);
 
@@ -307,6 +307,7 @@ public class DomeinController {
 
     /**
      * Bewaart de wedstrijd
+     *
      * @param naam naam van de speler
      */
     public void bewaarWedstrijd(String naam) {
@@ -320,12 +321,13 @@ public class DomeinController {
 
     /**
      * Update de meegegeven speler in de database
+     *
      * @param naam naam van de speler
      */
-    public void updateSpeler(String naam){
+    public void updateSpeler(String naam) {
         spelerRepository.updateSpeler(wedstrijd.geefSpeler(naam));
     }
-    
+
     /**
      * Toont een lijst van wedstrijden
      *
@@ -382,6 +384,10 @@ public class DomeinController {
 
     public int geefSetScore(String naam) {
         return wedstrijd.geefSpeler(naam).getSetScore();
+    }
+
+    public int geefSpelbordScore(String naam) {
+        return wedstrijd.geefSpeler(naam).getSpelbordScore();
     }
 
     public void beeindigBeurt() {
