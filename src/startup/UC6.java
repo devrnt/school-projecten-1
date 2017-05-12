@@ -18,7 +18,7 @@ public class UC6 {
         dc.bepaalSpelerAanDeBeurtEersteSet();
 
         while (!dc.setEinde()) {
-            dc.bepaalSpelerAanVolgendeBeurt();
+            //dc.bepaalSpelerAanVolgendeBeurt();
             //eigenlijk mag de dc.bepaalSpelerAanEersteBeurt weg !!
 
             //controle welke set ronde

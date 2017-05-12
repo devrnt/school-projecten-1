@@ -1,6 +1,5 @@
 package domein;
 
-import static java.lang.Math.floor;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;

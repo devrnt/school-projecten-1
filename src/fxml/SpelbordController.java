@@ -78,8 +78,8 @@ public class SpelbordController implements Initializable {
         setCounter.setText(MessageFormat.format(dc.getTaal().getVertaling("setcounter"), dc.getAantalSets()));
 
         //updaten scores
-        score1.setText(String.valueOf(dc.geefGeregistreerdeSpelers().get(0) + dc.geefSetScore(dc.geefGeregistreerdeSpelers().get(0))));
-        score2.setText(String.valueOf(dc.geefGeregistreerdeSpelers().get(1) + dc.geefSetScore(dc.geefGeregistreerdeSpelers().get(1))));
+        score1.setText(String.valueOf(dc.geefGeregistreerdeSpelers().get(0) + ": " + dc.geefSetScore(dc.geefGeregistreerdeSpelers().get(0))));
+        score2.setText(String.valueOf(dc.geefGeregistreerdeSpelers().get(1) + ": " + dc.geefSetScore(dc.geefGeregistreerdeSpelers().get(1))));
 
         //score actieve speler border geven
         if(dc.geefActieveSpeler().equals(dc.geefGeregistreerdeSpelers().get(0))){
