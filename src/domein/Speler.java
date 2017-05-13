@@ -266,21 +266,31 @@ public class Speler {
      * @param kaart kaart
      */
     public void verwijderKaartVanWedstrijdStapel(Kaart kaart) {
-        if (wedstrijdStapel.size() > 0) {
-            /*for (Kaart k : wedstrijdStapel) {
-                if (k.getOmschrijving().equals(kaart.getOmschrijving())) {
-                    wedstrijdStapel.remove(k);
-                }
-
-            }*/
-            Iterator<Kaart> it = wedstrijdStapel.iterator();
-            while (it.hasNext()) {
+//        if (wedstrijdStapel.size() > 0) {
+//            Iterator<Kaart> iter = wedstrijdStapel.iterator();
+//            while (iter.hasNext()) {
+//                Kaart k = iter.next();
+//                if (k.getOmschrijving().equals(kaart.getOmschrijving())) {
+//                    wedstrijdStapel.remove(k);
+//                }
+//            }
+//        }
+        if(wedstrijdStapel.size()>0){
+            for(Iterator<Kaart> it = wedstrijdStapel.iterator(); it.hasNext();){
                 Kaart k = it.next();
-                if (k.getOmschrijving().equals(kaart.getOmschrijving())) {
+                if(k.getOmschrijving().equals(kaart.getOmschrijving())){
                     it.remove();
                 }
             }
         }
+//        if (wedstrijdStapel.size() > 0) {
+//            for (Kaart k : wedstrijdStapel) {
+//                if (k.getOmschrijving().equals(kaart.getOmschrijving())) {
+//                    wedstrijdStapel.remove(k);
+//                }
+//
+//            }
+//        }
 //  else {
 //            throw new IllegalArgumentException("geen_wedstrijdstapel");
 //
@@ -338,5 +348,11 @@ public class Speler {
     public void setSetScore(int setScore) {
         this.setScore = setScore;
     }
+
+    public void setSpelbord(List<Kaart> spelbord) {
+        this.spelbord = spelbord;
+    }
+    
+    
 
 }

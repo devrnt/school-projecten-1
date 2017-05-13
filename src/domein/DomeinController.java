@@ -406,6 +406,11 @@ public class DomeinController {
         wedstrijd.geefUitslag();
     }
 
+    public void resetSet() {
+        wedstrijd.resetSet();
+
+    }
+
     public Speler geefSpeler(String naam) {
         return wedstrijd.geefSpeler(naam);
     }

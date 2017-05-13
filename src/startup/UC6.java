@@ -42,7 +42,7 @@ public class UC6 {
                 }
 
                 System.out.printf("%n");
-                System.out.printf("De spelbordcore is %d%n", dc.geefSpelbordScore(spelers.get(i)));
+                System.out.printf(dc.getTaal().getVertaling("spelbord_score") + "%d%n", dc.geefSpelbordScore(spelers.get(i)));
                 System.out.printf(dc.getTaal().getVertaling("setscore") + "%s: %d%n", spelers.get(i), dc.geefSetScore(spelers.get(i)));
 
                 System.out.printf(dc.getTaal().getVertaling("wedstrijd_stapel") + "%s%n", spelers.get(i));
@@ -126,24 +126,27 @@ public class UC6 {
                 int keuzeType = 3;
                 String kaartType = dc.geefKaartType(wedstrijdStapel.get(kaartKeuze));
                 if (kaartType.equals("+/-")) {
-                    boolean succes = false;
                     System.out.println(dc.getTaal().getVertaling("kaarttype_gebruiken"));
-                    while (!succes) {
-                        do {
+                    while (keuzeType < 0 || keuzeType > 2) {
+                        boolean succes = false;
+
+                        while (!succes) {
+
                             System.out.println(dc.getTaal().getVertaling("keuze_kaart_opleggen"));
-                            System.out.println("1. + ");
-                            System.out.println("2. - ");
+                            System.out.println("1) + ");
+                            System.out.println("2) - ");
+
                             try {
+                                System.out.print(" > ");
 
                                 keuzeType = input.nextInt();
                                 succes = true;
                             } catch (InputMismatchException ex) {
-                                System.err.println(dc.getTaal().getVertaling("integer_input") + " Error: " + ex.getMessage());
+                                System.err.println(dc.getTaal().getVertaling("integer_input"));
                                 System.out.print(" > ");
-                                input.nextInt();
+                                input.nextLine();
                             }
-                        } while (keuzeType < 0 || keuzeType > 2);
-
+                        }
                     }
                 }
                 //legWedstrijdkaart herbekijken: alle kaarten worden gelegd niet de keuze
@@ -171,8 +174,8 @@ public class UC6 {
 
                     System.out.printf(dc.getTaal().getVertaling("wedstrijd_stapel") + "%s%n", spelers.get(i));
 
-                    for (int k = 0; k < wedstrijdStapel.size(); k++) {
-                        System.out.println(k + 1 + ") " + wedstrijdStapel.get(k));
+                    for (int k = 0; k < dc.geefWedstrijdStapel(spelers.get(i)).size(); k++) {
+                        System.out.println(k + 1 + ") " + dc.geefWedstrijdStapel(spelers.get(i)).get(k));
                     }
 
                     System.out.println("");
@@ -192,10 +195,10 @@ public class UC6 {
             if (dc.geefNaamSetWinnaar() == null) {
                 System.out.println(dc.getTaal().getVertaling("set_gelijkspel"));
             } else {
-                System.out.printf(dc.getTaal().getVertaling("set_winnaar") + " %s "
-                        + dc.getTaal().getVertaling("set_winnaar_score") + " %d ", dc.geefNaamSetWinnaar(), dc.geefSetScore(dc.geefNaamSetWinnaar()));
+                System.out.printf(dc.getTaal().getVertaling("set_winnaar") + " %s " + dc.getTaal().getVertaling("set_winnaar_score") + " %d%n%n", dc.geefNaamSetWinnaar(), dc.geefSetScore(dc.geefNaamSetWinnaar()));
 
             }
+            dc.resetSet();
         }
 
     }

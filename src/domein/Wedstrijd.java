@@ -285,7 +285,7 @@ public class Wedstrijd {
         if (speler1.getSpelbord().size() >= 9 || speler2.getSpelbord().size() >= 9) {
             return true;
         }
-        
+
         return speler1.isSpelbordBevroren() && speler2.isSpelbordBevroren();
 
     }
@@ -336,6 +336,20 @@ public class Wedstrijd {
     /**
      * Geeft de winnaar van de set
      */
+    public void resetSet() {
+        List<Kaart> leegSpelbord = new ArrayList<>();
+        speler1.setSpelbordScore(0);
+        speler2.setSpelbordScore(0);
+        speler1.setSpelbord(leegSpelbord);
+        speler2.setSpelbord(leegSpelbord);
+        speler1.setSpelbordBevroren(false);
+        speler2.setSpelbordBevroren(false);
+        
+//        winnaarSet.setSpelbordScore(0);
+//        winnaarSet.setSpelbord(null);
+//        winnaarSet.setSpelbordBevroren(false);
+    }
+
     public void geefUitslag() {
         int spelbordScoreSpeler1 = speler1.getSpelbordScore();
         int spelbordScoreSpeler2 = speler2.getSpelbordScore();
@@ -348,6 +362,8 @@ public class Wedstrijd {
             if (spelbordScoreSpeler1 <= 20) {
                 int setScore = speler1.getSetScore();
                 winnaarSet = speler1;
+                winnaarSet.setSpelbordScore(speler1.getSpelbordScore());
+
                 winnaarSet.setSetScore(setScore++);
             }
         }
@@ -357,34 +373,40 @@ public class Wedstrijd {
             if (spelbordScoreSpeler2 <= 20) {
                 int setScore = speler2.getSetScore();
                 winnaarSet = speler2;
+                winnaarSet.setSpelbordScore(speler2.getSpelbordScore());
                 winnaarSet.setSetScore(setScore++);
 
             }
         }
 
         if (aantalKaartenSpelbordSpeler1 < 9 && aantalKaartenSpelbordSpeler2 < 9) {
-            if (spelbordScoreSpeler1 > spelbordScoreSpeler2) {
-                int setScore = speler1.getSetScore();
-                winnaarSet = speler1;
-                winnaarSet.setSetScore(setScore++);
-            } else if (spelbordScoreSpeler1 < spelbordScoreSpeler2) {
-                int setScore = speler2.getSetScore();
-                winnaarSet = speler2;
-                winnaarSet.setSetScore(setScore + 1);
+            if (spelbordScoreSpeler1 <= 20 && spelbordScoreSpeler2 <= 20) {
+                if (spelbordScoreSpeler1 > spelbordScoreSpeler2) {
+                    int setScore = speler1.getSetScore();
+                    winnaarSet = speler1;
+                    winnaarSet.setSpelbordScore(speler1.getSpelbordScore());
+                    speler1.setSetScore(setScore++);
+                } else if (spelbordScoreSpeler1 < spelbordScoreSpeler2) {
+                    int setScore = speler2.getSetScore();
+                    winnaarSet = speler2;
+                    winnaarSet.setSpelbordScore(speler2.getSpelbordScore());
+                    speler2.setSetScore(setScore++);
+                } else {
+                    winnaarSet = null;        //gelijkspel wordt afgehandeld in de dc
+                }
             } else {
-                winnaarSet = null;        //gelijkspel wordt afgehandeld in de dc
+                winnaarSet = null;
             }
-
 //            if (speler1.getSetScore() > 2) {
 //                winnaarSet = speler1;
 //            } else if (speler2.getSetScore() > 2) {
 //                winnaarSet = speler2;
 //            }
         }
-        if(speler1.getSetScore()>=3){
+        if (speler1.getSetScore() >= 3) {
             winnaar = speler1;
         }
-        if(speler2.getSetScore()>=3){
+        if (speler2.getSetScore() >= 3) {
             winnaar = speler2;
         }
     }
