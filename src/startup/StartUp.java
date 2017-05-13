@@ -6,6 +6,7 @@
 package startup;
 
 import domein.DomeinController;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +22,7 @@ public class StartUp {
         DomeinController dc = new DomeinController();
         Scanner input = new Scanner(System.in);
         int keuze = -1;
-        boolean flag=true;
+        boolean flag = true;
         try {
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -41,23 +42,31 @@ public class StartUp {
                     i = 0;
                     System.out.println(dc.getTaal().getVertaling("selecteer_optie"));
                     System.out.print(" > ");
-                    keuze = input.nextInt();
+                    try {
+                        keuze = input.nextInt();
+                    } catch (InputMismatchException ex) {
+                        System.err.println(dc.getTaal().getVertaling("integer_input"));
+                        System.out.print(" > ");
+                        input.nextLine();
+                    }
                     System.out.println("--------------------");
 
                 } while (keuze < 0 || keuze > 4);
 
                 switch (keuze) {
-                    case 1: UC3.testUC3(dc);
+                    case 1:
+                        UC3.testUC3(dc);
                         break;
                     case 2:
                         UC1.testUC1(dc);
                         break;
-                    case 3: UC9.testUC9(dc);
+                    case 3:
+                        UC9.testUC9(dc);
                         break;
-                    case 4: flag=false;
+                    case 4:
+                        flag = false;
                 }
 
-                
                 //UC4.testUC4(dc);
                 //UC2.testUC2(dc);
             }
