@@ -25,6 +25,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -47,6 +49,8 @@ public class SpelbordController implements Initializable {
     public Button saveButton;
     public Button endTurnButton;
     public Button passButton;
+    public ImageView matchpoints1;
+    public ImageView matchpoints2;
 
     private DomeinController dc;
 
@@ -57,10 +61,17 @@ public class SpelbordController implements Initializable {
     private void endTurn() {
         dc.beeindigBeurt();
         if (dc.setEinde()) {
+            System.out.println("Set ten einde");
             dc.geefUitslag();   //identificatie van winnaar set geven?
-            if(dc.geefSetScore(dc.geefGeregistreerdeSpelers().get(0)) >= 3 || dc.geefSetScore(dc.geefGeregistreerdeSpelers().get(1)) >= 3){
+            if (dc.geefSetScore(dc.geefGeregistreerdeSpelers().get(0)) >= 3 || dc.geefSetScore(dc.geefGeregistreerdeSpelers().get(1)) >= 3) {
+                updateScherm();
                 dc.verhoogKrediet();
                 toonWinnaarScherm();
+            } else {
+                dc.maakSetStapel();
+                dc.bepaalSpelerAanDeBeurtEersteSet();
+                dc.voegBovensteKaartVanSetStapelToeAanSpelbord();
+                updateScherm();
             }
         } else {
             dc.voegBovensteKaartVanSetStapelToeAanSpelbord();
@@ -92,9 +103,12 @@ public class SpelbordController implements Initializable {
         //updaten setNummer
         setCounter.setText(MessageFormat.format(dc.getTaal().getVertaling("setcounter"), dc.getAantalSets()));
 
-        //updaten scores
-        score1.setText(String.valueOf(dc.geefGeregistreerdeSpelers().get(0) + ": " + dc.geefSetScore(dc.geefGeregistreerdeSpelers().get(0))));
-        score2.setText(String.valueOf(dc.geefGeregistreerdeSpelers().get(1) + ": " + dc.geefSetScore(dc.geefGeregistreerdeSpelers().get(1))));
+        //updaten match points
+        matchpoints1.setImage(new Image(String.format("/resources/%d_points.png", dc.geefSetScore(dc.geefGeregistreerdeSpelers().get(0)))));
+        matchpoints2.setImage(new Image(String.format("/resources/%d_points.png", dc.geefSetScore(dc.geefGeregistreerdeSpelers().get(1)))));
+        //updaten setscores
+        score1.setText(String.valueOf(dc.geefGeregistreerdeSpelers().get(0) + ": " + Integer.toString(dc.geefSpeler(dc.geefGeregistreerdeSpelers().get(0)).getSpelbordScore())));
+        score2.setText(String.valueOf(dc.geefGeregistreerdeSpelers().get(1) + ": " + Integer.toString(dc.geefSpeler(dc.geefGeregistreerdeSpelers().get(1)).getSpelbordScore())));
 
         //score actieve speler border geven
         if (dc.geefActieveSpeler().equals(dc.geefGeregistreerdeSpelers().get(0))) {
@@ -108,6 +122,8 @@ public class SpelbordController implements Initializable {
         }
 
         //updaten spelborden
+        spelbord1.getChildren().clear();
+        spelbord2.getChildren().clear();
         List<String> bord1 = dc.geefSpelbord(dc.geefGeregistreerdeSpelers().get(0));
         for (int i = 0; i < bord1.size(); i++) {
             Card card;
@@ -129,6 +145,7 @@ public class SpelbordController implements Initializable {
             spelbord2.add(card.getContent(), i % 3, (int) Math.floor(i / 3));
         }
         //updaten hand
+        hand.getChildren().clear();
         List<Kaart> handKaarten = dc.geefSpeler(dc.geefActieveSpeler()).getWedstrijdStapel();
         for (int i = 0; i < handKaarten.size(); i++) {
             Card card;
@@ -181,6 +198,7 @@ public class SpelbordController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        matchpoints2.setScaleY(-1);
         dc.maakSetStapel();
         dc.bepaalSpelerAanDeBeurtEersteSet();
         dc.voegBovensteKaartVanSetStapelToeAanSpelbord();

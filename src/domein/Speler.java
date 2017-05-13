@@ -2,6 +2,7 @@ package domein;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -21,7 +22,7 @@ public class Speler {
 
     private List<Kaart> spelbord;    //max 9 kaarten
     private List<Kaart> wedstrijdStapel;
-    private int setScore =0;
+    private int setScore = 0;
     private boolean spelbordBevroren;
     private int spelbordScore;
 
@@ -126,8 +127,6 @@ public class Speler {
     public List<Kaart> getWedstrijdStapel() {
         return wedstrijdStapel;
     }
-    
-    
 
     /**
      * Geeft de score van de speler
@@ -242,18 +241,19 @@ public class Speler {
                         spelbordScore = spelbordScore - scoreKaart;
                     } else if (kaart.getType().equals("+")) {
                         spelbordScore = spelbordScore + scoreKaart;
-                    }   break;
+                    }
+                    break;
                 case 1://case 1 +
                     spelbordScore = spelbordScore + scoreKaart;
                     break;
                 case 2: //case 2 -
                     spelbordScore = spelbordScore - scoreKaart;
                     break;
-                
+
             }
             spelbord.add(kaart);
 
-        } 
+        }
 //        else {
 //            throw new IllegalArgumentException("spelbord_vol");
 //
@@ -267,13 +267,20 @@ public class Speler {
      */
     public void verwijderKaartVanWedstrijdStapel(Kaart kaart) {
         if (wedstrijdStapel.size() > 0) {
-            for (Kaart k : wedstrijdStapel) {
+            /*for (Kaart k : wedstrijdStapel) {
                 if (k.getOmschrijving().equals(kaart.getOmschrijving())) {
-                    wedstrijdStapel.remove(kaart);
+                    wedstrijdStapel.remove(k);
                 }
 
+            }*/
+            Iterator<Kaart> it = wedstrijdStapel.iterator();
+            while (it.hasNext()) {
+                Kaart k = it.next();
+                if (k.getOmschrijving().equals(kaart.getOmschrijving())) {
+                    it.remove();
+                }
             }
-        } 
+        }
 //  else {
 //            throw new IllegalArgumentException("geen_wedstrijdstapel");
 //
@@ -293,7 +300,6 @@ public class Speler {
         this.spelbordScore = spelbordScore;
     }
 
-    
     /**
      * Voegt kaart toe aan kaartlijst
      *
