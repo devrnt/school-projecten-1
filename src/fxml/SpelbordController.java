@@ -31,6 +31,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 /**
@@ -51,6 +52,8 @@ public class SpelbordController implements Initializable {
     public Button passButton;
     public ImageView matchpoints1;
     public ImageView matchpoints2;
+    public Label setWinner;
+    public Button startSet;
 
     private DomeinController dc;
 
@@ -61,17 +64,19 @@ public class SpelbordController implements Initializable {
     private void endTurn() {
         dc.beeindigBeurt();
         if (dc.setEinde()) {
-            System.out.println("Set ten einde");
             dc.geefUitslag();   //identificatie van winnaar set geven?
             if (dc.geefSetScore(dc.geefGeregistreerdeSpelers().get(0)) >= 3 || dc.geefSetScore(dc.geefGeregistreerdeSpelers().get(1)) >= 3) {
                 updateScherm();
                 dc.verhoogKrediet();
                 toonWinnaarScherm();
             } else {
-                dc.maakSetStapel();
-                dc.bepaalSpelerAanDeBeurtEersteSet();
-                dc.voegBovensteKaartVanSetStapelToeAanSpelbord();
-                updateScherm();
+                //winnaar tonen
+                endTurnButton.setDisable(true);
+                passButton.setDisable(true);
+                startSet.setDisable(false);
+                setWinner.setText(dc.getTaal().getVertaling("set_winnaar") + dc.geefNaamSetWinnaar());
+                setWinner.setOpacity(1);
+                startSet.setOpacity(1);
             }
         } else {
             dc.voegBovensteKaartVanSetStapelToeAanSpelbord();
@@ -198,11 +203,15 @@ public class SpelbordController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        matchpoints2.setScaleY(-1);
+        matchpoints2.setScaleX(-1);
         dc.maakSetStapel();
         dc.bepaalSpelerAanDeBeurtEersteSet();
         dc.voegBovensteKaartVanSetStapelToeAanSpelbord();
         updateScherm();
+        //setWinner.setOpacity(0);
+        setWinner.setTextAlignment(TextAlignment.CENTER);
+        startSet.setOpacity(0);
+        startSet.setDisable(true);
 
         saveButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -246,6 +255,30 @@ public class SpelbordController implements Initializable {
                 //todo bevriezen van de speler, en beurt beeindig
                 dc.bevriesSpelbord();
                 endTurn();
+            }
+        });
+        
+        startSet.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                //oude set clearen
+                dc.geefSpeler(dc.geefGeregistreerdeSpelers().get(0)).setSpelbordBevroren(false);
+                dc.geefSpeler(dc.geefGeregistreerdeSpelers().get(0)).setSpelbordScore(0);
+                dc.geefSpeler(dc.geefGeregistreerdeSpelers().get(0)).getSpelbord().clear();
+                dc.geefSpeler(dc.geefGeregistreerdeSpelers().get(1)).setSpelbordBevroren(false);
+                dc.geefSpeler(dc.geefGeregistreerdeSpelers().get(1)).setSpelbordScore(0);
+                dc.geefSpeler(dc.geefGeregistreerdeSpelers().get(1)).getSpelbord().clear();                         
+                
+                //nieuwe set starten
+                dc.maakSetStapel();
+                dc.bepaalSpelerAanDeBeurtEersteSet();
+                dc.voegBovensteKaartVanSetStapelToeAanSpelbord();
+                updateScherm();
+                setWinner.setOpacity(0);
+                endTurnButton.setDisable(false);
+                passButton.setDisable(false);
+                startSet.setOpacity(0);
+                startSet.setDisable(true);
             }
         });
     }

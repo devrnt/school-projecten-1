@@ -265,7 +265,7 @@ public class Wedstrijd {
      */
     public void voegBovensteKaartVanSetStapelToeAanSpelbord() {
         actief.voegBovensteKaartVanSetStapelToeAanSpelbord(setStapel.get(0));//zet dit uit om te testen of het werkt in test.java
-        actief.verhoogSpelbordScore(Integer.parseInt(setStapel.get(0).getWaarde()));
+        //actief.verhoogSpelbordScore(Integer.parseInt(setStapel.get(0).getWaarde()));
 
         /* hieronder staat het als het een list van kaarten moet zijn */
         //actief.setStartStapel((List<Kaart>) setStapel.get(0)); //cast oke?

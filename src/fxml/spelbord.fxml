@@ -67,5 +67,11 @@
             <Image url="@../../../../../Pictures/0_points.png" />
          </image>
       </ImageView>
+      <Label fx:id="setWinner" layoutX="228.0" layoutY="132.0" opacity="0.0" prefHeight="74.0" prefWidth="231.0" style="-fx-background-color: white; -fx-border-color: black;" text="HELLO" textAlignment="CENTER">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="startSet" layoutX="324.0" layoutY="209.0" mnemonicParsing="false" text="next" />
    </children>
 </AnchorPane>
