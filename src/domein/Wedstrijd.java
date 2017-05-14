@@ -21,7 +21,7 @@ public class Wedstrijd {
     private Speler actief;
     private Speler winnaar;
     private List<Kaart> setStapel;
-    private int aantalSets;
+    private int aantalSets=1;
     private Speler winnaarSet;
 
     /**
@@ -153,23 +153,31 @@ public class Wedstrijd {
      * Bepaald Speler Aan de Beurt van de eerste set
      */
     public void bepaalSpelerAanDeBeurtEersteSet() {
+        if (aantalSets % 2 != 0) {
+            int huidigJaar = Calendar.getInstance().get(Calendar.YEAR);
 
-        int huidigJaar = Calendar.getInstance().get(Calendar.YEAR);
+            int leeftijdSpeler1 = huidigJaar - speler1.getGeboortejaar();
+            int leeftijdSpeler2 = huidigJaar - speler2.getGeboortejaar();
 
-        int leeftijdSpeler1 = huidigJaar - speler1.getGeboortejaar();
-        int leeftijdSpeler2 = huidigJaar - speler2.getGeboortejaar();
-
-        if (leeftijdSpeler1 > leeftijdSpeler2) {
-            actief = speler1;
-        } else if (leeftijdSpeler2 > leeftijdSpeler1) {
-            actief = speler2;
-        } else if (leeftijdSpeler1 == leeftijdSpeler2) {
-            int compare = speler1.getGebruikersnaam().compareTo(speler2.getGebruikersnaam());
-
-            if (compare < 0) {
+            if (leeftijdSpeler1 > leeftijdSpeler2) {
                 actief = speler1;
-            } else if (compare > 0) {
+            } else if (leeftijdSpeler2 > leeftijdSpeler1) {
                 actief = speler2;
+            } else if (leeftijdSpeler1 == leeftijdSpeler2) {
+                int compare = speler1.getGebruikersnaam().compareTo(speler2.getGebruikersnaam());
+
+                if (compare < 0) {
+                    actief = speler1;
+                } else if (compare > 0) {
+                    actief = speler2;
+                }
+            }
+        } else if (aantalSets % 2 == 0) {
+
+            if (actief == speler1) {
+                actief = speler2;
+            } else if (actief == speler2) {
+                actief = speler1;
             }
         }
     }
@@ -337,13 +345,19 @@ public class Wedstrijd {
      * Geeft de winnaar van de set
      */
     public void resetSet() {
-        List<Kaart> leegSpelbord = new ArrayList<>();
-        speler1.setSpelbordScore(0);
-        speler2.setSpelbordScore(0);
-        speler1.setSpelbord(leegSpelbord);
-        speler2.setSpelbord(leegSpelbord);
-        speler1.setSpelbordBevroren(false);
-        speler2.setSpelbordBevroren(false);
+//        List<Kaart> leegSpelbord = new ArrayList<>();
+//        speler1.setSpelbordScore(0);
+//        speler2.setSpelbordScore(0);
+//        speler1.setSpelbord(leegSpelbord);
+//        speler2.setSpelbord(leegSpelbord);
+//        speler1.setSpelbordBevroren(false);
+//        speler2.setSpelbordBevroren(false);
+        geefSpeler(geefGeregistreerdeSpelers().get(0)).setSpelbordBevroren(false);
+        geefSpeler(geefGeregistreerdeSpelers().get(0)).setSpelbordScore(0);
+        geefSpeler(geefGeregistreerdeSpelers().get(0)).getSpelbord().clear();
+        geefSpeler(geefGeregistreerdeSpelers().get(1)).setSpelbordBevroren(false);
+        geefSpeler(geefGeregistreerdeSpelers().get(1)).setSpelbordScore(0);
+        geefSpeler(geefGeregistreerdeSpelers().get(1)).getSpelbord().clear();
 //        winnaarSet.setSpelbordScore(0);
 //        winnaarSet.setSpelbord(null);
 //        winnaarSet.setSpelbordBevroren(false);
@@ -399,10 +413,10 @@ public class Wedstrijd {
 //            } else if (speler2.getSetScore() > 2) {
 //                winnaarSet = speler2;
 //            }
-        } else{
+        } else {
             winnaarSet = null;
         }
-        
+
         //hier wordt gekeken of er een winnaar is van de match.
         if (speler1.getSetScore() >= 3) {
             winnaar = speler1;

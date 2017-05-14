@@ -353,6 +353,10 @@ public class DomeinController {
     public void voegBovensteKaartVanSetStapelToeAanSpelbord() {
         wedstrijd.voegBovensteKaartVanSetStapelToeAanSpelbord();
     }
+    
+    public void verhoogAantalSets(){
+        wedstrijd.setAantalSets(wedstrijd.getAantalSets()+1);
+    }
 
     public List<String> geefSpelbord(String speler) {
 //        List <Kaart> spelbord = speler.getSpelbord();

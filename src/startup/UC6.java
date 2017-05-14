@@ -16,10 +16,11 @@ public class UC6 {
     public static void testUC6(DomeinController dc) {
         dc.maakSetStapel();
         dc.bepaalSpelerAanDeBeurtEersteSet();
+        dc.resetSet();
 
         while (!dc.setEinde()) {
-            //eigenlijk mag de dc.bepaalSpelerAanEersteBeurt weg !!
 
+            //eigenlijk mag de dc.bepaalSpelerAanEersteBeurt weg !!
             //controle welke set ronde
             dc.voegBovensteKaartVanSetStapelToeAanSpelbord();
 
@@ -159,7 +160,7 @@ public class UC6 {
                     if (dc.geefSpelbord(spelers.get(i)).isEmpty()) {
                         System.out.printf("%n" + "%s " + dc.getTaal().getVertaling("spelbord") + "%n", spelers.get(i));
                     } else {
-                        System.out.printf(dc.getTaal().getVertaling("spelbord_not_empty") + "%s%n ", spelers.get(i));
+                        System.out.printf(dc.getTaal().getVertaling("spelbord_not_empty") + " %s%n ", spelers.get(i));
 
                         List<String> spelbord = dc.geefSpelbord(spelers.get(i));
 
@@ -170,12 +171,15 @@ public class UC6 {
                     }
 
                     System.out.printf("%n");
+                    System.out.printf(dc.getTaal().getVertaling("spelbord_score") + "%d%n", dc.geefSpelbordScore(spelers.get(i)));
                     System.out.printf(dc.getTaal().getVertaling("setscore") + "%s: %d%n", spelers.get(i), dc.geefSetScore(spelers.get(i)));
 
                     System.out.printf(dc.getTaal().getVertaling("wedstrijd_stapel") + "%s%n", spelers.get(i));
 
-                    for (int k = 0; k < dc.geefWedstrijdStapel(spelers.get(i)).size(); k++) {
-                        System.out.println(k + 1 + ") " + dc.geefWedstrijdStapel(spelers.get(i)).get(k));
+                    wedstrijdStapel = dc.geefWedstrijdStapel(spelers.get(i));
+
+                    for (int k = 0; k < wedstrijdStapel.size(); k++) {
+                        System.out.println(k + 1 + ") " + wedstrijdStapel.get(k));
                     }
 
                     System.out.println("");
@@ -210,7 +214,14 @@ public class UC6 {
                 System.out.println(" ");
 
             }
-            dc.resetSet();
+            dc.verhoogAantalSets();
+
+//            dc.geefSpeler(dc.geefGeregistreerdeSpelers().get(0)).setSpelbordBevroren(false);
+//            dc.geefSpeler(dc.geefGeregistreerdeSpelers().get(0)).setSpelbordScore(0);
+//            dc.geefSpeler(dc.geefGeregistreerdeSpelers().get(0)).getSpelbord().clear();
+//            dc.geefSpeler(dc.geefGeregistreerdeSpelers().get(1)).setSpelbordBevroren(false);
+//            dc.geefSpeler(dc.geefGeregistreerdeSpelers().get(1)).setSpelbordScore(0);
+//            dc.geefSpeler(dc.geefGeregistreerdeSpelers().get(1)).getSpelbord().clear();
         }
 
     }
