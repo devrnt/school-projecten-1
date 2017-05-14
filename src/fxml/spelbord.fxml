@@ -72,6 +72,6 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="startSet" layoutX="324.0" layoutY="209.0" mnemonicParsing="false" text="next" />
+      <Button fx:id="startSet" disable="true" layoutX="324.0" layoutY="209.0" mnemonicParsing="false" opacity="0.0" text="next" />
    </children>
 </AnchorPane>
