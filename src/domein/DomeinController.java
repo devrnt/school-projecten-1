@@ -236,7 +236,11 @@ public class DomeinController {
     }
 
     public String geefNaamSetWinnaar() {
-        return wedstrijd.getWinnaarSet().getGebruikersnaam();
+        if (wedstrijd.getWinnaarSet() == null) {
+            return "gelijkspel";
+        } else {
+            return wedstrijd.getWinnaarSet().getGebruikersnaam();
+        }
     }
 
     /**

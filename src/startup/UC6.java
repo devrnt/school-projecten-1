@@ -101,7 +101,7 @@ public class UC6 {
                         System.out.printf("%d) %s%n", i + 1, wedstrijdStapel.get(i));
                     }
                 } else {
-                    System.out.println(dc.getTaal().getVertaling("geen_wedstrijdstapem_uc6"));
+                    System.out.println(dc.getTaal().getVertaling("geen_wedstrijdstapel_uc6"));
 
                 }
 
@@ -159,7 +159,7 @@ public class UC6 {
                     if (dc.geefSpelbord(spelers.get(i)).isEmpty()) {
                         System.out.printf("%n" + "%s " + dc.getTaal().getVertaling("spelbord") + "%n", spelers.get(i));
                     } else {
-                        System.out.printf(dc.getTaal().getVertaling("spelbord_not_empty") + " %s%n ", spelers.get(i));
+                        System.out.printf(dc.getTaal().getVertaling("spelbord_not_empty") + "%s%n ", spelers.get(i));
 
                         List<String> spelbord = dc.geefSpelbord(spelers.get(i));
 
@@ -192,10 +192,22 @@ public class UC6 {
         if (dc.setEinde()) {
             dc.geefUitslag();
 
-            if (dc.geefNaamSetWinnaar() == null) {
+            if ("gelijkspel".equals(dc.geefNaamSetWinnaar())) {
+                System.out.println(" ");
+                System.out.println("----------------------------------------");
                 System.out.println(dc.getTaal().getVertaling("set_gelijkspel"));
+                System.out.println("----------------------------------------");
+
+                System.out.println(" ");
             } else {
-                System.out.printf(dc.getTaal().getVertaling("set_winnaar") + " %s " + dc.getTaal().getVertaling("set_winnaar_score") + " %d%n%n", dc.geefNaamSetWinnaar(), dc.geefSetScore(dc.geefNaamSetWinnaar()));
+                System.out.println(" ");
+
+                System.out.println("----------------------------------------");
+
+                System.out.printf(dc.getTaal().getVertaling("set_winnaar") + " %s " + dc.getTaal().getVertaling("set_winnaar_score") + " %d%n", dc.geefNaamSetWinnaar(), dc.geefSpelbordScore(dc.geefNaamSetWinnaar()));
+                System.out.printf(dc.getTaal().getVertaling("aantal_gewonnen_sets") + "%d%n", dc.geefSetScore(dc.geefNaamSetWinnaar()));
+                System.out.printf("----------------------------------------%n");
+                System.out.println(" ");
 
             }
             dc.resetSet();
