@@ -100,13 +100,14 @@ public class UC6 {
                 if (wedstrijdStapel.size() > 0) {
                     for (int i = 0; i < wedstrijdStapel.size(); i++) {
                         System.out.printf("%d) %s%n", i + 1, wedstrijdStapel.get(i));
+                        System.out.println(dc.getTaal().getVertaling("kaart_opleggen") + ": ");
+
                     }
                 } else {
                     System.out.println(dc.getTaal().getVertaling("geen_wedstrijdstapel_uc6"));
+                    dc.bepaalSpelerAanVolgendeBeurt();
 
                 }
-
-                System.out.println(dc.getTaal().getVertaling("kaart_opleggen") + ": ");
 
                 while (kaartKeuze < 0 || kaartKeuze >= wedstrijdStapel.size()) {
                     boolean succes = false;

@@ -389,6 +389,8 @@ public class Wedstrijd {
 
             }
         }
+        
+        
 
         if (aantalKaartenSpelbordSpeler1 <= 9 && aantalKaartenSpelbordSpeler2 <= 9) {
             if (spelbordScoreSpeler1 <= 20 && spelbordScoreSpeler2 <= 20) {
@@ -404,6 +406,11 @@ public class Wedstrijd {
 
                 } else {
                     winnaarSet = null;        //gelijkspel wordt afgehandeld in de dc
+                }
+                if(spelbordScoreSpeler1>20 && spelbordScoreSpeler2<=20){
+                    winnaarSet = speler2;
+                } else if(spelbordScoreSpeler2>20 && spelbordScoreSpeler1<=20){
+                    winnaarSet = speler1;
                 }
             } else {
                 winnaarSet = null;
