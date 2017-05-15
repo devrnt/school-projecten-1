@@ -140,7 +140,6 @@ public class WedstrijdMapper {
                         
             PreparedStatement querySpelerNaam = conn.prepareStatement("SELECT gebruikersnaam FROM ID222177_g14.Speler WHERE spelerID =  ?");
             querySpelerNaam.setInt(1, spelerIDSpelers[0]);
-            System.out.println(querySpelerNaam.toString());
             String naamSpeler1;            
             try (ResultSet rs = querySpelerNaam.executeQuery()) {
                 rs.next();
@@ -153,33 +152,26 @@ public class WedstrijdMapper {
                 naamSpeler2 = rs.getString("gebruikersnaam");
             }
             
-            PreparedStatement queryStapelSpeler1 = conn.prepareStatement("SELECT * FROM ID222177_g14.Wedstrijdstapel INNER JOIN ID222177_g14.Kaarttype WHERE naam = ?");
+            PreparedStatement queryStapelSpeler1 = conn.prepareStatement("SELECT omschrijving FROM ID222177_g14.Wedstrijdstapel WHERE naam = ? AND spelerID = ?");
             queryStapelSpeler1.setString(1, naam);
+            queryStapelSpeler1.setInt(2, spelerIDSpelers[0]);
             String omschrijvingSpeler1;
-            List<Kaart> KaartenSpeler1 = new ArrayList<>();
+            List<String> KaartenSpeler1 = new ArrayList<>();
             try (ResultSet rs = queryStapelSpeler1.executeQuery()) {
                 while (rs.next()) {
-                    omschrijvingSpeler1 = rs.getString("omschrijving");
-                    String type = rs.getString("type");
-                    String waarde = rs.getString("waarde");
-                    int prijs = rs.getInt("prijs");
                     
-                    KaartenSpeler1.add(new Kaart(omschrijvingSpeler1, type, waarde, prijs));           
+                    KaartenSpeler1.add(rs.getString("omschrijving"));           
                 }
             }
             
             PreparedStatement queryStapelSpeler2 = conn.prepareStatement("SELECT * FROM ID222177_g14.Wedstrijdstapel INNER JOIN ID222177_g14.Kaarttype WHERE naam = ?");
-            queryStapelSpeler2.setString(1, naam);
-            String omschrijvingSpeler2;
-            List<Kaart> KaartenSpeler2 = new ArrayList<>();
-            try (ResultSet rs = queryStapelSpeler2.executeQuery()) {
-                while (rs.next()) {                    
-                    omschrijvingSpeler2 = rs.getString("omschrijving");
-                    String type = rs.getString("type");
-                    String waarde = rs.getString("waarde");
-                    int prijs = rs.getInt("prijs");
+            queryStapelSpeler1.setInt(2, spelerIDSpelers[0]);
+           
+            List<String> KaartenSpeler2 = new ArrayList<>();
+            try (ResultSet rs = queryStapelSpeler1.executeQuery()) {
+                while (rs.next()) {
                     
-                    KaartenSpeler2.add(new Kaart(omschrijvingSpeler2, type, waarde, prijs));
+                    KaartenSpeler2.add(rs.getString("omschrijving"));           
                 }
             }
             
@@ -191,8 +183,7 @@ public class WedstrijdMapper {
                     speler1 = new Speler(rs.getString("gebruikersnaam"), rs.getInt("geboortejaar"), rs.getDouble("krediet"));
                 }
             }
-            
-            PreparedStatement querySpeler2 = conn.prepareStatement("SELECT * FROM ID222177_g14.Speler WHERE spelerID = ?");
+                        
             querySpeler1.setInt(1, spelerIDSpelers[1]);
             Speler speler2 = null;
             try (ResultSet rs = querySpeler1.executeQuery()) {
@@ -203,8 +194,8 @@ public class WedstrijdMapper {
             
             speler1.setSetScore(scoreSpelers[0]);
             speler2.setSetScore(scoreSpelers[1]);
-            speler1.setWedstrijdStapel(KaartenSpeler1);
-            speler2.setWedstrijdStapel(KaartenSpeler1);
+            speler1.maakWedstrijdStapel(KaartenSpeler1);
+            speler2.maakWedstrijdStapel(KaartenSpeler2);
             wedstrijd.registreerSpeler(speler1);
             wedstrijd.registreerSpeler(speler2);
             wedstrijd.setAantalSets(aantalSets);            
