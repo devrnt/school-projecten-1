@@ -194,6 +194,8 @@ public class WedstrijdMapper {
             
             speler1.setSetScore(scoreSpelers[0]);
             speler2.setSetScore(scoreSpelers[1]);
+            geefKaartenSpeler(speler1, spelerIDSpelers[0]);
+            geefKaartenSpeler(speler2, spelerIDSpelers[1]);
             speler1.maakWedstrijdStapel(KaartenSpeler1);
             speler2.maakWedstrijdStapel(KaartenSpeler2);
             wedstrijd.registreerSpeler(speler1);
@@ -204,5 +206,19 @@ public class WedstrijdMapper {
             throw new RuntimeException(ex);
         }
         return wedstrijd;
+    }
+    
+    private void geefKaartenSpeler(Speler speler, int spelerID) {
+        try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL)) {
+            PreparedStatement query = conn.prepareStatement("SELECT * FROM ID222177_g14.Kaart INNER JOIN ID222177_g14.Kaarttype USING (omschrijving) WHERE spelerID = ?");
+            query.setInt(1, spelerID);
+            try (ResultSet rs = query.executeQuery()) {
+                while (rs.next()) {
+                    speler.voegKaartToe(new Kaart(rs.getString("omschrijving"), rs.getString("type"), rs.getString("waarde"), rs.getInt("prijs")));
+                }
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 }
