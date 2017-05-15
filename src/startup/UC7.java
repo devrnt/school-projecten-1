@@ -66,7 +66,9 @@ public class UC7 {
                 System.out.println(dc.getTaal().getVertaling("nietgenoeg_krediet"));
                 System.out.printf(dc.getTaal().getVertaling("huidig_krediet") + "%.1f%n", dc.geefKredietSpeler(speler));
             }
-
+            
+            System.out.println("Ok!");
+            System.out.println();
             System.out.println(dc.getTaal().getVertaling("nog_aankopen"));
             System.out.println("1. " + dc.getTaal().getVertaling("ja"));
             System.out.println("2. " + dc.getTaal().getVertaling("nee"));
