@@ -133,22 +133,23 @@ public class SpelerMapper {
             query.setString(2, speler.getGebruikersnaam());
             query.executeUpdate();
 
-            //updaten gekochte kaarten
-            List<Kaart> localKaarten = speler.getKaartLijst();
-            List<String> serverKaarten = new ArrayList<>();
-            PreparedStatement query2 = conn.prepareStatement("SELECT omschrijving FROM ID222177_g14.Kaart INNER JOIN ID222177_g14.Speler USING (gebruikersnaam) WHERE gebruikersnaam = ?");
-            query2.setString(1, speler.getGebruikersnaam());
-            try (ResultSet rs = query.executeQuery()) {
-                while (rs.next()) {
-                    serverKaarten.add(rs.getString("omschrijving"));
-                }
-            }
-            
+            //updaten gekochte kaarten                   
             PreparedStatement idQuery = conn.prepareStatement("SELECT spelerID FROM ID222177_g14.Speler WHERE gebruikersnaam = ?");
             idQuery.setString(1, speler.getGebruikersnaam());
             int id;
             try (ResultSet rs = idQuery.executeQuery()) {
+                rs.next();
                 id = rs.getInt("spelerID");
+            }
+            
+            List<Kaart> localKaarten = speler.getKaartLijst();
+            List<String> serverKaarten = new ArrayList<>();
+            PreparedStatement query2 = conn.prepareStatement("SELECT omschrijving FROM ID222177_g14.Kaart WHERE spelerID = ?");
+            query2.setInt(1, id);
+            try (ResultSet rs = query2.executeQuery()) {
+                while (rs.next()) {
+                    serverKaarten.add(rs.getString("omschrijving"));
+                }
             }
             
             for (Kaart kaart : localKaarten) {

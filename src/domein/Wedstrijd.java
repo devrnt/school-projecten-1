@@ -407,7 +407,7 @@ public class Wedstrijd {
                 }
             }
 
-            if (spelbordScoreSpeler1 > 20 && spelbordScoreSpeler2 <= 20) {
+            else if (spelbordScoreSpeler1 > 20 && spelbordScoreSpeler2 <= 20) {
                 winnaarSet = speler2;
             } else if (spelbordScoreSpeler2 > 20 && spelbordScoreSpeler1 <= 20) {
                 winnaarSet = speler1;
