@@ -402,13 +402,15 @@ public class Wedstrijd {
                     speler2.setSetScore(speler2.getSetScore() + 1);
                     winnaarSet = speler2;
 
-                } else if (spelbordScoreSpeler1 > 20 && spelbordScoreSpeler2 <= 20) {
-                    winnaarSet = speler2;
-                } else if (spelbordScoreSpeler2 > 20 && spelbordScoreSpeler1 <= 20) {
-                    winnaarSet = speler1;
-                } else {
+                } else if (spelbordScoreSpeler1 == spelbordScoreSpeler2) {
                     winnaarSet = null;        //gelijkspel wordt afgehandeld in de dc
                 }
+            }
+
+            if (spelbordScoreSpeler1 > 20 && spelbordScoreSpeler2 <= 20) {
+                winnaarSet = speler2;
+            } else if (spelbordScoreSpeler2 > 20 && spelbordScoreSpeler1 <= 20) {
+                winnaarSet = speler1;
             } else {
                 winnaarSet = null;
             }
