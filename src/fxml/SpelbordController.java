@@ -74,6 +74,7 @@ public class SpelbordController implements Initializable {
                 endTurnButton.setDisable(true);
                 passButton.setDisable(true);
                 startSet.setDisable(false);
+                saveButton.setDisable(false);
                 setWinner.setText(dc.getTaal().getVertaling("set_winnaar") + dc.geefNaamSetWinnaar());
                 setWinner.setOpacity(1);
                 startSet.setOpacity(1);
@@ -212,6 +213,7 @@ public class SpelbordController implements Initializable {
         setWinner.setTextAlignment(TextAlignment.CENTER);
         startSet.setOpacity(0);
         startSet.setDisable(true);
+        saveButton.setDisable(true);
 
         saveButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -220,21 +222,24 @@ public class SpelbordController implements Initializable {
                 saveButton.getParent().setDisable(true);
                 Label saveLabel = new Label(dc.getTaal().getVertaling("save_label")); //"Geef de naam om op te slaan"
                 TextField saveInput = new TextField(); //input
-                Button acceptButton = new Button(dc.getTaal().getVertaling("opslaan")); // button om het te bevestigen
-                Stage popup = new Stage();
+                Button acceptButton = new Button(dc.getTaal().getVertaling("opslaan")); // button om het te bevestigen               
                 acceptButton.disableProperty().bind(Bindings.isEmpty(saveInput.textProperty()));
                 acceptButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
                         if (!dc.toonLijstWedstrijden().contains(saveInput.getText())) {
-                            dc.bewaarWedstrijd(saveInput.getText());
+                            //dc.bewaarWedstrijd(saveInput.getText());
                             saveButton.getParent().setDisable(false);
-                            popup.close();
+                            Stage stage = (Stage) acceptButton.getScene().getWindow();
+                            stage.close();
+                        }else{
+                            saveInput.setStyle("-fx-background-color: rgba(255, 0, 0, 0.40)");
                         }
                     }
                 });
                 HBox hbox = new HBox(saveLabel, saveInput, acceptButton);
                 hbox.setPadding(new Insets(10));
+                Stage popup = new Stage();
                 popup.setScene(new Scene(hbox));
                 popup.showAndWait();
                 saveButton.getParent().setDisable(false);
@@ -279,6 +284,7 @@ public class SpelbordController implements Initializable {
                 passButton.setDisable(false);
                 startSet.setOpacity(0);
                 startSet.setDisable(true);
+                saveButton.setDisable(true);
             }
         });
     }

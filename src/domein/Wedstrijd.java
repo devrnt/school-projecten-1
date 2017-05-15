@@ -373,7 +373,7 @@ public class Wedstrijd {
         if (aantalKaartenSpelbordSpeler1 == 9 && aantalKaartenSpelbordSpeler2 != 9) {
 
             if (spelbordScoreSpeler1 <= 20) {
-                speler1.setSpelbordScore(spelbordScoreSpeler1);
+                speler1.setSpelbordScore(spelbordScoreSpeler1);     //waarom
                 speler1.setSetScore(speler1.getSetScore() + 1);
                 winnaarSet = speler1;
 

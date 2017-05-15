@@ -34,17 +34,19 @@ public class WedstrijdMapper {
 
             query.setString(1, naam);
             query.setInt(2, wedstrijd.getAantalSets());
-            query.executeQuery();
+            query.executeUpdate();
 
             PreparedStatement querySpelerID = conn.prepareStatement("SELECT spelerID FROM ID222177_g14.Speler WHERE gebruikersnaam = ?");
             querySpelerID.setString(1, wedstrijd.getSpeler1().getGebruikersnaam());
             int id1;
             try (ResultSet rs = querySpelerID.executeQuery()) {
+                rs.next();
                 id1 = rs.getInt("spelerID");
             }
             querySpelerID.setString(1, wedstrijd.getSpeler2().getGebruikersnaam());
             int id2;
             try (ResultSet rs = querySpelerID.executeQuery()) {
+                rs.next();
                 id2 = rs.getInt("spelerID");
             }
 
@@ -53,14 +55,14 @@ public class WedstrijdMapper {
             querySpeler1.setInt(1, id1);
             querySpeler1.setString(2, naam);
             querySpeler1.setInt(3, wedstrijd.getSpeler1().getSetScore());
-            querySpeler1.executeQuery();
+            querySpeler1.executeUpdate();
 
             PreparedStatement querySpeler2 = conn.prepareStatement("INSERT INTO ID222177_g14.Score (spelerID, naam, score)"
                     + "VALUES (?, ?, ?)");
             querySpeler2.setInt(1, id2);
             querySpeler2.setString(2, naam);
             querySpeler2.setInt(3, wedstrijd.getSpeler2().getSetScore());
-            querySpeler2.executeQuery();
+            querySpeler2.executeUpdate();
 
             PreparedStatement queryStapelSpeler1 = conn.prepareStatement("INSERT INTO ID222177_g14.Wedstrijdstapel (spelerID, naam, omschrijving)"
                     + "VALUES (?, ?, ?)");
@@ -68,7 +70,7 @@ public class WedstrijdMapper {
             queryStapelSpeler1.setString(2, naam);
             for (Kaart kaart : wedstrijd.getSpeler1().getWedstrijdStapel()) {
                 queryStapelSpeler1.setString(3, kaart.getOmschrijving());
-                queryStapelSpeler1.executeQuery();                
+                queryStapelSpeler1.executeUpdate();                
             }
             PreparedStatement queryStapelSpeler2 = conn.prepareStatement("INSERT INTO ID222177_g14.Wedstrijdstapel (spelerID, naam, omschrijving)"
                     + "VALUES (?, ?, ?)");
@@ -76,7 +78,7 @@ public class WedstrijdMapper {
             queryStapelSpeler2.setString(2, naam);
             for (Kaart kaart : wedstrijd.getSpeler2().getWedstrijdStapel()) {
                 queryStapelSpeler2.setString(3, kaart.getOmschrijving());
-                queryStapelSpeler2.executeQuery();
+                queryStapelSpeler2.executeUpdate();
             }
 
         } catch (SQLException ex) {
