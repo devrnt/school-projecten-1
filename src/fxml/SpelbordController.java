@@ -228,7 +228,7 @@ public class SpelbordController implements Initializable {
                     @Override
                     public void handle(ActionEvent event) {
                         if (!dc.toonLijstWedstrijden().contains(saveInput.getText())) {
-                            //dc.bewaarWedstrijd(saveInput.getText());
+                            dc.bewaarWedstrijd(saveInput.getText());
                             saveButton.getParent().setDisable(false);
                             Stage stage = (Stage) acceptButton.getScene().getWindow();
                             stage.close();

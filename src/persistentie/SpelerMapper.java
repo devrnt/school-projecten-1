@@ -129,9 +129,9 @@ public class SpelerMapper {
         try (Connection conn = DriverManager.getConnection(Connectie.JDBC_URL)) {
             //updaten krediet
             PreparedStatement query = conn.prepareStatement("UPDATE ID222177_g14.Speler SET krediet = ?  WHERE gebruikersnaam = ?");
-            query.setDouble(2, speler.getKrediet());
+            query.setDouble(1, speler.getKrediet());
             query.setString(2, speler.getGebruikersnaam());
-            query.executeQuery();
+            query.executeUpdate();
 
             //updaten gekochte kaarten
             List<Kaart> localKaarten = speler.getKaartLijst();
