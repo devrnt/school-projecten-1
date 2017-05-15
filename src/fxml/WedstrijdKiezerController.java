@@ -48,11 +48,10 @@ public class WedstrijdKiezerController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //List<String> lijst = dc.toonLijstWedstrijden();
+        List<String> lijst = dc.toonLijstWedstrijden();
         StringProperty pick = new SimpleStringProperty();
-        maakButton.disableProperty().bind(pick.isNotEqualTo(""));
+        maakButton.disableProperty().bind(pick.isEqualTo(""));
         maakButton.textProperty().bind(Bindings.format(dc.getTaal().getVertaling("keuze_wedstrijd") + ": %s", pick));
-        List<String> lijst = new ArrayList<>();
 
         for (String text : lijst) {
             Label label = new Label(text);

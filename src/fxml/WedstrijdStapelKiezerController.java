@@ -171,7 +171,7 @@ public class WedstrijdStapelKiezerController implements Initializable {
                                 label.setText(String.valueOf(dc.geefKredietSpeler(spelerView.getSelectionModel().getSelectedItem().toString())));
                             }
                         });
-                        Label prijs = new Label(kost.toString() + "krediet");       //nog vertaald worden
+                        Label prijs = new Label(kost.toString() + " " + dc.getTaal().getVertaling("credit"));       //nog vertaald worden
                         VBox vbox = new VBox(card.getContent(), prijs);
                         grid.add(vbox, i % 4, (int) Math.floor(i / 4));
                     } else {
@@ -188,7 +188,7 @@ public class WedstrijdStapelKiezerController implements Initializable {
                                 }
                             }
                         });
-                        Label prijs = new Label(kost.toString());
+                        Label prijs = new Label(kost.toString() + " " + dc.getTaal().getVertaling("credit"));  
                         VBox vbox = new VBox(card.getContent(), prijs);
                         grid.add(vbox, i % 4, (int) Math.floor(i / 4));
                     }

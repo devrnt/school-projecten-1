@@ -75,9 +75,14 @@ public class SpelbordController implements Initializable {
                 passButton.setDisable(true);
                 startSet.setDisable(false);
                 saveButton.setDisable(false);
-                setWinner.setText(dc.getTaal().getVertaling("set_winnaar") + dc.geefNaamSetWinnaar());
+                if (dc.geefNaamSetWinnaar().equals("gelijkspel")) {
+                    setWinner.setText(dc.getTaal().getVertaling("set_gelijkspel"));
+                } else {
+                    setWinner.setText(dc.getTaal().getVertaling("set_winnaar") + " " + dc.geefNaamSetWinnaar());
+                }
                 setWinner.setOpacity(1);
                 startSet.setOpacity(1);
+                dc.verhoogAantalSets();
             }
         } else {
             dc.voegBovensteKaartVanSetStapelToeAanSpelbord();
@@ -90,7 +95,7 @@ public class SpelbordController implements Initializable {
         try {
             AnchorPane win = FXMLLoader.load(SpelbordController.class.getResource("/fxml/winnaar.fxml"));
             ((Label) win.getChildren().get(1)).setText(dc.getTaal().getVertaling("ui_winner"));
-            ((Label) win.getChildren().get(1)).setText(dc.getTaal().getVertaling("ui_credit"));
+            ((Label) win.getChildren().get(2)).setText(dc.getTaal().getVertaling("ui_credit"));
             Stage lastStage = new Stage();
             lastStage.setScene(new Scene(win));
             lastStage.showAndWait();
@@ -232,7 +237,7 @@ public class SpelbordController implements Initializable {
                             saveButton.getParent().setDisable(false);
                             Stage stage = (Stage) acceptButton.getScene().getWindow();
                             stage.close();
-                        }else{
+                        } else {
                             saveInput.setStyle("-fx-background-color: rgba(255, 0, 0, 0.40)");
                         }
                     }
@@ -262,7 +267,7 @@ public class SpelbordController implements Initializable {
                 endTurn();
             }
         });
-        
+
         startSet.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -272,8 +277,8 @@ public class SpelbordController implements Initializable {
                 dc.geefSpeler(dc.geefGeregistreerdeSpelers().get(0)).getSpelbord().clear();
                 dc.geefSpeler(dc.geefGeregistreerdeSpelers().get(1)).setSpelbordBevroren(false);
                 dc.geefSpeler(dc.geefGeregistreerdeSpelers().get(1)).setSpelbordScore(0);
-                dc.geefSpeler(dc.geefGeregistreerdeSpelers().get(1)).getSpelbord().clear();                         
-                
+                dc.geefSpeler(dc.geefGeregistreerdeSpelers().get(1)).getSpelbord().clear();
+
                 //nieuwe set starten
                 dc.maakSetStapel();
                 dc.bepaalSpelerAanDeBeurtEersteSet();

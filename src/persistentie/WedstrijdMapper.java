@@ -127,40 +127,34 @@ public class WedstrijdMapper {
             
             PreparedStatement queryScoreSpeler1 = conn.prepareStatement("SELECT spelerID, score FROM ID222177_g14.Score WHERE naam = ?");
             queryScoreSpeler1.setString(1, naam);            
-            int scoreSpeler1 = 0;
-            int spelerIDSpeler1 = 0;
+            int[] scoreSpelers = new int[2];
+            int[] spelerIDSpelers = new int[2];
+            int g = 0;
             try (ResultSet rs = queryScoreSpeler1.executeQuery()) {
                 while (rs.next()) {                    
-                    scoreSpeler1 = rs.getInt("score");
-                    spelerIDSpeler1 = rs.getInt("spelerID");
+                    scoreSpelers[g] = rs.getInt("score");
+                    spelerIDSpelers[g] = rs.getInt("spelerID");
+                    g++;
                 }
             }
-            
-            PreparedStatement queryScoreSpeler2 = conn.prepareStatement("SELECT spelerID, score FROM ID222177_g14.Score WHERE naam = ?");
-            queryScoreSpeler2.setString(1, naam);            
-            int scoreSpeler2 = 0;
-            int spelerIDSpeler2 = 0;
-            try (ResultSet rs = queryScoreSpeler2.executeQuery()) {
-                while (rs.next()) {                    
-                    scoreSpeler2 = rs.getInt("score");
-                    spelerIDSpeler2 = rs.getInt("spelerID");
-                }
-            }
-            
+                        
             PreparedStatement querySpelerNaam = conn.prepareStatement("SELECT gebruikersnaam FROM ID222177_g14.Speler WHERE spelerID =  ?");
-            querySpelerNaam.setInt(1, spelerIDSpeler1);
+            querySpelerNaam.setInt(1, spelerIDSpelers[0]);
+            System.out.println(querySpelerNaam.toString());
             String naamSpeler1;            
             try (ResultSet rs = querySpelerNaam.executeQuery()) {
+                rs.next();
                 naamSpeler1 = rs.getString("gebruikersnaam");
             }
-            querySpelerNaam.setInt(1, spelerIDSpeler2);
+            querySpelerNaam.setInt(1, spelerIDSpelers[1]);
             String naamSpeler2;
             try (ResultSet rs = querySpelerNaam.executeQuery()) {
+                rs.next();
                 naamSpeler2 = rs.getString("gebruikersnaam");
             }
             
             PreparedStatement queryStapelSpeler1 = conn.prepareStatement("SELECT * FROM ID222177_g14.Wedstrijdstapel INNER JOIN ID222177_g14.Kaarttype WHERE naam = ?");
-            queryScoreSpeler1.setString(1, naam);
+            queryStapelSpeler1.setString(1, naam);
             String omschrijvingSpeler1;
             List<Kaart> KaartenSpeler1 = new ArrayList<>();
             try (ResultSet rs = queryStapelSpeler1.executeQuery()) {
@@ -190,7 +184,7 @@ public class WedstrijdMapper {
             }
             
             PreparedStatement querySpeler1 = conn.prepareStatement("SELECT * FROM ID222177_g14.Speler WHERE spelerID = ?");
-            querySpeler1.setInt(1, spelerIDSpeler1);
+            querySpeler1.setInt(1, spelerIDSpelers[0]);
             Speler speler1 = null;
             try (ResultSet rs = querySpeler1.executeQuery()) {
                 while (rs.next()) {
@@ -199,7 +193,7 @@ public class WedstrijdMapper {
             }
             
             PreparedStatement querySpeler2 = conn.prepareStatement("SELECT * FROM ID222177_g14.Speler WHERE spelerID = ?");
-            querySpeler1.setInt(1, spelerIDSpeler2);
+            querySpeler1.setInt(1, spelerIDSpelers[1]);
             Speler speler2 = null;
             try (ResultSet rs = querySpeler1.executeQuery()) {
                 while (rs.next()) {
@@ -207,8 +201,10 @@ public class WedstrijdMapper {
                 }
             }
             
-            speler1.setSetScore(scoreSpeler1);
-            speler2.setSetScore(scoreSpeler2);
+            speler1.setSetScore(scoreSpelers[0]);
+            speler2.setSetScore(scoreSpelers[1]);
+            speler1.setWedstrijdStapel(KaartenSpeler1);
+            speler2.setWedstrijdStapel(KaartenSpeler1);
             wedstrijd.registreerSpeler(speler1);
             wedstrijd.registreerSpeler(speler2);
             wedstrijd.setAantalSets(aantalSets);            

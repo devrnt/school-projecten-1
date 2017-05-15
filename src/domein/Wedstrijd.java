@@ -153,11 +153,12 @@ public class Wedstrijd {
      * Bepaald Speler Aan de Beurt van de eerste set
      */
     public void bepaalSpelerAanDeBeurtEersteSet() {
-        if (aantalSets % 2 != 0) {
-            int huidigJaar = Calendar.getInstance().get(Calendar.YEAR);
+                    int huidigJaar = Calendar.getInstance().get(Calendar.YEAR);
 
             int leeftijdSpeler1 = huidigJaar - speler1.getGeboortejaar();
             int leeftijdSpeler2 = huidigJaar - speler2.getGeboortejaar();
+
+        if (aantalSets % 2 != 0) {
 
             if (leeftijdSpeler1 > leeftijdSpeler2) {
                 actief = speler1;
@@ -173,11 +174,18 @@ public class Wedstrijd {
                 }
             }
         } else if (aantalSets % 2 == 0) {
-
-            if (actief == speler1) {
+            if (leeftijdSpeler1 > leeftijdSpeler2) {
                 actief = speler2;
-            } else if (actief == speler2) {
+            } else if (leeftijdSpeler2 > leeftijdSpeler1) {
                 actief = speler1;
+            } else if (leeftijdSpeler1 == leeftijdSpeler2) {
+                int compare = speler1.getGebruikersnaam().compareTo(speler2.getGebruikersnaam());
+
+                if (compare < 0) {
+                    actief = speler2;
+                } else if (compare > 0) {
+                    actief = speler1;
+                }
             }
         }
     }

@@ -46,7 +46,7 @@ public class WedstrijdRepository {
      * @return wedstrijd
      */
     public Wedstrijd laadWedstrijd(String naam){
-        return null;
+        return mapper.laadWedstrijd(naam);
     }
     
 }

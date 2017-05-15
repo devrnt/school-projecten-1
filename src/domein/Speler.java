@@ -52,6 +52,7 @@ public class Speler {
      * @param geboortejaar geboortejaar van de speler
      * @param krediet krediet van de speler
      */
+    
     public Speler(String gebruikersnaam, int geboortejaar, double krediet) {
 
         wedstrijdStapel = new ArrayList<>();
@@ -319,6 +320,14 @@ public class Speler {
         kaartLijst.add(kaart);
     }
 
+    /**
+     * Setter voor wedstrijdstapel (enkel voor wedstrijdmapper)
+     * @param stapel
+     */
+    public void setWedstrijdStapel(List<Kaart> stapel){
+        wedstrijdStapel = stapel;
+    }
+    
     /**
      * Maakt een WedstrijdStapel
      *
