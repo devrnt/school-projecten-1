@@ -79,7 +79,7 @@ public class UC6 {
                         menuKeuze = input.nextInt();
                         succes = true;
                     } catch (InputMismatchException ex) {
-                        System.err.println(dc.getTaal().getVertaling("integer_input") + " Error: " + ex.getMessage());
+                        System.err.println(dc.getTaal().getVertaling("integer_input"));
                         System.out.print(" > ");
                         input.nextLine();
 
@@ -97,10 +97,11 @@ public class UC6 {
 
                 System.out.println(dc.getTaal().getVertaling("huidige_wedstrijd_stapel") + " ");
                 List<String> wedstrijdStapel = dc.geefWedstrijdStapel(spelerAanBeurt);
+                System.out.println(dc.getTaal().getVertaling("kaart_opleggen") + ": ");
+
                 if (wedstrijdStapel.size() > 0) {
                     for (int i = 0; i < wedstrijdStapel.size(); i++) {
                         System.out.printf("%d) %s%n", i + 1, wedstrijdStapel.get(i));
-                        System.out.println(dc.getTaal().getVertaling("kaart_opleggen") + ": ");
 
                     }
                 } else {
@@ -118,7 +119,7 @@ public class UC6 {
                             kaartKeuze = input.nextInt() - 1;
                             succes = true;
                         } catch (InputMismatchException ex) {
-                            System.err.println(dc.getTaal().getVertaling("integer_input") + " Error: " + ex.getMessage());
+                            System.err.println(dc.getTaal().getVertaling("integer_input"));
                             System.out.print(" > ");
                             input.nextLine();
                         }
