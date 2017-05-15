@@ -319,14 +319,6 @@ public class Speler {
     public void voegKaartToe(Kaart kaart) {
         kaartLijst.add(kaart);
     }
-
-    /**
-     * Setter voor wedstrijdstapel (enkel voor wedstrijdmapper)
-     * @param stapel
-     */
-    public void setWedstrijdStapel(List<Kaart> stapel){
-        wedstrijdStapel = stapel;
-    }
     
     /**
      * Maakt een WedstrijdStapel
