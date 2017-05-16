@@ -41,14 +41,16 @@ public class UC6 {
                     }
 
                 }
+                List<String> wedstrijdStapel = dc.geefWedstrijdStapel(spelers.get(i));
 
                 System.out.printf("%n");
                 System.out.printf(dc.getTaal().getVertaling("spelbord_score") + "%d%n", dc.geefSpelbordScore(spelers.get(i)));
                 System.out.printf(dc.getTaal().getVertaling("setscore") + "%s: %d%n", spelers.get(i), dc.geefSetScore(spelers.get(i)));
-
-                System.out.printf(dc.getTaal().getVertaling("wedstrijd_stapel") + "%s%n", spelers.get(i));
-
-                List<String> wedstrijdStapel = dc.geefWedstrijdStapel(spelers.get(i));
+                if (wedstrijdStapel.size() > 0) {
+                    System.out.printf(dc.getTaal().getVertaling("wedstrijd_stapel") + "%s%n", spelers.get(i));
+                } else {
+                    System.out.println(dc.getTaal().getVertaling("geen_wedstrijdstapel_uc6"));
+                }
 
                 for (int k = 0; k < wedstrijdStapel.size(); k++) {
                     System.out.println(k + 1 + ") " + wedstrijdStapel.get(k));
@@ -95,66 +97,66 @@ public class UC6 {
 
                 int kaartKeuze = -1;
 
-                System.out.println(dc.getTaal().getVertaling("huidige_wedstrijd_stapel") + " ");
                 List<String> wedstrijdStapel = dc.geefWedstrijdStapel(spelerAanBeurt);
-                System.out.println(dc.getTaal().getVertaling("kaart_opleggen") + ": ");
 
                 if (wedstrijdStapel.size() > 0) {
                     for (int i = 0; i < wedstrijdStapel.size(); i++) {
+                        System.out.println(dc.getTaal().getVertaling("huidige_wedstrijd_stapel") + " ");
+                        System.out.println(dc.getTaal().getVertaling("kaart_opleggen") + ": ");
                         System.out.printf("%d) %s%n", i + 1, wedstrijdStapel.get(i));
+                        while (kaartKeuze < 0 || kaartKeuze >= wedstrijdStapel.size()) {
+                            boolean succes = false;
+                            System.out.println(dc.getTaal().getVertaling("keuze_kaart_opleggen"));
+                            System.out.print(" > ");
+                            while (!succes) {
+                                try {
+                                    kaartKeuze = input.nextInt() - 1;
+                                    succes = true;
+                                } catch (InputMismatchException ex) {
+                                    System.err.println(dc.getTaal().getVertaling("integer_input"));
+                                    System.out.print(" > ");
+                                    input.nextLine();
+                                }
+                            }
+                        }
+
+                        int keuzeType = 3;
+                        String kaartType = dc.geefKaartType(wedstrijdStapel.get(kaartKeuze));
+                        if (kaartType.equals("+/-")) {
+                            System.out.println(dc.getTaal().getVertaling("kaarttype_gebruiken"));
+                            while (keuzeType < 0 || keuzeType > 2) {
+                                boolean succes = false;
+
+                                while (!succes) {
+
+                                    System.out.println(dc.getTaal().getVertaling("keuze_kaart_opleggen"));
+                                    System.out.println("1) + ");
+                                    System.out.println("2) - ");
+
+                                    try {
+                                        System.out.print(" > ");
+
+                                        keuzeType = input.nextInt();
+                                        succes = true;
+                                    } catch (InputMismatchException ex) {
+                                        System.err.println(dc.getTaal().getVertaling("integer_input"));
+                                        System.out.print(" > ");
+                                        input.nextLine();
+                                    }
+                                }
+                            }
+                        }
+                        //legWedstrijdkaart herbekijken: alle kaarten worden gelegd niet de keuze
+                        dc.legWedstrijdkaart(dc.geefWedstrijdStapel(spelerAanBeurt).get(kaartKeuze), keuzeType);
+                        System.out.println(dc.getTaal().getVertaling("kaart_toegevoegd_aan_spelbord"));
 
                     }
                 } else {
                     System.out.println(dc.getTaal().getVertaling("geen_wedstrijdstapel_uc6"));
-                    dc.bepaalSpelerAanVolgendeBeurt();
+//                    dc.bepaalSpelerAanVolgendeBeurt();
 
+//                    break;
                 }
-
-                while (kaartKeuze < 0 || kaartKeuze >= wedstrijdStapel.size()) {
-                    boolean succes = false;
-                    System.out.println(dc.getTaal().getVertaling("keuze_kaart_opleggen"));
-                    System.out.print(" > ");
-                    while (!succes) {
-                        try {
-                            kaartKeuze = input.nextInt() - 1;
-                            succes = true;
-                        } catch (InputMismatchException ex) {
-                            System.err.println(dc.getTaal().getVertaling("integer_input"));
-                            System.out.print(" > ");
-                            input.nextLine();
-                        }
-                    }
-                }
-
-                int keuzeType = 3;
-                String kaartType = dc.geefKaartType(wedstrijdStapel.get(kaartKeuze));
-                if (kaartType.equals("+/-")) {
-                    System.out.println(dc.getTaal().getVertaling("kaarttype_gebruiken"));
-                    while (keuzeType < 0 || keuzeType > 2) {
-                        boolean succes = false;
-
-                        while (!succes) {
-
-                            System.out.println(dc.getTaal().getVertaling("keuze_kaart_opleggen"));
-                            System.out.println("1) + ");
-                            System.out.println("2) - ");
-
-                            try {
-                                System.out.print(" > ");
-
-                                keuzeType = input.nextInt();
-                                succes = true;
-                            } catch (InputMismatchException ex) {
-                                System.err.println(dc.getTaal().getVertaling("integer_input"));
-                                System.out.print(" > ");
-                                input.nextLine();
-                            }
-                        }
-                    }
-                }
-                //legWedstrijdkaart herbekijken: alle kaarten worden gelegd niet de keuze
-                dc.legWedstrijdkaart(dc.geefWedstrijdStapel(spelerAanBeurt).get(kaartKeuze), keuzeType);
-                System.out.println(dc.getTaal().getVertaling("kaart_toegevoegd_aan_spelbord"));
 
                 for (int i = 0; i < spelers.size(); i++) {
                     System.out.println("-----------------------------------");

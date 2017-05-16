@@ -67,7 +67,7 @@ public class StartUp {
                         flag = false;
                 }
 
-                //UC4.testUC4(dc);
+//                UC4.testUC4(dc);
                 //UC2.testUC2(dc);
             }
         } catch (ClassNotFoundException ex) {
